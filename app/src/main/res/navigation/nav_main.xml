@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.bankappds.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_graphFragment"
+            app:destination="@id/graphFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_goalFragment"
+            app:destination="@id/goalFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_fixedFragment"
+            app:destination="@id/fixedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.example.bankappds.GraphFragment"
+        android:label="fragment_graph"
+        tools:layout="@layout/fragment_graph" />
+    <fragment
+        android:id="@+id/goalFragment"
+        android:name="com.example.bankappds.GoalFragment"
+        android:label="fragment_goal"
+        tools:layout="@layout/fragment_goal" />
+    <fragment
+        android:id="@+id/fixedFragment"
+        android:name="com.example.bankappds.FixedFragment"
+        android:label="fragment_fixed"
+        tools:layout="@layout/fragment_fixed" >
+        <action
+            android:id="@+id/action_fixedFragment_to_inputfixedFragment"
+            app:destination="@id/inputfixedFragment" />
+        <argument
+            android:name="input_fix"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="com.example.bankappds.FixedPay" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputfixedFragment"
+        android:name="com.example.bankappds.inputfixedFragment"
+        android:label="fragment_inputfixed"
+        tools:layout="@layout/fragment_inputfixed" >
+        <action
+            android:id="@+id/action_inputfixedFragment_to_fixedFragment"
+            app:destination="@id/fixedFragment" />
+    </fragment>
+</navigation>
