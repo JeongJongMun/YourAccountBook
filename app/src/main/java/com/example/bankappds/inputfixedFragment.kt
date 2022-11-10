@@ -26,10 +26,8 @@ class inputfixedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         binding?.btnFin?.setOnClickListener {
-            val fp =FixedPay(binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0)
+            val fp =FixedPay(PayType.HOME,binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0,true)
             val action = inputfixedFragmentDirections.actionInputfixedFragmentToFixedFragment(fp)
             findNavController().navigate(action)
         }
