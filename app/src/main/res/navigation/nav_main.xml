@@ -25,6 +25,11 @@
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <argument
+            android:name="mainListData"
+            app:argType="com.example.bankappds.MainList"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
@@ -58,7 +63,16 @@
         android:id="@+id/inputFragment"
         android:name="com.example.bankappds.InputFragment"
         android:label="fragment_input"
-        tools:layout="@layout/fragment_input" />
+        tools:layout="@layout/fragment_input" >
+        <action
+            android:id="@+id/action_inputFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="calendarDate"
+            app:argType="com.example.bankappds.MainList"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/barChart"
         android:name="com.example.bankappds.BarChart"

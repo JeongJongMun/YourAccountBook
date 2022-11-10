@@ -43,7 +43,7 @@
     </LinearLayout>
 
     <CalendarView
-        android:id="@+id/recCalendarView"
+        android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recCalendarView"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_view"
         tools:listitem="@layout/main_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,66 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.bankappds.databinding.FragmentInputBinding
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "date"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InputFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InputFragment : Fragment() {
     private var binding: FragmentInputBinding? = null
 
-    // TODO: Rename and change types of parameters
-    private var date: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            date = it.getString("date", "000000")
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentInputBinding.inflate(inflater, container, false)
+        // 달력 날짜 전달 받기
+        val args : InputFragmentArgs by navArgs()
+        val year = args.calendarDate?.year
+        val month = args.calendarDate?.month
+        val day = args.calendarDate?.day
 
+        // 입력창 달력 날짜 설정
+        binding?.txtInputYear?.text = year.toString()
+        binding?.txtInputMonth?.text = month.toString()
+        binding?.txtInputDay?.text = day.toString()
 
-        binding!!.txtDate.text = date.toString()
+        // 저장 버튼 클릭시 날짜, 금액 전달
+        binding?.btnSave?.setOnClickListener {
+            val temp = MainList(year!!, month!!, day!!, binding?.edtMoney?.text.toString().toIntOrNull()?:0)
+            var action = InputFragmentDirections.actionInputFragmentToMainFragment(temp)
 
-        // 앱 내 뒤로가기 버튼
-        binding!!.btnBackInput.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-            requireActivity().supportFragmentManager.popBackStack()
+            findNavController().navigate(action)
         }
-
 
         return binding!!.root
     }
 
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InputFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(date: String) =
-            InputFragment().apply {
-                arguments = Bundle().apply {
-                    putString("date", date)
-                }
-            }
-    }
 }

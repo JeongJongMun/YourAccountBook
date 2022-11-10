@@ -23,8 +23,7 @@ class MainListAdapter(private val calendarsList: Array<MainList>)
         holder.txtYear.text = currentItem.year.toString()
         holder.txtMonth.text = currentItem.month.toString()
         holder.txtDay.text = currentItem.day.toString()
-        holder.txtSubtractMoney.text = currentItem.subtractMoney.toString()
-        holder.txtMoney.text = currentItem.money.toString()
+        holder.txtExpense.text = currentItem.expense.toString()
     }
 
     // 전체 아이템 개수 리턴
@@ -35,7 +34,6 @@ class MainListAdapter(private val calendarsList: Array<MainList>)
         val txtYear : TextView = itemView.findViewById(R.id.txt_year)
         val txtMonth : TextView = itemView.findViewById(R.id.txt_month)
         val txtDay : TextView = itemView.findViewById(R.id.txt_day)
-        val txtSubtractMoney : TextView = itemView.findViewById(R.id.txt_subtractMoney)
-        val txtMoney : TextView = itemView.findViewById(R.id.txt_money)
+        val txtExpense : TextView = itemView.findViewById(R.id.txt_expense)
     }
 }
