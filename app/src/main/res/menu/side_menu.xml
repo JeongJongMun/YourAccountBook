@@ -13,6 +13,9 @@
         android:id="@+id/fixedFragment"
         android:title="고정지출" />
     <item
-        android:id="@+id/graphFragment"
+        android:id="@+id/barChart"
         android:title="통계" />
+    <item
+        android:id="@+id/searchFragment"
+        android:title="검색" />
 </menu>

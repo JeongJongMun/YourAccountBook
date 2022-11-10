@@ -2,12 +2,15 @@ package com.example.bankappds
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
+
+//TODO fragment 위에서 fragment 띄우기 (아니면 더 다른 좋은게 있나..) / 검색-카테고리, 메인프레그먼트-입력창
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,10 +35,9 @@ class MainActivity : AppCompatActivity() {
         //nav controll 할 때 top level에서는 표시하지 않게
         setupActionBarWithNavController(navController,appBarConfiguration) //네비게이션과 연결시킴
         binding.drawerNav.setupWithNavController(navController)
-
         setContentView(binding.root)
-
     }
+
     //up버튼에 대한 반응 세팅 - default-기본은 back 동작을 안함
     override fun onSupportNavigateUp(): Boolean {
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController

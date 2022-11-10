@@ -11,20 +11,21 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_graphFragment"
-            app:destination="@id/graphFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_goalFragment"
             app:destination="@id/goalFragment" />
         <action
             android:id="@+id/action_mainFragment_to_fixedFragment"
             app:destination="@id/fixedFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_inputFragment"
+            app:destination="@id/inputFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_barChart2"
+            app:destination="@id/barChart" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/graphFragment"
-        android:name="com.example.bankappds.GraphFragment"
-        android:label="fragment_graph"
-        tools:layout="@layout/fragment_graph" />
     <fragment
         android:id="@+id/goalFragment"
         android:name="com.example.bankappds.GoalFragment"
@@ -53,4 +54,33 @@
             android:id="@+id/action_inputfixedFragment_to_fixedFragment"
             app:destination="@id/fixedFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/inputFragment"
+        android:name="com.example.bankappds.InputFragment"
+        android:label="fragment_input"
+        tools:layout="@layout/fragment_input" />
+    <fragment
+        android:id="@+id/barChart"
+        android:name="com.example.bankappds.BarChart"
+        android:label="BarChart" >
+        <action
+            android:id="@+id/action_barChart_to_circleChart"
+            app:destination="@id/circleChart"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/circleChart"
+        android:name="com.example.bankappds.CircleChart"
+        android:label="CircleChart" >
+        <action
+            android:id="@+id/action_circleChart_to_barChart"
+            app:destination="@id/barChart"
+            app:popUpTo="@id/barChart"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.bankappds.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>

@@ -10,8 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.bankappds.databinding.FragmentFixedBinding
 
 
-
-
 class FixedFragment : Fragment() {
     var binding : FragmentFixedBinding ?= null
 
@@ -29,22 +27,17 @@ class FixedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding?.txtWh?.text = args.inputFix?.where
         binding?.txtMon?.text = args.inputFix?.money.toString()
-
-
 
         binding?.btnAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_fixedFragment_to_inputfixedFragment)
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
-
 
 }
