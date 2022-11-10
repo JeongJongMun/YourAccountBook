@@ -13,7 +13,7 @@ import com.example.bankappds.databinding.ActivityMainBinding
 //TODO fragment 위에서 fragment 띄우기 (아니면 더 다른 좋은게 있나..) / 검색-카테고리, 메인프레그먼트-입력창
 
 class MainActivity : AppCompatActivity() {
-
+    //haha
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
