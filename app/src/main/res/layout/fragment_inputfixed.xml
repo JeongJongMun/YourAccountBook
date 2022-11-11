@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type_spn" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <EditText
         android:id="@+id/edt_pay"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_where" />
 
     <Spinner
-        android:id="@+id/type_spn"
+        android:id="@+id/spinner"
         android:layout_width="150dp"
         android:layout_height="41dp"
         android:layout_marginTop="80dp"

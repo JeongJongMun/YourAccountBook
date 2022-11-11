@@ -61,7 +61,7 @@ class FixedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding?.txtMon?.text = args.inputFix?.money.toString()
+        //binding?.txtMon?.text = args.inputFix?.money.toString()
 
 
         binding?.btnAdd?.setOnClickListener {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fixed_type">
+        <item>문화</item>
+        <item>가정</item>
+        <item>금융</item>
+        <item>식비</item>
+        <item>기타</item>
+    </string-array>
+
+</resources>
