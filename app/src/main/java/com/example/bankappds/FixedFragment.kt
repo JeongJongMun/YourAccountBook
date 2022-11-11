@@ -37,9 +37,19 @@ class FixedFragment : Fragment() {
             payLists = payLists.plus(FixedPay(PayType.HOME,args.inputFix.where,args.inputFix.money,true))
         }
         */
-        payLists = payLists.plus(FixedPay(PayType.HOME,"haha",12333,true))
+
+        //val inputPay = FixedPay(PayType.HOME,"haha",12333,true)
+
+
 
         binding?.recPay?.adapter=FixedPayAdapter(payLists)
+
+        //https://ddolcat.tistory.com/592
+
+        //binding?.recPay?.adapter.addItem(inputPay)
+
+
+
         return binding?.root
 
 

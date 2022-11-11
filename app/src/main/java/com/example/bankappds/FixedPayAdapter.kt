@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankappds.databinding.FixedListBinding
 
 
-class FixedPayAdapter (val pays: Array<FixedPay>): RecyclerView.Adapter<FixedPayAdapter.Holder>() {
+class FixedPayAdapter (var pays: Array<FixedPay>): RecyclerView.Adapter<FixedPayAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = FixedListBinding.inflate(LayoutInflater.from(parent.context))
@@ -19,6 +19,13 @@ class FixedPayAdapter (val pays: Array<FixedPay>): RecyclerView.Adapter<FixedPay
     }
 
     override fun getItemCount() = pays.size
+
+    /*
+    fun addItem(addPay:FixedPay){
+        pays.plus(addPay)
+        notifyDataSetChanged()
+    }
+     */
 
     class Holder(private val binding: FixedListBinding) :RecyclerView.ViewHolder(binding.root) {
         fun bind( pay : FixedPay) {

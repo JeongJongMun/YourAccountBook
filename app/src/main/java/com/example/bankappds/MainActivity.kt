@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration) //네비게이션과 연결시킴
         binding.drawerNav.setupWithNavController(navController)
         setContentView(binding.root)
+
     }
 
     //up버튼에 대한 반응 세팅 - default-기본은 back 동작을 안함
