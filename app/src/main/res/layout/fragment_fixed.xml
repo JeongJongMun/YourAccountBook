@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="vertical"
+    android:background="@color/allbg"
     tools:context=".FixedFragment">
 
     <androidx.recyclerview.widget.RecyclerView

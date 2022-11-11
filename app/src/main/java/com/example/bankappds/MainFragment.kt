@@ -45,6 +45,7 @@ class MainFragment : Fragment() {
     }
 
     // 입력 창에서 데이터 받아오는 함수
+
     fun dataReceive() {
         // 입력창에서 데이터 받아옴
         val args : MainFragmentArgs by navArgs()
