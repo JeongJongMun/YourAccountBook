@@ -12,5 +12,5 @@ enum class PayType {
 }
 
 @Parcelize
-data class FixedPay (val type :PayType, val where:String, val money:Int,val go: Boolean):Parcelable
+data class FixedPay (val type :PayType, val where:String, val money:Int):Parcelable
 

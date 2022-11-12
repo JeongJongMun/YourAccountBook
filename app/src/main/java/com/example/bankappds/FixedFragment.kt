@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +15,11 @@ import com.example.bankappds.databinding.FragmentFixedBinding
 class FixedFragment : Fragment() {
     var binding : FragmentFixedBinding ?= null
 
-    var payLists = arrayOf(
-        FixedPay(PayType.ENTE,"Netflix",12000,true),
-        FixedPay(PayType.HOME,"전기세",30000,true),
-        FixedPay(PayType.FOOD,"급식비",300000,true)
+
+    var payLists : ArrayList<FixedPay> = arrayListOf(
+        FixedPay(PayType.ENTE,"Netflix",12000),
+        FixedPay(PayType.HOME,"전기세",30000),
+        FixedPay(PayType.FOOD,"급식비",300000)
     )
 
 
@@ -30,39 +32,32 @@ class FixedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentFixedBinding.inflate(inflater)
-        binding?.recPay?.layoutManager = LinearLayoutManager(activity)
 
-        /*
-        if (args.inputFix.go){
-            payLists = payLists.plus(FixedPay(PayType.HOME,args.inputFix.where,args.inputFix.money,true))
-        }
-        */
-
-        //val inputPay = FixedPay(PayType.HOME,"haha",12333,true)
-
-
-
+        binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
+        binding?.recPay?.setHasFixedSize(true)
         binding?.recPay?.adapter=FixedPayAdapter(payLists)
 
+
+        print(MainActivity().forfixedcheck)
         //https://ddolcat.tistory.com/592
 
-        //binding?.recPay?.adapter.addItem(inputPay)
-
-
+        if (MainActivity().forfixedcheck) {
+            payLists.add(args.inputFix!!)
+            MainActivity().forfixedcheck=false
+            binding?.recPay?.adapter?.notifyDataSetChanged()
+        }
+        else {
+            println("DDDDDD")
+            Toast.makeText(requireContext(), "XXXX", Toast.LENGTH_SHORT).show()
+        }
 
         return binding?.root
-
 
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        //binding?.txtMon?.text = args.inputFix?.money.toString()
-
 
         binding?.btnAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_fixedFragment_to_inputfixedFragment)

@@ -7,15 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.databinding.FragmentFixedBinding
 import com.example.bankappds.databinding.FragmentInputfixedBinding
 
 
+
 class inputfixedFragment : Fragment() {
 
     var binding : FragmentInputfixedBinding ?= null
+
 
     var typeT : PayType? = null
 
@@ -52,6 +55,7 @@ class inputfixedFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 //position은 선택한 아이템의 위치를 넘겨주는 인자입니다.
                 typeT = when(spnLst.get(position)){
+                    "분류" -> null
                     "문화" ->PayType.ENTE
                     "가정" ->PayType.HOME
                     "금융" ->PayType.MONEY
@@ -60,23 +64,28 @@ class inputfixedFragment : Fragment() {
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
         }
 
 
         binding?.btnFin?.setOnClickListener {
-//            if (typeT!=null){
-                val fp =FixedPay(typeT!!,binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0,true)
+            if (typeT == null ){
+                Toast.makeText(requireContext(), "누락된 부분이 있다", Toast.LENGTH_SHORT).show()
+
+
+            }
+            else {
+                MainActivity().forfixedcheck = true
+                val fp =FixedPay(typeT!!,binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0)
                 val action = inputfixedFragmentDirections.actionInputfixedFragmentToFixedFragment(fp)
                 findNavController().navigate(action)
-
-//            }
-//            else {
-//                findNavController().navigate(R.id.action_inputfixedFragment_to_fixedFragment)
-//            }
-
+            }
         }
+
+        binding?.btnCancle?.setOnClickListener {
+            findNavController().navigate(R.id.action_inputfixedFragment_to_fixedFragment)
+        }
+
 
 
     }
@@ -84,7 +93,7 @@ class inputfixedFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
+        binding=null
     }
 
 }
