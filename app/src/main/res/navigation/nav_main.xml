@@ -57,7 +57,9 @@
         tools:layout="@layout/fragment_inputfixed" >
         <action
             android:id="@+id/action_inputfixedFragment_to_fixedFragment"
-            app:destination="@id/fixedFragment" />
+            app:destination="@id/fixedFragment"
+            app:popUpTo="@id/fixedFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/inputFragment"

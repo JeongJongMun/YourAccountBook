@@ -1,13 +1,7 @@
 package com.example.bankappds
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -15,13 +9,20 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
 
-//TODO fragment 위에서 fragment 띄우기 (아니면 더 다른 좋은게 있나..) / 검색-카테고리, 메인프레그먼트-입력창
+//TODO inputFragment 에서 입력하면 mainFragment 에 무제한으로 입력되게끔
+//TODO MainList 클래스에서 깃발 세워서 한번만 저장되게
+
+//TODO 다음주 보류
+//TODO 달력이 넘어가면 메인 리스트도 같이 넘어가기 / 안되면 리스트를 바꾸는걸로,,
+//TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기
+//TODO 통계 - 데이터 입력
+//TODO 데이터 클래스 통합, 일별로 모을수 있게끔 클래스 하나 더 생성?
+
+//TODO 디자인은 마지막에
 
 class MainActivity : AppCompatActivity() {
-    //haha
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
