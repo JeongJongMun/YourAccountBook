@@ -14,8 +14,7 @@ import com.example.bankappds.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
     private var binding : FragmentMainBinding? = null
-    private var mainArrayList : ArrayList<MainList>
-    = arrayListOf(MainList(2022, 11,1,10000, "술","소주땡기네"))
+    private var mainArrayList : ArrayList<MainList> = arrayListOf()
 
 
     override fun onCreateView(
@@ -42,13 +41,17 @@ class MainFragment : Fragment() {
             val send = MainFragmentDirections.actionMainFragmentToInputFragment(temp) // 전달
             findNavController().navigate(send)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
         getInputData()
     }
 
+    // 입력창에서 데이터 받아오기
     @SuppressLint("NotifyDataSetChanged")
     private fun getInputData() {
         println("onResume")
-        // 입력창에서 데이터 받아오기
         val args : MainFragmentArgs by navArgs()
         if ( args.mainListData?.expense != null && args.mainListData?.expense != 0 ) {
             val year = args.mainListData?.year
