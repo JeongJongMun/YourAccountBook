@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
         // 메인 리스트 리사이클러뷰
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
-        //binding?.recyclerView?.setHasFixedSize(true)
+        binding?.recyclerView?.setHasFixedSize(true)
         binding?.recyclerView?.adapter = MainListAdapter(mainArrayList)
 
         // 달력 날짜 선택시 날짜 전달, 이동
@@ -43,11 +43,6 @@ class MainFragment : Fragment() {
             findNavController().navigate(send)
         }
         getInputData()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
