@@ -41,10 +41,11 @@ class MainFragment : Fragment() {
             val send = MainFragmentDirections.actionMainFragmentToInputFragment(temp) // 전달
             findNavController().navigate(send)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
+        binding?.imageView2?.setOnClickListener {
+            mainArrayList.add(MainList(2000, 10, 17, 10000, "테스트", "성공"))
+            // 리사이클러뷰가 변경되었음을 알림
+            binding?.recyclerView?.adapter?.notifyDataSetChanged()
+        }
         getInputData()
     }
 
