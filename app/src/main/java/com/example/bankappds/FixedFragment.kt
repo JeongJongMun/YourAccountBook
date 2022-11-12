@@ -23,6 +23,7 @@ class FixedFragment : Fragment() {
     )
 
 
+    var forcheck = 0
 
     val args: FixedFragmentArgs by navArgs()
 
@@ -38,12 +39,12 @@ class FixedFragment : Fragment() {
         binding?.recPay?.adapter=FixedPayAdapter(payLists)
 
 
-        print(MainActivity().forfixedcheck)
+
         //https://ddolcat.tistory.com/592
 
-        if (MainActivity().forfixedcheck) {
+        if (forcheck == 1) {
             payLists.add(args.inputFix!!)
-            MainActivity().forfixedcheck=false
+            forcheck=0
             binding?.recPay?.adapter?.notifyDataSetChanged()
         }
         else {
@@ -60,9 +61,12 @@ class FixedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.btnAdd?.setOnClickListener {
+            forcheck=1
+            println(forcheck)
             findNavController().navigate(R.id.action_fixedFragment_to_inputfixedFragment)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
