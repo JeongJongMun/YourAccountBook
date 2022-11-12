@@ -1,18 +1,22 @@
 package com.example.bankappds
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
-    var binding : FragmentMainBinding? = null
-    private lateinit var mainArrayList : Array<MainList>
+    private var binding : FragmentMainBinding? = null
+    private var mainArrayList : ArrayList<MainList>
+    = arrayListOf(MainList(2022, 11,1,10000, "술","소주땡기네"))
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,39 +31,47 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 메인 리스트 리사이클러뷰
-        dataInitialize()
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
-        binding?.recyclerView?.setHasFixedSize(true)
+        //binding?.recyclerView?.setHasFixedSize(true)
         binding?.recyclerView?.adapter = MainListAdapter(mainArrayList)
 
         // 달력 날짜 선택시 날짜 전달, 이동
         binding?.calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val temp = MainList(year, month+1, dayOfMonth, 0)
+            val temp = MainList(year, month+1, dayOfMonth, 0, "", "")
             val send = MainFragmentDirections.actionMainFragmentToInputFragment(temp) // 전달
             findNavController().navigate(send)
         }
-/*        val argsCheck : MainFragmentArgs by navArgs()
-        if (argsCheck == null)*/
+        getInputData()
+    }
+
+    override fun onResume() {
+        super.onResume()
 
     }
 
-    // 입력 창에서 데이터 받아오는 함수
-
-    fun dataReceive() {
-        // 입력창에서 데이터 받아옴
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getInputData() {
+        println("onResume")
+        // 입력창에서 데이터 받아오기
         val args : MainFragmentArgs by navArgs()
-        val year = args.mainListData?.year
-        val month = args.mainListData?.month
-        val day = args.mainListData?.day
-        val expense = args.mainListData?.expense
-        // 메인 리스트에 추가
-        mainArrayList = mainArrayList.plus(MainList(year!!, month!!, day!!, expense!!))
+        if ( args.mainListData?.expense != null && args.mainListData?.expense != 0 ) {
+            val year = args.mainListData?.year
+            val month = args.mainListData?.month
+            val day = args.mainListData?.day
+            val expense = args.mainListData?.expense
+            val category = args.mainListData?.category.toString()
+            val memo = args.mainListData?.memo.toString()
+
+            // 메인 리스트에 추가
+            mainArrayList.add(MainList(year!!, month!!, day!!, expense!!, category, memo))
+            // 리사이클러뷰가 변경되었음을 알림
+            binding?.recyclerView?.adapter?.notifyDataSetChanged()
+        }
+
+        else if ( args.mainListData?.expense == 0 ) {
+            Toast.makeText(requireContext(), "추가할 지출이 없습니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun dataInitialize() {
-        mainArrayList = arrayOf(
-        MainList(2022, 11,1,10000)
-        )
-    }
 }

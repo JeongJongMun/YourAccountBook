@@ -1,7 +1,12 @@
 package com.example.bankappds
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     //haha
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration) //네비게이션과 연결시킴
         binding.drawerNav.setupWithNavController(navController)
         setContentView(binding.root)
-
     }
 
     //up버튼에 대한 반응 세팅 - default-기본은 back 동작을 안함

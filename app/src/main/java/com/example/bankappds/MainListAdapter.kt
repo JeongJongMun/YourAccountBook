@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MainListAdapter(private val calendarsList: Array<MainList>)
+class MainListAdapter(private val calendarsList: ArrayList<MainList>)
     : RecyclerView.Adapter<MainListAdapter.MyViewHolder>(){
 
     // 인자로 받는 viewType 형태의 아이템 뷰를 위한 ViewHolder 객체를 생성하는 함수
