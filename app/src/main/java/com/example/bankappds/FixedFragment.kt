@@ -23,7 +23,7 @@ class FixedFragment : Fragment() {
     )
 
 
-    var forcheck = 0
+
 
     val args: FixedFragmentArgs by navArgs()
 
@@ -42,9 +42,10 @@ class FixedFragment : Fragment() {
 
         //https://ddolcat.tistory.com/592
 
-        if (forcheck == 1) {
+        println(MainActivity().forcheck)
+        if (MainActivity().forcheck == true) {
             payLists.add(args.inputFix!!)
-            forcheck=0
+            MainActivity().forcheck=false
             binding?.recPay?.adapter?.notifyDataSetChanged()
         }
         else {
@@ -60,9 +61,15 @@ class FixedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding?.btnKkk?.setOnClickListener {
+            payLists.add(FixedPay(PayType.MONEY,"gg",123))
+            // 리사이클러뷰가 변경되었음을 알림
+            binding?.recPay?.adapter?.notifyDataSetChanged()
+        }
+
         binding?.btnAdd?.setOnClickListener {
-            forcheck=1
-            println(forcheck)
+            MainActivity().forcheck=true
+            println(MainActivity().forcheck)
             findNavController().navigate(R.id.action_fixedFragment_to_inputfixedFragment)
         }
     }
