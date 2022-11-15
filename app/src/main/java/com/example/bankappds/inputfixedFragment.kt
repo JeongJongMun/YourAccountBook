@@ -74,6 +74,7 @@ class inputfixedFragment : Fragment() {
             }
             else {
                 MainActivity().forcheck = true
+                print(MainActivity().forcheck)
                 val fp =FixedPay(typeT!!,binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0)
                 val action = inputfixedFragmentDirections.actionInputfixedFragmentToFixedFragment(fp)
                 findNavController().navigate(action)
