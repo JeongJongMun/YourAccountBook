@@ -10,16 +10,19 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
 
-//TODO inputFragment 에서 입력하면 mainFragment 에 무제한으로 입력되게끔
 //TODO MainList 클래스에서 깃발 세워서 한번만 저장되게
+//TODO 뷰모델로 데이터 관리 -> year, month, day, expense, memo, category를 담고 있는 arrayList?
 
 //TODO 다음주 보류
-//TODO 달력이 넘어가면 메인 리스트도 같이 넘어가기 / 안되면 리스트를 바꾸는걸로,,
+//TODO 달력이 넘어가면 메인 리사이클러뷰도 같이 넘어가기 OR 커스텀 캘린더 OR 버튼으로 전환
 //TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기
 //TODO 통계 - 데이터 입력
 //TODO 데이터 클래스 통합, 일별로 모을수 있게끔 클래스 하나 더 생성?
 
 //TODO 디자인은 마지막에
+
+
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
@@ -28,8 +31,30 @@ class MainActivity : AppCompatActivity() {
     var inputFlag : Boolean = false
     var forcheck : Boolean = false
 
-    //var mainArrayList : ArrayList<MainList> = arrayListOf()
+    var mainArrayList : ArrayList<MainList> = arrayListOf()
     var totalExpense = 0
+
+    //TODO sharedPreferences로 내부에 영구 저장 되게 하기
+    //TODO put은 MainFragment에서 사용, value를 arraylist 넘기는 법 공부
+
+/*    // 입력 데이터 sharedPreferences에서 가져오기
+    private fun getSharedPreference(key: String): String  {
+        val shared = this.requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
+        var expense = shared.getString(key, "0").toString()
+        (activity as MainActivity).totalExpense += expense.toIntOrNull() ?: 0
+        println("Shared $expense, TotalExpense ${(activity as MainActivity).totalExpense}")
+        return expense
+    }
+    getSharedPreference("expense")
+
+    // 입력 데이터 sharedPreferences에 저장
+    private fun putSharedPreference(key: String, value: String) {
+        val shared = this.requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
+        val editor = shared.edit()
+        if (value != null) editor.putString(key, value)
+        editor.apply()
+    }
+    putSharedPreference("expense", expense.toString())*/
 
 
 

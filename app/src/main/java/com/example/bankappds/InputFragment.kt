@@ -6,13 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bankappds.databinding.FragmentInputBinding
+import com.example.bankappds.viewmodel.dataViewModel
 
 
 class InputFragment : Fragment() {
     private var binding: FragmentInputBinding? = null
+
+    val viewModel: dataViewModel by activityViewModels()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -23,6 +28,12 @@ class InputFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        viewModel.expense.observe(viewLifecycleOwner) {
+//            if (binding?.edtMoney?.text.toString().isNotEmpty()) {
+//                binding?.edtMoney?.setText(it.toString())
+//            }
+//        }
 
         spinnerSetting()
 
@@ -39,6 +50,13 @@ class InputFragment : Fragment() {
 
         // 저장 버튼 클릭시 date, expense, category, memo 전달
         binding?.btnSave?.setOnClickListener {
+
+            //TODO 지출 입력 안하고 뒤로가기 눌러도 전에 썼던 값이 계속 더해짐
+            //TODO 힌트도 isEmpty()에 영향이 있나...?
+            if (binding?.edtMoney?.text?.isEmpty() != true) {
+                viewModel.plusExpense(binding?.edtMoney?.text.toString().toIntOrNull()?:0)
+            }
+
             val temp = MainList(year!!, month!!, day!!, binding?.edtMoney?.text.toString().toIntOrNull()?:0,
                 binding?.spinnerInputCategory?.selectedItem.toString(), binding?.edtMemo?.text.toString()
             )

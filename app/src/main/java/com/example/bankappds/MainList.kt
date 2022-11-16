@@ -5,11 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-
-/* data class MainList(val type:String, val money: Int) : Parcelable */
-
-
-
 data class MainList(val year: Int,
                val month: Int,
                val day: Int,
