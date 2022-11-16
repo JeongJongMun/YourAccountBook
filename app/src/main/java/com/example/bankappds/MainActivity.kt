@@ -1,5 +1,6 @@
 package com.example.bankappds
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
@@ -24,7 +25,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
-    var forcheck = false
+    var inputFlag : Boolean = false
+    var forcheck : Boolean = false
+
+    //var mainArrayList : ArrayList<MainList> = arrayListOf()
+    var totalExpense = 0
+
 
 
 

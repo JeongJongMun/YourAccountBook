@@ -1,27 +1,20 @@
 package com.example.bankappds
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.bankappds.databinding.FragmentFixedBinding
 import com.example.bankappds.databinding.FragmentInputfixedBinding
 
 
-
 class inputfixedFragment : Fragment() {
-
     var binding : FragmentInputfixedBinding ?= null
-
-
     var typeT : PayType? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +27,6 @@ class inputfixedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         var spnLst = resources.getStringArray(R.array.fixed_type)
         //ArrayAdapter의 두 번쨰 인자는 스피너 목록에 아이템을 그려줄 레이아웃을 지정하여 줍니다.
         val adapter = activity?.let {
@@ -44,8 +36,6 @@ class inputfixedFragment : Fragment() {
                 spnLst
             )
         }
-
-
 
         //activity_main에서 만들어 놓은 spinner에 adapter 연결하여 줍니다.
         binding?.spinner?.adapter = adapter
@@ -73,7 +63,8 @@ class inputfixedFragment : Fragment() {
                 Toast.makeText(requireContext(), "누락된 부분이 있다", Toast.LENGTH_SHORT).show()
             }
             else {
-                MainActivity().forcheck = true
+                (activity as MainActivity?)?.forcheck = true
+                Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
                 print(MainActivity().forcheck)
                 val fp =FixedPay(typeT!!,binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0)
                 val action = inputfixedFragmentDirections.actionInputfixedFragmentToFixedFragment(fp)
@@ -91,7 +82,7 @@ class inputfixedFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding=null
+        binding = null
     }
 
 

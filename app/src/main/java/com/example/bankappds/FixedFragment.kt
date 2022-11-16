@@ -1,20 +1,22 @@
 package com.example.bankappds
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentFixedBinding
+import com.example.bankappds.databinding.FragmentMainBinding
 
 
 class FixedFragment : Fragment() {
     var binding : FragmentFixedBinding ?= null
-
 
     var payLists : ArrayList<FixedPay> = arrayListOf(
         FixedPay(PayType.ENTE,"Netflix",12000),
@@ -22,11 +24,7 @@ class FixedFragment : Fragment() {
         FixedPay(PayType.FOOD,"급식비",300000)
     )
 
-
-
-
     val args: FixedFragmentArgs by navArgs()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,26 +36,13 @@ class FixedFragment : Fragment() {
         binding?.recPay?.setHasFixedSize(true)
         binding?.recPay?.adapter=FixedPayAdapter(payLists)
 
-
-
         //https://ddolcat.tistory.com/592
-
-        println(MainActivity().forcheck)
-        if (MainActivity().forcheck == true) {
-            payLists.add(args.inputFix!!)
-            MainActivity().forcheck=false
-            binding?.recPay?.adapter?.notifyDataSetChanged()
-        }
-        else {
-            println("DDDDDD")
-            Toast.makeText(requireContext(), "XXXX", Toast.LENGTH_SHORT).show()
-        }
 
         return binding?.root
 
     }
 
-
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,9 +53,20 @@ class FixedFragment : Fragment() {
         }
 
         binding?.btnAdd?.setOnClickListener {
-            MainActivity().forcheck=true
-            println(MainActivity().forcheck)
+            (activity as MainActivity?)?.forcheck = true
+            Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_fixedFragment_to_inputfixedFragment)
+        }
+
+        // 고정지출 입력 확인
+        if (MainActivity().forcheck) {
+            MainActivity().forcheck = false
+            payLists.add(args.inputFix!!)
+            binding?.recPay?.adapter?.notifyDataSetChanged()
+            //Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            //Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
         }
     }
 

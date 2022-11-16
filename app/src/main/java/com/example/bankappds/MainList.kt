@@ -3,6 +3,7 @@ package com.example.bankappds
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+
 @Parcelize
 
 /* data class MainList(val type:String, val money: Int) : Parcelable */

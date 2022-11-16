@@ -14,10 +14,17 @@ import com.example.bankappds.databinding.FragmentInputBinding
 class InputFragment : Fragment() {
     private var binding: FragmentInputBinding? = null
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentInputBinding.inflate(inflater)
+
+        return binding!!.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        spinnerSetting()
 
         // 달력 날짜 전달 받기
         val args : InputFragmentArgs by navArgs()
@@ -36,17 +43,20 @@ class InputFragment : Fragment() {
                 binding?.spinnerInputCategory?.selectedItem.toString(), binding?.edtMemo?.text.toString()
             )
             var action = InputFragmentDirections.actionInputFragmentToMainFragment(temp)
+            (activity as MainActivity).inputFlag = true
 
             findNavController().navigate(action)
         }
+        // 뒤로가기
+        binding?.btnBack?.setOnClickListener {
+            findNavController().navigate(R.id.action_inputFragment_to_mainFragment)
+        }
 
-        return binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        spinnerSetting()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     // 카테고리 스피너 설정
