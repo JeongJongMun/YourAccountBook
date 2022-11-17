@@ -17,7 +17,7 @@
             android:id="@+id/action_mainFragment_to_regFragment"
             app:destination="@id/regFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_inputFragment"
+            android:id="@+id/action_mainFragment_to_mainInputFragment"
             app:destination="@id/mainInputFragment" />
         <action
             android:id="@+id/action_mainFragment_to_barChart2"
@@ -67,12 +67,11 @@
         android:label="입력창"
         tools:layout="@layout/fragment_main_input">
         <action
-            android:id="@+id/action_inputFragment_to_mainFragment"
+            android:id="@+id/action_mainInputFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
         <argument
             android:name="calendarDate"
-            app:argType="com.example.bankappds.Expenditure"
-            app:nullable="true" />
+            app:argType="integer[]" />
     </fragment>
     <fragment
         android:id="@+id/barChart"

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -33,34 +34,44 @@ class MainInputFragment : Fragment() {
 
         // 달력 날짜 전달 받기
         val args : MainInputFragmentArgs by navArgs()
-        val year = args.calendarDate?.year
-        val month = args.calendarDate?.month
-        val day = args.calendarDate?.day
+
+//        val year = args.calendarDate?.year
+//        val month = args.calendarDate?.month
+//        val day = args.calendarDate?.day
 
         // 입력창 달력 날짜 설정
-        binding?.txtInputYear?.text = year.toString()
-        binding?.txtInputMonth?.text = month.toString()
-        binding?.txtInputDay?.text = day.toString()
+        binding?.txtInputYear?.text = args.calendarDate[0].toString()
+        binding?.txtInputMonth?.text = args.calendarDate[1].toString()
+        binding?.txtInputDay?.text = args.calendarDate[2].toString()
 
         // 저장 버튼 클릭시 date, expense, category, memo 전달
         binding?.btnSave?.setOnClickListener {
 
             //TODO 지출 입력 안하고 뒤로가기 눌러도 전에 썼던 값이 계속 더해짐
             //TODO 힌트도 isEmpty()에 영향이 있나...?
-            if (binding?.edtMoney?.text?.isEmpty() != true) {
+
+            if (typeT == null || binding?.edtMoney?.text.toString().isEmpty()  || binding?.edtMemo?.text.toString().isEmpty() ) {
+                Toast.makeText(requireContext(), "누락된 칸이 있습니다", Toast.LENGTH_SHORT).show()
+            }
+            else {
+
                 viewModel.plusExpense(binding?.edtMoney?.text.toString().toIntOrNull()?:0)
+                val temp = Expenditure(args.calendarDate[0], args.calendarDate[1], args.calendarDate[2], binding?.edtMoney?.text.toString().toIntOrNull()?:0,
+                    typeT, binding?.edtMemo?.text.toString())
+
+                var action = MainInputFragmentDirections.actionMainInputFragmentToMainFragment(temp)
+
+                findNavController().navigate(action)
+
+
+
             }
 
-            val temp = Expenditure(year!!, month!!, day!!, binding?.edtMoney?.text.toString().toIntOrNull()?:0,
-                typeT, binding?.edtMemo?.text.toString()
-            )
-            var action = MainInputFragmentDirections.actionInputFragmentToMainFragment(temp)
 
-            findNavController().navigate(action)
         }
         // 뒤로가기
         binding?.btnBack?.setOnClickListener {
-            findNavController().navigate(R.id.action_inputFragment_to_mainFragment)
+            findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)
         }
 
     }

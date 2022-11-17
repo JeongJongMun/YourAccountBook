@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankappds.databinding.ExpenditureListBinding
 
 
-class ExpenditureAdapter (var pays: MutableList<Expenditure>): RecyclerView.Adapter<ExpenditureAdapter.Holder>() {
+class ExpenditureAdapter (private val pays: MutableList<Expenditure>?): RecyclerView.Adapter<ExpenditureAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ExpenditureListBinding.inflate(LayoutInflater.from(parent.context))
@@ -15,10 +15,10 @@ class ExpenditureAdapter (var pays: MutableList<Expenditure>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(pays[position])
+        if (pays != null ) holder.bind(pays[position])
     }
 
-    override fun getItemCount() = pays.size
+    override fun getItemCount() = pays?.size ?:0
 
     class Holder(private val binding: ExpenditureListBinding) :RecyclerView.ViewHolder(binding.root) {
         fun bind( pay : Expenditure) {

@@ -22,8 +22,6 @@ class RegFragment : Fragment() {
     ): View? {
         binding= FragmentRegBinding.inflate(inflater)
 
-
-
         return binding?.root
 
     }
