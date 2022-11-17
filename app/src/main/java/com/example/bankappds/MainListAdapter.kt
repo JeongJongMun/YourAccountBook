@@ -23,7 +23,7 @@ class MainListAdapter(private val calendarsList: ArrayList<MainList>)
         holder.txtMonth.text = currentItem.month.toString()
         holder.txtDay.text = currentItem.day.toString()
         holder.txtExpense.text = currentItem.expense.toString()
-        holder.txtCategory.text = currentItem.category
+        holder.txtCategory.text = currentItem.category.toString()
     }
 
     // 전체 아이템 개수 리턴

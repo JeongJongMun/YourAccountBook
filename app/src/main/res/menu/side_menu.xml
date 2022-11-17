@@ -10,7 +10,7 @@
         android:id="@+id/goalFragment"
         android:title="목표금액" />
     <item
-        android:id="@+id/fixedFragment"
+        android:id="@+id/regFragment"
         android:title="고정지출" />
     <item
         android:id="@+id/barChart"

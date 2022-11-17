@@ -2,10 +2,12 @@
 <resources>
     <string-array name="fixed_type">
         <item>분류</item>
-        <item>문화</item>
-        <item>가정</item>
-        <item>금융</item>
         <item>식비</item>
+        <item>금융</item>
+        <item>여가</item>
+        <item>취미</item>
+        <item>건강</item>
+        <item>주거</item>
         <item>기타</item>
     </string-array>
 

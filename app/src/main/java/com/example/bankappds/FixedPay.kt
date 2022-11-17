@@ -5,12 +5,15 @@ import kotlinx.android.parcel.Parcelize
 
 
 enum class PayType {
-    HOME,
-    ENTE,
     FOOD,
-    MONEY
+    ENTERTAINMENT,
+    SHOPPING,
+    HOBBY,
+    HEALTH,
+    FINANCE,
+    HOME,
+    ETC
 }
 
 @Parcelize
-data class FixedPay (val type :PayType, val where:String, val money:Int):Parcelable
-
+data class FixedPay (val type :Ecategory, val where:String, val money:Int):Parcelable

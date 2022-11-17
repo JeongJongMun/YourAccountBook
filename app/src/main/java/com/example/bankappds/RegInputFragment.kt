@@ -10,17 +10,18 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.databinding.FragmentInputfixedBinding
+import com.example.bankappds.databinding.FragmentRegInputBinding
 
 
-class inputfixedFragment : Fragment() {
-    var binding : FragmentInputfixedBinding ?= null
-    var typeT : PayType? = null
+class RegInputFragment : Fragment() {
+    var binding : FragmentRegInputBinding ?= null
+    var typeT : Ecategory? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentInputfixedBinding.inflate(inflater)
+        binding = FragmentRegInputBinding.inflate(inflater)
         return binding?.root
     }
 
@@ -46,10 +47,10 @@ class inputfixedFragment : Fragment() {
                 //position은 선택한 아이템의 위치를 넘겨주는 인자입니다.
                 typeT = when(spnLst.get(position)){
                     "분류" -> null
-                    "문화" ->PayType.ENTE
-                    "가정" ->PayType.HOME
-                    "금융" ->PayType.MONEY
-                    "식비" ->PayType.FOOD
+                    "문화" ->Ecategory.ENTE
+                    "가정" ->Ecategory.HOME
+                    "금융" ->Ecategory.MONEY
+                    "식비" ->Ecategory.FOOD
                     else -> null
                 }
             }
@@ -64,13 +65,13 @@ class inputfixedFragment : Fragment() {
             }
             else {
                 val fp =FixedPay(typeT!!,binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0)
-                val action = inputfixedFragmentDirections.actionInputfixedFragmentToFixedFragment(fp)
+                val action = RegInputFragmentDirections.actionRegInputFragmentToRegFragment(fp)
                 findNavController().navigate(action)
             }
         }
 
         binding?.btnCancle?.setOnClickListener {
-            findNavController().navigate(R.id.action_inputfixedFragment_to_fixedFragment)
+            findNavController().navigate(R.id.action_regInputFragment_to_regFragment)
         }
 
     }

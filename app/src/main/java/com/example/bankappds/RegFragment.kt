@@ -1,36 +1,34 @@
 package com.example.bankappds
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentFixedBinding
-import com.example.bankappds.databinding.FragmentMainBinding
+import com.example.bankappds.databinding.FragmentRegBinding
 
 
-class FixedFragment : Fragment() {
-    var binding : FragmentFixedBinding ?= null
+class RegFragment : Fragment() {
+    var binding : FragmentRegBinding?= null
 
     var payLists : ArrayList<FixedPay> = arrayListOf(
-        FixedPay(PayType.ENTE,"Netflix",12000),
-        FixedPay(PayType.HOME,"전기세",30000),
-        FixedPay(PayType.FOOD,"급식비",300000)
+        FixedPay(Ecategory.ENTE,"Netflix",12000),
+        FixedPay(Ecategory.HOME,"전기세",30000),
+        FixedPay(Ecategory.FOOD,"급식비",300000)
     )
 
-    val args: FixedFragmentArgs by navArgs()
+    val args: RegFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentFixedBinding.inflate(inflater)
+        binding= FragmentRegBinding.inflate(inflater)
 
         binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
         binding?.recPay?.setHasFixedSize(true)
@@ -47,13 +45,13 @@ class FixedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.btnKkk?.setOnClickListener {
-            payLists.add(FixedPay(PayType.MONEY,"gg",123))
+            payLists.add(FixedPay(Ecategory.MONEY,"gg",123))
             // 리사이클러뷰가 변경되었음을 알림
             binding?.recPay?.adapter?.notifyDataSetChanged()
         }
 
         binding?.btnAdd?.setOnClickListener {
-            findNavController().navigate(R.id.action_fixedFragment_to_inputfixedFragment)
+            findNavController().navigate(R.id.action_regFragment_to_regInputFragment)
         }
 
         // 고정지출 입력 확인

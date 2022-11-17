@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
+
+
     var mainArrayList : ArrayList<MainList> = arrayListOf()
     var totalExpense = 0
 

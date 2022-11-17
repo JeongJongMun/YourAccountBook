@@ -73,7 +73,7 @@ class MainInputFragment : Fragment() {
     // 카테고리 스피너 설정
     private fun spinnerSetting() {
         // 스피너에 들어갈 데이터
-        val spinnerData = listOf("식비","카페,간식","편의점,마트,잡화","술,유흥","쇼핑","취미,여가","의료,건강,피트니스","주거,통신","기타")
+//        val spinnerData = listOf("식비","카페,간식","편의점,마트,잡화","술,유흥","쇼핑","취미,여가","의료,건강,피트니스","주거,통신","기타")
         // 어댑터 생성 ( fragment 에서 사용하니 requireContext()를 써주자 )
         val adapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, spinnerData)
         // 어댑터 설정
