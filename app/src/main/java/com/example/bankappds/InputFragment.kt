@@ -29,12 +29,6 @@ class InputFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        viewModel.expense.observe(viewLifecycleOwner) {
-//            if (binding?.edtMoney?.text.toString().isNotEmpty()) {
-//                binding?.edtMoney?.setText(it.toString())
-//            }
-//        }
-
         spinnerSetting()
 
         // 달력 날짜 전달 받기
