@@ -15,7 +15,7 @@
         android:id="@+id/rec_pay"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:background="#FFFFFF"
+        android:background="@color/allbg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
