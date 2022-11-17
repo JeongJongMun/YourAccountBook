@@ -53,21 +53,12 @@ class FixedFragment : Fragment() {
         }
 
         binding?.btnAdd?.setOnClickListener {
-            (activity as MainActivity?)?.forcheck = true
-            Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_fixedFragment_to_inputfixedFragment)
         }
 
         // 고정지출 입력 확인
-        if (MainActivity().forcheck) {
-            MainActivity().forcheck = false
-            payLists.add(args.inputFix!!)
-            binding?.recPay?.adapter?.notifyDataSetChanged()
-            //Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            //Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
-        }
+/*            payLists.add(args.inputFix!!)
+            binding?.recPay?.adapter?.notifyDataSetChanged()*/
     }
 
 

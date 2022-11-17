@@ -9,19 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.bankappds.databinding.FragmentInputBinding
+import com.example.bankappds.databinding.FragmentMainInputBinding
 import com.example.bankappds.viewmodel.dataViewModel
 
 
-class InputFragment : Fragment() {
-    private var binding: FragmentInputBinding? = null
+class MainInputFragment : Fragment() {
+    private var binding: FragmentMainInputBinding? = null
 
     val viewModel: dataViewModel by activityViewModels()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = FragmentInputBinding.inflate(inflater)
+        binding = FragmentMainInputBinding.inflate(inflater)
 
         return binding!!.root
     }
@@ -32,7 +32,7 @@ class InputFragment : Fragment() {
         spinnerSetting()
 
         // 달력 날짜 전달 받기
-        val args : InputFragmentArgs by navArgs()
+        val args : MainInputFragmentArgs by navArgs()
         val year = args.calendarDate?.year
         val month = args.calendarDate?.month
         val day = args.calendarDate?.day
@@ -54,8 +54,7 @@ class InputFragment : Fragment() {
             val temp = MainList(year!!, month!!, day!!, binding?.edtMoney?.text.toString().toIntOrNull()?:0,
                 binding?.spinnerInputCategory?.selectedItem.toString(), binding?.edtMemo?.text.toString()
             )
-            var action = InputFragmentDirections.actionInputFragmentToMainFragment(temp)
-            (activity as MainActivity).inputFlag = true
+            var action = MainInputFragmentDirections.actionInputFragmentToMainFragment(temp)
 
             findNavController().navigate(action)
         }

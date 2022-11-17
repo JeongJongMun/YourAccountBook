@@ -63,9 +63,6 @@ class inputfixedFragment : Fragment() {
                 Toast.makeText(requireContext(), "누락된 부분이 있다", Toast.LENGTH_SHORT).show()
             }
             else {
-                (activity as MainActivity?)?.forcheck = true
-                Toast.makeText(requireContext(), "${MainActivity().forcheck}", Toast.LENGTH_SHORT).show()
-                print(MainActivity().forcheck)
                 val fp =FixedPay(typeT!!,binding?.edtWhere?.text.toString(), binding?.edtPay?.text.toString().toIntOrNull()?:0)
                 val action = inputfixedFragmentDirections.actionInputfixedFragmentToFixedFragment(fp)
                 findNavController().navigate(action)
@@ -75,8 +72,6 @@ class inputfixedFragment : Fragment() {
         binding?.btnCancle?.setOnClickListener {
             findNavController().navigate(R.id.action_inputfixedFragment_to_fixedFragment)
         }
-
-
 
     }
 

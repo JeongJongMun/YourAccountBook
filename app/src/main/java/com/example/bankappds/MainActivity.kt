@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
-    var inputFlag : Boolean = false
-    var forcheck : Boolean = false
-
     var mainArrayList : ArrayList<MainList> = arrayListOf()
     var totalExpense = 0
 

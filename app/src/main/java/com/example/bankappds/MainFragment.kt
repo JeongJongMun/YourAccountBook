@@ -82,15 +82,13 @@ class MainFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun getInputData() {
         val args : MainFragmentArgs by navArgs()
-        if ( args.mainListData?.expense != null && args.mainListData?.expense != 0 && (activity as MainActivity).inputFlag ) {
+        if ( args.mainListData?.expense != null && args.mainListData?.expense != 0 ) {
             val year = args.mainListData?.year
             val month = args.mainListData?.month
             val day = args.mainListData?.day
             val expense = args.mainListData?.expense
             val category = args.mainListData?.category.toString()
             val memo = args.mainListData?.memo.toString()
-
-            (activity as MainActivity).inputFlag = false
 
             // 메인 리스트에 추가
             //mainArrayList.add(MainList(year!!, month!!, day!!, expense!!, category, memo))
