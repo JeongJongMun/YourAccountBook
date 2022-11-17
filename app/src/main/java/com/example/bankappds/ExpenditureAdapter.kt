@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankappds.databinding.ExpenditureListBinding
 
 
-class ExpenditureAdapter (var pays: ArrayList<Expenditure>): RecyclerView.Adapter<ExpenditureAdapter.Holder>() {
+class ExpenditureAdapter (var pays: MutableList<Expenditure>): RecyclerView.Adapter<ExpenditureAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ExpenditureListBinding.inflate(LayoutInflater.from(parent.context))
@@ -28,14 +28,14 @@ class ExpenditureAdapter (var pays: ArrayList<Expenditure>): RecyclerView.Adapte
                 binding.imgCategory.setImageResource(
                     when(pay.category) {
                         Ecategory.FOOD -> R.drawable.food
-                        Ecategory.FINANCE -> R.drawable.food
-                        Ecategory.SHOPPING -> R.drawable.food
-                        Ecategory.ENTERTAINMENT -> R.drawable.food
-                        Ecategory.HOBBY -> R.drawable.food
-                        Ecategory.HEALTH -> R.drawable.food
-                        Ecategory.HOME -> R.drawable.food
-                        Ecategory.ETC -> R.drawable.food
-                        else -> R.drawable.food
+                        Ecategory.FINANCE -> R.drawable.finance
+                        Ecategory.SHOPPING -> R.drawable.shopping
+                        Ecategory.ENTERTAINMENT -> R.drawable.entertainment
+                        Ecategory.HOBBY -> R.drawable.hobby
+                        Ecategory.HEALTH -> R.drawable.health
+                        Ecategory.HOME -> R.drawable.home
+                        Ecategory.ETC -> R.drawable.etc
+                        else -> 0
                     }
                 )
             }

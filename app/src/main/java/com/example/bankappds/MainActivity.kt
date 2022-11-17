@@ -8,15 +8,31 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
+import java.lang.reflect.Executable
 
-//TODO 다음주 보류
-//TODO 달력이 넘어가면 메인 리사이클러뷰도 같이 넘어가기 OR 커스텀 캘린더 OR 버튼으로 전환
+//TODO 조건문 가라 금지
+
+//TODO 한달 통계 데이터 관리
 //TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기
+//TODO 앱바 - 오른쪽에 버튼 누르면 한달 통계 리사이클러뷰
 //TODO 통계 - 데이터 입력
-//TODO 데이터 클래스 통합, 일별로 모을수 있게끔 클래스 하나 더 생성?
+
+//TODO 각 프래그먼트 xml 정리
 
 //TODO 디자인은 마지막에
 
+//TODO 앱 컨셉을 저축왕 느낌으로 게이지 채우는 형식
+
+/*
+var testObject = Expenditure(0, 0,10,0,Ecategory.FOOD,"") // 객체 생성
+
+var map = mutableMapOf<Int, MutableList<Expenditure>>()
+if (map[testObject.day] != null) {
+    map[testObject.day]?.add(testObject)
+}
+else map.put(testObject.day, mutableListOf<Expenditure>(testObject))
+println(map[10])
+*/
 
 
 
@@ -24,7 +40,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
-    var expenditureList : ArrayList<Expenditure> = arrayListOf()
+//    var expenditureList : ArrayList<Expenditure> = arrayListOf()
+    var expenditureMap = mutableMapOf<Int, MutableList<Expenditure>>(99 to mutableListOf
+    (Expenditure(0,0,0,0,Ecategory.ETC,"")))
     var totalExpense = 0
 
     //TODO sharedPreferences로 내부에 영구 저장 되게 하기
@@ -67,6 +85,12 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+    fun addExpenditure(expd: Expenditure) {
+        if (expenditureMap[expd.day] != null) {
+            expenditureMap[expd.day]?.add(expd)
+        }
+        else expenditureMap.put(expd.day, mutableListOf(expd))
     }
 
 }

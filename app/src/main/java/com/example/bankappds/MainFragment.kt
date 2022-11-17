@@ -19,7 +19,6 @@ class MainFragment : Fragment() {
     private var binding : FragmentMainBinding? = null
     var typeT : Ecategory? = null
 
-
     // 뷰모델을 어떻게 초기화할지를 viewModels라는 함수에 위임(by)한다
     // val viewModel: MbtiViewModel by viewModels()
     // 우리는 엑티비티에 프래그먼트들이 물려있으니까 엑티비티뷰모델 사용
@@ -45,15 +44,22 @@ class MainFragment : Fragment() {
         }
 
 
-        // 메인 리스트 리사이클러뷰
-        val layoutManager = LinearLayoutManager(context)
-        binding?.recyclerView?.layoutManager = layoutManager
-        binding?.recyclerView?.setHasFixedSize(true)
-        binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureList)
-
         // 달력 날짜 선택시 날짜 전달, 이동
         binding?.calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
             binding?.btnAdd2?.isVisible = true
+            if ((activity as MainActivity).expenditureMap[dayOfMonth] != null) {
+                // 메인 리스트 리사이클러뷰
+                val layoutManager = LinearLayoutManager(context)
+                binding?.recyclerView?.layoutManager = layoutManager
+                binding?.recyclerView?.setHasFixedSize(true)
+                binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap[dayOfMonth]!!)
+            }
+            else {
+                val layoutManager = LinearLayoutManager(context)
+                binding?.recyclerView?.layoutManager = layoutManager
+                binding?.recyclerView?.setHasFixedSize(true)
+                binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap[99]!!)
+            }
 
             binding?.btnAdd2?.setOnClickListener {
                 val temp = Expenditure(year, month + 1, dayOfMonth, 0, typeT, "")
@@ -71,7 +77,6 @@ class MainFragment : Fragment() {
         binding = null
     }
 
-
     // 입력창에서 데이터 받아오기
     @SuppressLint("NotifyDataSetChanged")
     private fun getInputData() {
@@ -84,8 +89,9 @@ class MainFragment : Fragment() {
             typeT = args.expenditureData?.category
             val memo = args.expenditureData?.memo.toString()
 
+
             // 메인 리스트에 추가
-            (activity as MainActivity).expenditureList.add(Expenditure(year!!, month!!, day!!, expense!!, typeT, memo))
+            (activity as MainActivity).addExpenditure(Expenditure(year!!, month!!, day!!, expense!!, typeT, memo))
             // 리사이클러뷰가 변경되었음을 알림
             binding?.recyclerView?.adapter?.notifyDataSetChanged()
         }
