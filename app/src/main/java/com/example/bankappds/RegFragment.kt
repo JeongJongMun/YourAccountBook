@@ -15,7 +15,6 @@ import com.example.bankappds.databinding.FragmentRegBinding
 
 class RegFragment : Fragment() {
     var binding : FragmentRegBinding?= null
-    var typeT: Ecategory? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,14 +49,14 @@ class RegFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun getInputData() {
         val args : RegFragmentArgs by navArgs()
-        if ( args.regExpenditure?.expense != 0 ) {
+        if ( args.regExpenditure?.expense != null && args.regExpenditure?.expense != 0 ) {
             val day = args.regExpenditure?.day
             val expense = args.regExpenditure?.expense
-            typeT = args.regExpenditure?.category
+            val category: Ecategory? = args.regExpenditure?.category
             val memo = args.regExpenditure?.memo.toString()
 
             // 메인 리스트에 추가
-            (activity as MainActivity).expenditureList.add(Expenditure(0, 0, day!!, expense!!, typeT, memo))
+            (activity as MainActivity).expenditureList.add(Expenditure(0, 0, day!!, expense!!, category!!, memo))
             // 리사이클러뷰가 변경되었음을 알림
             binding?.recPay?.adapter?.notifyDataSetChanged()
         }
