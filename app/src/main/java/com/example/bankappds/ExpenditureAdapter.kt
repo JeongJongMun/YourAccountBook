@@ -23,13 +23,9 @@ class ExpenditureAdapter (var pays: ArrayList<Expenditure>): RecyclerView.Adapte
     class Holder(private val binding: ExpenditureListBinding) :RecyclerView.ViewHolder(binding.root) {
         fun bind( pay : Expenditure) {
             if ( pay.year == 0 && pay.month == 0 ) {
-                binding.categoryImage.isVisible = true
-                binding.txtYear.isVisible = false
-                binding.txtYear2.isVisible = false
-                binding.txtMonth.isVisible = false
-                binding.txtMonth2.isVisible = false
+                binding.imgCategory.isVisible = true
 
-                binding.categoryImage.setImageResource(
+                binding.imgCategory.setImageResource(
                     when(pay.category) {
                         Ecategory.FOOD -> R.drawable.food
                         Ecategory.FINANCE -> R.drawable.food
@@ -44,18 +40,13 @@ class ExpenditureAdapter (var pays: ArrayList<Expenditure>): RecyclerView.Adapte
                 )
             }
             else {
-                binding.categoryImage.isVisible = false
-                binding.txtYear.isVisible = true
-                binding.txtYear2.isVisible = true
-                binding.txtMonth.isVisible = true
-                binding.txtMonth2.isVisible = true
-
-                binding.txtYear.text = pay.year.toString()
-                binding.txtMonth.text = pay.month.toString()
+                binding.imgCategory.isVisible = false
             }
-
+            binding.txtYear.text = pay.year.toString()
+            binding.txtMonth.text = pay.month.toString()
             binding.txtDay.text = pay.day.toString()
             binding.txtExpense.text = pay.expense.toString()
+            binding.txtMemo.text = pay.memo
             binding.txtCategory.text = pay.category.toString()
     }
 }}
