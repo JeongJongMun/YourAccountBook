@@ -9,9 +9,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
 
-//TODO MainList 클래스에서 깃발 세워서 한번만 저장되게
-//TODO 뷰모델로 데이터 관리 -> year, month, day, expense, memo, category를 담고 있는 arrayList?
-
 //TODO 다음주 보류
 //TODO 달력이 넘어가면 메인 리사이클러뷰도 같이 넘어가기 OR 커스텀 캘린더 OR 버튼으로 전환
 //TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기

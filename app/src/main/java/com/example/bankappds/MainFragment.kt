@@ -59,7 +59,6 @@ class MainFragment : Fragment() {
                 val temp = Expenditure(year, month + 1, dayOfMonth, 0, typeT, "")
                 val send = com.example.bankappds.MainFragmentDirections.actionMainFragmentToInputFragment(temp) // 전달
                 findNavController().navigate(send)
-
             }
 
         }

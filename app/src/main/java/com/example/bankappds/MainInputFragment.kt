@@ -20,9 +20,7 @@ class MainInputFragment : Fragment() {
 
     val viewModel: dataViewModel by activityViewModels()
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = FragmentMainInputBinding.inflate(inflater)
 
         return binding!!.root
