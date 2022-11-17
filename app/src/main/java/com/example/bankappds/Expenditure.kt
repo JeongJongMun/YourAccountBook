@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 
-enum class PayType {
+enum class Ecategory {
     FOOD,
     ENTERTAINMENT,
     SHOPPING,
@@ -15,5 +15,13 @@ enum class PayType {
     ETC
 }
 
+
 @Parcelize
-data class FixedPay (val type :Ecategory, val where:String, val money:Int):Parcelable
+data class Expenditure(
+    var year: Int = 0,
+    var month: Int = 0,
+    val day: Int,
+    val expense: Int,
+    val category: Ecategory?,
+    val memo: String ): Parcelable
+

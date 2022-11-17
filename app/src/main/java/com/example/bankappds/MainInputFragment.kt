@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,6 +16,7 @@ import com.example.bankappds.viewmodel.dataViewModel
 
 class MainInputFragment : Fragment() {
     private var binding: FragmentMainInputBinding? = null
+    var typeT : Ecategory? = null
 
     val viewModel: dataViewModel by activityViewModels()
 
@@ -51,8 +53,8 @@ class MainInputFragment : Fragment() {
                 viewModel.plusExpense(binding?.edtMoney?.text.toString().toIntOrNull()?:0)
             }
 
-            val temp = MainList(year!!, month!!, day!!, binding?.edtMoney?.text.toString().toIntOrNull()?:0,
-                binding?.spinnerInputCategory?.selectedItem.toString(), binding?.edtMemo?.text.toString()
+            val temp = Expenditure(year!!, month!!, day!!, binding?.edtMoney?.text.toString().toIntOrNull()?:0,
+                typeT, binding?.edtMemo?.text.toString()
             )
             var action = MainInputFragmentDirections.actionInputFragmentToMainFragment(temp)
 
@@ -72,14 +74,32 @@ class MainInputFragment : Fragment() {
 
     // 카테고리 스피너 설정
     private fun spinnerSetting() {
-        // 스피너에 들어갈 데이터
-//        val spinnerData = listOf("식비","카페,간식","편의점,마트,잡화","술,유흥","쇼핑","취미,여가","의료,건강,피트니스","주거,통신","기타")
-        // 어댑터 생성 ( fragment 에서 사용하니 requireContext()를 써주자 )
-        val adapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, spinnerData)
-        // 어댑터 설정
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // 스피너에 어댑터 적용
+        var spnLst = resources.getStringArray(R.array.category_type)
+        //ArrayAdapter의 두 번쨰 인자는 스피너 목록에 아이템을 그려줄 레이아웃을 지정하여 줍니다.
+        val adapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, spnLst)
+        //activity_main에서 만들어 놓은 spinner에 adapter 연결하여 줍니다.
         binding?.spinnerInputCategory?.adapter = adapter
+        //데이터가 들어가 있는 spinner 에서 선택한 아이템을 가져옵니다.
+        binding?.spinnerInputCategory?.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                //position은 선택한 아이템의 위치를 넘겨주는 인자입니다.
+                typeT = when(spnLst[position]){
+                    "분류" -> null
+                    "식비" ->Ecategory.FOOD
+                    "금융" ->Ecategory.FINANCE
+                    "쇼핑" ->Ecategory.SHOPPING
+                    "여가" ->Ecategory.ENTERTAINMENT
+                    "취미" ->Ecategory.HOBBY
+                    "건강" ->Ecategory.HEALTH
+                    "주거" ->Ecategory.HOME
+                    "기타" ->Ecategory.ETC
+                    else -> null
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
     }
 
 }

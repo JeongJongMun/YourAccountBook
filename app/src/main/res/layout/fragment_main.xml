@@ -70,7 +70,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendar_view"
-        tools:listitem="@layout/main_list" />
+        tools:listitem="@layout/expenditure_list" />
 
     <Button
         android:id="@+id/btn_add2"

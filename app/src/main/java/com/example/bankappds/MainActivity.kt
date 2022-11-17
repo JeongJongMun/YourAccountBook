@@ -1,6 +1,5 @@
 package com.example.bankappds
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
@@ -28,9 +27,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
-
-
-    var mainArrayList : ArrayList<MainList> = arrayListOf()
+    var expenditureList : ArrayList<Expenditure> = arrayListOf()
     var totalExpense = 0
 
     //TODO sharedPreferences로 내부에 영구 저장 되게 하기
@@ -55,31 +52,18 @@ class MainActivity : AppCompatActivity() {
     }
     putSharedPreference("expense", expense.toString())*/
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //53min
 
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         //action bar의 옛날이름
-        appBarConfiguration = AppBarConfiguration(
-            //top레벨 프래그먼트의 아이디의 집합을 넘김
-            //setOf(R.id.aboutFragment,R.id.examineFragment,R.id.settingsFragment),
-            navController.graph,
-            //drawer layout을 사용할 경우 써줘야함
-            binding.drawerLayout
-        )
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout) //drawer layout을 사용할 경우 써줘야함
         //nav controll 할 때 top level에서는 표시하지 않게
         setupActionBarWithNavController(navController,appBarConfiguration) //네비게이션과 연결시킴
         binding.drawerNav.setupWithNavController(navController)
         setContentView(binding.root)
-
-
     }
 
     //up버튼에 대한 반응 세팅 - default-기본은 back 동작을 안함
@@ -87,4 +71,5 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }
