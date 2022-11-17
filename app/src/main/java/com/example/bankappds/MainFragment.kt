@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -54,9 +55,18 @@ class MainFragment : Fragment() {
 
         // 달력 날짜 선택시 날짜 전달, 이동
         binding?.calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val temp = MainList(year, month+1, dayOfMonth, 0, "", "")
-            val send = MainFragmentDirections.actionMainFragmentToInputFragment(temp) // 전달
-            findNavController().navigate(send)
+            binding?.btnAdd2?.isVisible = true
+
+            binding?.btnAdd2?.setOnClickListener {
+                val temp = com.example.bankappds.MainList(year, month + 1, dayOfMonth, 0, "", "")
+                val send = com.example.bankappds.MainFragmentDirections.actionMainFragmentToInputFragment(temp) // 전달
+                findNavController().navigate(send)
+
+            }
+
+
+
+
         }
 
         getInputData()
