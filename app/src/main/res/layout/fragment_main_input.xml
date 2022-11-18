@@ -11,17 +11,15 @@
         android:id="@+id/edt_memo"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginTop="80dp"
         android:gravity="end"
         android:hint="내용을 입력하세요."
         android:inputType="textMultiLine"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_input_category"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_input_category" />
 
     <Button
         android:id="@+id/btn_back"
@@ -86,27 +84,29 @@
         android:id="@+id/edt_money"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="80dp"
         android:ems="10"
         android:gravity="end"
         android:hint="0원"
         android:inputType="number"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_input_category"
+        app:layout_constraintBottom_toTopOf="@+id/btn_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_memo"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/spinner_input_category"
         android:layout_width="240dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintBottom_toTopOf="@+id/edt_memo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/edt_money" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_input_month" />
 
     <TextView
         android:id="@+id/textView9"

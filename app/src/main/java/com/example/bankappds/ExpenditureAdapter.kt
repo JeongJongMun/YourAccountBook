@@ -42,6 +42,7 @@ class ExpenditureAdapter (private val pays: MutableList<Expenditure>?): Recycler
             else {
                 binding.imgCategory.isVisible = false
             }
+
             binding.txtYear.text = pay.year.toString()
             binding.txtMonth.text = pay.month.toString()
             binding.txtDay.text = pay.day.toString()
@@ -50,3 +51,4 @@ class ExpenditureAdapter (private val pays: MutableList<Expenditure>?): Recycler
             binding.txtCategory.text = pay.category.toString()
     }
 }}
+

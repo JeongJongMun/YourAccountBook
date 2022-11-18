@@ -29,7 +29,12 @@ class RegFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getInputData()
+        //getInputData()
+
+        binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
+        binding?.recPay?.setHasFixedSize(true)
+        binding?.recPay?.adapter=ExpenditureAdapter((activity as MainActivity).expenditureMap[0])
+        binding?.recPay?.adapter?.notifyDataSetChanged()
 
         binding?.btnAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_regFragment_to_regInputFragment)
@@ -42,6 +47,7 @@ class RegFragment : Fragment() {
         binding = null
     }
 
+    /*
     @SuppressLint("NotifyDataSetChanged")
     private fun getInputData() {
         val args : RegFragmentArgs by navArgs()
@@ -65,5 +71,7 @@ class RegFragment : Fragment() {
             Toast.makeText(requireContext(), "추가할 지출이 없습니다.", Toast.LENGTH_SHORT).show()
         }
     }
+
+     */
 
 }

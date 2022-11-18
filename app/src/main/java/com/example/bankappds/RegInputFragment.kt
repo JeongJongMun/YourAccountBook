@@ -55,18 +55,19 @@ class RegInputFragment : Fragment() {
             }
         }
 
-
+//typeT == null || binding?.edtMoney?.text.toString().isEmpty()  || binding?.edtMemo?.text.toString().isEmpty()
         binding?.btnFin?.setOnClickListener {
-            if (typeT == null ){
+            if (typeT == null || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty()){
                 Toast.makeText(requireContext(), "누락된 부분이 있다", Toast.LENGTH_SHORT).show()
             }
             else {
-                val temp = Expenditure(1, 1, binding?.edtDay?.text.toString().toIntOrNull()?:0,
+                val temp = Expenditure(0, 0, 0,//binding?.edtDay?.text.toString().toIntOrNull()?:0,
                     binding?.edtPay?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemoReg?.text.toString()
                 )
-                val action = RegInputFragmentDirections.actionRegInputFragmentToRegFragment(temp)
-                findNavController().navigate(action)
+                (activity as MainActivity).addExpenditure(temp)
+                //val action = RegInputFragmentDirections.actionRegInputFragmentToRegFragment(temp)
+                findNavController().navigate(R.id.action_regInputFragment_to_regFragment)
             }
         }
 

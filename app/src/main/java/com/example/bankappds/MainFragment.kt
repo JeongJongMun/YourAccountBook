@@ -55,12 +55,13 @@ class MainFragment : Fragment() {
 
             binding?.btnAdd2?.setOnClickListener {
                 val caldata = intArrayOf(year,month+1,dayOfMonth)
+                //날짜 전달은 safe args를 이용하여 전달함
                 val send = com.example.bankappds.MainFragmentDirections.actionMainFragmentToMainInputFragment(caldata) // 전달
                 findNavController().navigate(send)
             }
         }
         // get Input 이거 갈아야함 -> 다른 화면에서 메인화면으로가면 자동으로 args가 있는걸로 인식해서 입렸했던 곳에 리스트 자동 추가됨 - 수정 필요 일부러 에러로 남겨둠
-        getInputData()
+        //getInputData()
     }
 
     override fun onDestroyView() {
@@ -68,6 +69,7 @@ class MainFragment : Fragment() {
         binding = null
     }
 
+    /*
     // 입력창에서 데이터 받아오기
     @SuppressLint("NotifyDataSetChanged")
     private fun getInputData() {
@@ -87,5 +89,7 @@ class MainFragment : Fragment() {
             binding?.recyclerView?.adapter?.notifyDataSetChanged()
         }
     }
+    */
+
 
 }

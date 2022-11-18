@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
     fun addExpenditure(expd: Expenditure) {
         if (expenditureMap[expd.day] != null) {
             expenditureMap[expd.day]?.add(expd)
