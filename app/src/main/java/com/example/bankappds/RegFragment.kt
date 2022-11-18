@@ -30,7 +30,7 @@ class RegFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //getInputData()
-
+        print("@@@@@@")
 
         binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
         binding?.recPay?.setHasFixedSize(true)

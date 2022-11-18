@@ -50,6 +50,10 @@ class MainFragment : Fragment() {
             val layoutManager = LinearLayoutManager(context)
 
             val dayStr = (activity as MainActivity).makeDayStr(year, month, dayOfMonth)
+
+            print("@@@@@@@@@@@@@@")
+            print(year)
+            print((activity as MainActivity).expenditureMap[dayStr])
             binding?.recyclerView?.layoutManager = layoutManager
             binding?.recyclerView?.setHasFixedSize(true)
             binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap[dayStr])
