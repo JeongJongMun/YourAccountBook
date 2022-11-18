@@ -31,9 +31,10 @@ class RegFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //getInputData()
 
+
         binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
         binding?.recPay?.setHasFixedSize(true)
-        binding?.recPay?.adapter=ExpenditureAdapter((activity as MainActivity).expenditureMap[0])
+        binding?.recPay?.adapter=ExpenditureAdapter((activity as MainActivity).expenditureMap["20221118"])
         binding?.recPay?.adapter?.notifyDataSetChanged()
 
         binding?.btnAdd?.setOnClickListener {

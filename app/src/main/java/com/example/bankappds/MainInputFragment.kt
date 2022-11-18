@@ -59,13 +59,8 @@ class MainInputFragment : Fragment() {
                     typeT, binding?.edtMemo?.text.toString())
 
                 (activity as MainActivity).addExpenditure(temp)
-
                 //var action = MainInputFragmentDirections.actionMainInputFragmentToMainFragment(temp)
-
                 findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)
-
-
-
             }
 
 

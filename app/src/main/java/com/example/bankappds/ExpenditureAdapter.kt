@@ -39,6 +39,7 @@ class ExpenditureAdapter (private val pays: MutableList<Expenditure>?): Recycler
                     }
                 )
             }
+
             else {
                 binding.imgCategory.isVisible = false
             }
