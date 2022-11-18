@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankappds.databinding.ExpenditureListBinding
 
 
-class ExpenditureAdapter (private val pays: MutableList<Expenditure>?): RecyclerView.Adapter<ExpenditureAdapter.Holder>() {
+class ExpenditureAdapter (private val pays: MutableList<Expenditure>?)
+    : RecyclerView.Adapter<ExpenditureAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ExpenditureListBinding.inflate(LayoutInflater.from(parent.context))

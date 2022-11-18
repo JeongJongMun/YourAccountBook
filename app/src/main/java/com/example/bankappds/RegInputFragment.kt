@@ -61,7 +61,7 @@ class RegInputFragment : Fragment() {
                 Toast.makeText(requireContext(), "누락된 부분이 있다", Toast.LENGTH_SHORT).show()
             }
             else {
-                val temp = Expenditure(0, 0, 0,//binding?.edtDay?.text.toString().toIntOrNull()?:0,
+                val temp = Expenditure(0, 0, binding?.edtDay?.text.toString().toIntOrNull()?:0,
                     binding?.edtPay?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemoReg?.text.toString()
                 )

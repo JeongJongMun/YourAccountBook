@@ -10,7 +10,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
 import java.lang.reflect.Executable
 
-//TODO 조건문 가라 금지
 
 //TODO 한달 통계 데이터 관리
 //TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기
@@ -35,6 +34,14 @@ println(map[10])
 */
 
 
+fun makeDayStr(year: Int, month: Int, day: Int): String {
+    val yearStr = if (year == 0) "0000" else year.toString()
+    val monthStr = if (month > 9) month.toString() else "0"+month.toString()
+    val dayStr = day.toString()
+
+    return yearStr+monthStr+dayStr
+}
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
@@ -42,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
 
     var expenditureMap = mutableMapOf<String, MutableList<Expenditure>>()
+    var regExpdMap = mutableMapOf<String,MutableList<Expenditure>>()
 //    99 to mutableListOf
 //    (Expenditure(0,0,0,0,Ecategory.ETC,"")))
     var totalExpense = 0
@@ -89,6 +97,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addExpenditure(expd: Expenditure) {
+        if (expd.year == 0 ){
+            if (regExpdMap[expd.day.toString()] != null ){
+                regExpdMap[expd.day.toString()]?.add(expd)
+            } else {
+                regExpdMap.put(expd.day.toString(), mutableListOf(expd))
+            }
+        }
+
         val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
 
         if (expenditureMap[dayInfo] != null) {
@@ -98,13 +114,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun makeDayStr(year: Int, month: Int, day: Int): String {
-        val yearStr = if (year == 0) "0000" else year.toString()
-        val monthStr = if (month > 9) month.toString() else "0"+month.toString()
-        val dayStr = day.toString()
 
-        return yearStr+monthStr+dayStr
-    }
 
 
 }

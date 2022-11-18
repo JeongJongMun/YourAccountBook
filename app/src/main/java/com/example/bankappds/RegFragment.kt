@@ -29,12 +29,13 @@ class RegFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //getInputData()
-        print("@@@@@@")
+
 
         binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
         binding?.recPay?.setHasFixedSize(true)
-        binding?.recPay?.adapter=ExpenditureAdapter((activity as MainActivity).expenditureMap["20221118"])
+
+
+        binding?.recPay?.adapter=ExpenditureAdapter(null)
         binding?.recPay?.adapter?.notifyDataSetChanged()
 
         binding?.btnAdd?.setOnClickListener {
