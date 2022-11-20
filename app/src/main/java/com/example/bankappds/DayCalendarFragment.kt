@@ -43,7 +43,7 @@ class DayCalendarFragment : Fragment() {
             val layoutManager = LinearLayoutManager(context)
             binding?.recyclerView?.layoutManager = layoutManager
             binding?.recyclerView?.setHasFixedSize(true)
-            binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap[dayOfMonth])
+            binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap[dayOfMonth.toString()])
             println("date: ${binding?.calendarView?.date?.div(3.154e+10)}")
 
 
