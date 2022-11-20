@@ -26,7 +26,7 @@ class MonthFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
         binding?.recyclerView?.setHasFixedSize(true)
-        binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap[15])
+        binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap["20221118"])
     }
 
 }
