@@ -10,7 +10,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
 import java.lang.reflect.Executable
 
-//TODO 조건문 가라 금지
 
 //TODO 한달 통계 데이터 관리
 //TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기
@@ -35,14 +34,24 @@ println(map[10])
 */
 
 
+fun makeDayStr(year: Int, month: Int, day: Int): String {
+    val yearStr = if (year == 0) "0000" else year.toString()
+    val monthStr = if (month > 9) month.toString() else "0"+month.toString()
+    val dayStr = day.toString()
+
+    return yearStr+monthStr+dayStr
+}
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
-//    var expenditureList : ArrayList<Expenditure> = arrayListOf()
-    var expenditureMap = mutableMapOf<Int, MutableList<Expenditure>>(99 to mutableListOf
-    (Expenditure(0,0,0,0,Ecategory.ETC,"")))
+
+    var expenditureMap = mutableMapOf<String, MutableList<Expenditure>>()
+    var regExpdMap = mutableMapOf<String,MutableList<Expenditure>>()
+//    99 to mutableListOf
+//    (Expenditure(0,0,0,0,Ecategory.ETC,"")))
     var totalExpense = 0
 
     //TODO sharedPreferences로 내부에 영구 저장 되게 하기
@@ -88,10 +97,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addExpenditure(expd: Expenditure) {
-        if (expenditureMap[expd.day] != null) {
-            expenditureMap[expd.day]?.add(expd)
+        if (expd.year == 0 ){
+            if (regExpdMap[expd.day.toString()] != null ){
+                regExpdMap[expd.day.toString()]?.add(expd)
+            } else {
+                regExpdMap.put(expd.day.toString(), mutableListOf(expd))
+            }
         }
-        else expenditureMap.put(expd.day, mutableListOf(expd))
+
+        val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
+
+        if (expenditureMap[dayInfo] != null) {
+            expenditureMap[dayInfo]?.add(expd)
+        } else {
+            expenditureMap.put(dayInfo, mutableListOf(expd))
+        }
     }
+
+
+
 
 }
