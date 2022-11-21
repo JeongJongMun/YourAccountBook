@@ -34,8 +34,16 @@ class RegFragment : Fragment() {
         binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
         binding?.recPay?.setHasFixedSize(true)
 
-
-        binding?.recPay?.adapter=ExpenditureAdapter(null)
+        var temp = mutableListOf<Expenditure>()
+        for ((K,V) in regExpdMap){
+            if (K[0].equals("0")) {
+                for (expd in V) {
+                    temp.add(expd)
+                }
+            }
+        }
+        print(temp)
+        binding?.recPay?.adapter=ExpenditureAdapter(temp)
         binding?.recPay?.adapter?.notifyDataSetChanged()
 
         binding?.btnAdd?.setOnClickListener {

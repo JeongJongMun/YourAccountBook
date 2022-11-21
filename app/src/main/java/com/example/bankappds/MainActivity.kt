@@ -16,6 +16,7 @@ import java.lang.reflect.Executable
 //TODO 앱바 - 오른쪽에 버튼 누르면 한달 통계 리사이클러뷰
 //TODO 통계 - 데이터 입력
 
+
 //TODO 각 프래그먼트 xml 정리
 
 //TODO 디자인은 마지막에
@@ -33,6 +34,26 @@ else map.put(testObject.day, mutableListOf<Expenditure>(testObject))
 println(map[10])
 */
 
+var expenditureMap = mutableMapOf<String, MutableList<Expenditure>>()
+var regExpdMap = mutableMapOf<String,MutableList<Expenditure>>()
+
+fun addExpenditure(expd: Expenditure) {
+    if (expd.year == 0 ){
+        if (regExpdMap[expd.day.toString()] != null ){
+            regExpdMap[expd.day.toString()]?.add(expd)
+        } else {
+            regExpdMap.put(expd.day.toString(), mutableListOf(expd))
+        }
+    }
+
+    val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
+
+    if (expenditureMap[dayInfo] != null) {
+        expenditureMap[dayInfo]?.add(expd)
+    } else {
+        expenditureMap.put(dayInfo, mutableListOf(expd))
+    }
+}
 
 fun makeDayStr(year: Int, month: Int, day: Int): String {
     val yearStr = if (year == 0) "0000" else year.toString()
@@ -42,14 +63,21 @@ fun makeDayStr(year: Int, month: Int, day: Int): String {
     return yearStr+monthStr+dayStr
 }
 
+fun addRegExpenditure(expd: Expenditure){
+    if (regExpdMap["000000${expd.day}"] != null) {
+        regExpdMap["000000${expd.day}"]?.add(expd)
+    } else {
+        regExpdMap.put("000000"+expd.day, mutableListOf(expd))
+    }
+}
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding :ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
 
-    var expenditureMap = mutableMapOf<String, MutableList<Expenditure>>()
-    var regExpdMap = mutableMapOf<String,MutableList<Expenditure>>()
+
 //    99 to mutableListOf
 //    (Expenditure(0,0,0,0,Ecategory.ETC,"")))
     var totalExpense = 0
@@ -95,26 +123,5 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-    fun addExpenditure(expd: Expenditure) {
-        if (expd.year == 0 ){
-            if (regExpdMap[expd.day.toString()] != null ){
-                regExpdMap[expd.day.toString()]?.add(expd)
-            } else {
-                regExpdMap.put(expd.day.toString(), mutableListOf(expd))
-            }
-        }
-
-        val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
-
-        if (expenditureMap[dayInfo] != null) {
-            expenditureMap[dayInfo]?.add(expd)
-        } else {
-            expenditureMap.put(dayInfo, mutableListOf(expd))
-        }
-    }
-
-
-
 
 }

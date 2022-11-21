@@ -43,7 +43,13 @@ class DayCalendarFragment : Fragment() {
             val layoutManager = LinearLayoutManager(context)
             binding?.recyclerView?.layoutManager = layoutManager
             binding?.recyclerView?.setHasFixedSize(true)
-            binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap[makeDayStr(year,month+1,dayOfMonth)])
+
+            val todayList = expenditureMap[makeDayStr(year,month+1,dayOfMonth)]
+            val regList = regExpdMap["000000${dayOfMonth}"]
+
+            val totalList: List<Expenditure> = todayList.orEmpty() + regList.orEmpty()
+
+            binding?.recyclerView?.adapter = ExpenditureAdapter(totalList.toMutableList())
 
 
 

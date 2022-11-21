@@ -58,7 +58,7 @@ class MainInputFragment : Fragment() {
                 val temp = Expenditure(args.calendarDate[0], args.calendarDate[1], args.calendarDate[2], binding?.edtMoney?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemo?.text.toString())
 
-                (activity as MainActivity).addExpenditure(temp)
+                addExpenditure(temp)
                 //var action = MainInputFragmentDirections.actionMainInputFragmentToMainFragment(temp)
                 findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)
             }
