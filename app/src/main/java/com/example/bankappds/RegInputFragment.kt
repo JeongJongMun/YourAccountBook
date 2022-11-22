@@ -43,7 +43,7 @@ class RegInputFragment : Fragment() {
                     "식비" ->Ecategory.FOOD
                     "금융" ->Ecategory.FINANCE
                     "쇼핑" ->Ecategory.SHOPPING
-                    "여가" ->Ecategory.ENTERTAINMENT
+                    "여가" ->Ecategory.ENTERTAIN
                     "취미" ->Ecategory.HOBBY
                     "건강" ->Ecategory.HEALTH
                     "주거" ->Ecategory.HOME

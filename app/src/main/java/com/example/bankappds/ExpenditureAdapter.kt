@@ -31,7 +31,7 @@ class ExpenditureAdapter (private val pays: MutableList<Expenditure>?)
                         Ecategory.FOOD -> R.drawable.food
                         Ecategory.FINANCE -> R.drawable.finance
                         Ecategory.SHOPPING -> R.drawable.shopping
-                        Ecategory.ENTERTAINMENT -> R.drawable.entertainment
+                        Ecategory.ENTERTAIN -> R.drawable.entertainment
                         Ecategory.HOBBY -> R.drawable.hobby
                         Ecategory.HEALTH -> R.drawable.health
                         Ecategory.HOME -> R.drawable.home

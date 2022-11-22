@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 enum class Ecategory {
     FOOD,
-    ENTERTAINMENT,
+    ENTERTAIN,
     SHOPPING,
     HOBBY,
     HEALTH,

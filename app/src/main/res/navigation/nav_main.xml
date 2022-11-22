@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.bankappds.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        android:label="가계부 어플"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_goalFragment"
             app:destination="@id/goalFragment" />
@@ -27,28 +27,28 @@
             app:destination="@id/searchFragment" />
         <argument
             android:name="expenditureData"
+            android:defaultValue="@null"
             app:argType="com.example.bankappds.Expenditure"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
         android:name="com.example.bankappds.GoalFragment"
-        android:label="fragment_goal"
+        android:label="목표 지출 금액 설정"
         tools:layout="@layout/fragment_goal" />
     <fragment
         android:id="@+id/regFragment"
         android:name="com.example.bankappds.RegFragment"
-        android:label="정기 지출"
+        android:label="정기 지출 목록"
         tools:layout="@layout/fragment_reg">
         <action
             android:id="@+id/action_regFragment_to_regInputFragment"
             app:destination="@id/regInputFragment" />
         <argument
             android:name="regExpenditure"
+            android:defaultValue="@null"
             app:argType="com.example.bankappds.Expenditure"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/regInputFragment"
@@ -64,7 +64,7 @@
     <fragment
         android:id="@+id/mainInputFragment"
         android:name="com.example.bankappds.MainInputFragment"
-        android:label="입력창"
+        android:label="일일 지출 입력창"
         tools:layout="@layout/fragment_main_input">
         <action
             android:id="@+id/action_mainInputFragment_to_mainFragment"
@@ -90,7 +90,7 @@
         <action
             android:id="@+id/action_circleChart_to_barChart"
             app:destination="@id/barChart"
-            app:popUpTo="@id/barChart"
+            app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
