@@ -33,26 +33,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:text="한달 고정 지출"
+            android:background="#62CD65"
+            android:text="한달 고정 지출 총액"
             android:textAlignment="center"
             android:textColor="#FFFAFA"
             android:textSize="20sp"
-            android:textStyle="bold"
-            tools:background="#5FD164" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/total_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:text="총액"
+            android:background="#61CF65"
             android:textAlignment="center"
             android:textColor="#FFFAFA"
             android:textSize="20sp"
-            android:textStyle="bold"
-            tools:background="#5FD164" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <Button

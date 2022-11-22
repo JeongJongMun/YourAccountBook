@@ -35,15 +35,18 @@ class RegFragment : Fragment() {
         binding?.recPay?.setHasFixedSize(true)
 
         var temp = mutableListOf<Expenditure>()
+        var totalreg: Int = 0
         for ((K,V) in regExpdMap){
             for (expd in V) {
                 temp.add(expd)
+                totalreg += expd.expense
             }
         }
-
-
         binding?.recPay?.adapter=ExpenditureAdapter(temp)
         binding?.recPay?.adapter?.notifyDataSetChanged()
+
+        binding?.totalReg?.text = totalreg.toString()
+
 
         binding?.btnAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_regFragment_to_regInputFragment)

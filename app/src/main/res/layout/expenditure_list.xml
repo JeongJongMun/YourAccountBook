@@ -68,7 +68,7 @@
         <ImageView
             android:id="@+id/img_category"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:background="@color/allbg"
             android:visibility="invisible"
             tools:layout_editor_absoluteX="0dp"
