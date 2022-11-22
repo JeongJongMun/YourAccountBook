@@ -65,7 +65,7 @@ class RegInputFragment : Fragment() {
                     binding?.edtPay?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemoReg?.text.toString()
                 )
-                addExpenditure(temp)
+                addRegExpenditure(temp)
                 //val action = RegInputFragmentDirections.actionRegInputFragmentToRegFragment(temp)
                 findNavController().navigate(R.id.action_regInputFragment_to_regFragment)
             }

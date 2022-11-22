@@ -36,13 +36,12 @@ class RegFragment : Fragment() {
 
         var temp = mutableListOf<Expenditure>()
         for ((K,V) in regExpdMap){
-            if (K[0].equals("0")) {
-                for (expd in V) {
-                    temp.add(expd)
-                }
+            for (expd in V) {
+                temp.add(expd)
             }
         }
-        print(temp)
+
+
         binding?.recPay?.adapter=ExpenditureAdapter(temp)
         binding?.recPay?.adapter?.notifyDataSetChanged()
 
