@@ -1,6 +1,5 @@
 package com.example.bankappds
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentRegBinding
 
@@ -26,32 +24,52 @@ class RegFragment : Fragment() {
 
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         binding?.recPay?.layoutManager = LinearLayoutManager(activity) //context
         binding?.recPay?.setHasFixedSize(true)
 
-        var temp = mutableListOf<Expenditure>()
-        var totalreg: Int = 0
-
+        // RegMap 데이터 가져오기
+        val temp = mutableListOf<Expenditure>()
+        var totalreg = 0
         for ((K,V) in regExpdMap){
             for (expd in V) {
                 temp.add(expd)
                 totalreg += expd.expense
             }
         }
-        binding?.recPay?.adapter=ExpenditureAdapter(temp)
-        binding?.recPay?.adapter?.notifyDataSetChanged()
-
         binding?.totalReg?.text = totalreg.toString()
 
+        val adapter = ExpenditureAdapter(temp)
+        binding?.recPay?.adapter = adapter
 
         binding?.btnAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_regFragment_to_regInputFragment)
         }
+        // 리사이클러뷰 객체 선택시 포지션 전달 받을 변수
+        var selectedReg = -1
+        // 삭제 버튼 클릭시
+        binding?.btnDelete?.setOnClickListener {
+            if (selectedReg != -1) {
+                deleteRegExpenditure(temp[selectedReg]) // map에서 리스트 삭제
+                totalreg -= temp[selectedReg].expense
+                binding?.totalReg?.text = totalreg.toString()
+                temp.removeAt(selectedReg) // temp 에서도 삭제하여 갱신
+                //adapter.notifyItemRemoved(selectedReg) // 삭제되었음을 알림
+                adapter.notifyDataSetChanged()
+                selectedReg = -1
+            } else Toast.makeText(requireContext(), "삭제 할 고정지출이 없습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+        // 리사이클러뷰 객체 선택시 포지션 전달
+        adapter.setItemClickListener(object : ExpenditureAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                selectedReg = position
+                println("$selectedReg 번 선택")
+            }
+        })
+
     }
 
 
@@ -59,6 +77,7 @@ class RegFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
 
     /*
     @SuppressLint("NotifyDataSetChanged")

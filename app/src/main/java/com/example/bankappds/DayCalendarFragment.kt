@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -31,13 +32,13 @@ class DayCalendarFragment : Fragment() {
         // 뷰모델로 메인엑티비티에 있는 totalExpense에 더해주기
         viewModel.expense.observe(viewLifecycleOwner) {
             (activity as MainActivity).totalExpense += viewModel.expense.value!!
-            dataViewModel().setZero()
             println("TotalExpense : ${(activity as MainActivity).totalExpense}")
         }
 
 
         // 달력 날짜 선택시 날짜 전달, 이동
         binding?.calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            binding?.btnDelete?.isVisible = true
             binding?.btnAdd?.isVisible = true
             // 메인 리스트 리사이클러뷰
             val layoutManager = LinearLayoutManager(context)
@@ -45,13 +46,13 @@ class DayCalendarFragment : Fragment() {
             binding?.recyclerView?.setHasFixedSize(true)
 
             val todayList = expenditureMap[makeDayStr(year,month+1,dayOfMonth)]
+            println("TodayList : $todayList")
             val regList = regExpdMap["000000${dayOfMonth}"]
 
-            val totalList: List<Expenditure> = todayList.orEmpty() + regList.orEmpty()
+            var totalList: MutableList<Expenditure> = (todayList.orEmpty() + regList.orEmpty()).toMutableList()
 
-            binding?.recyclerView?.adapter = ExpenditureAdapter(totalList.toMutableList())
-
-
+            val adapter = ExpenditureAdapter(totalList)
+            binding?.recyclerView?.adapter = adapter
 
             binding?.btnAdd?.setOnClickListener {
                 val caldata = intArrayOf(year,month+1,dayOfMonth)
@@ -59,6 +60,25 @@ class DayCalendarFragment : Fragment() {
                 val send = com.example.bankappds.MainFragmentDirections.actionMainFragmentToMainInputFragment(caldata) // 전달
                 findNavController().navigate(send)
             }
+            // 리사이클러뷰 객체 선택시 포지션 전달 받을 변수
+            var selectedReg = -1
+            binding?.btnDelete?.setOnClickListener {
+                if (selectedReg != -1 && todayList != null) {
+                    deleteExpenditure(todayList[selectedReg]) // map에서 리스트 삭제
+                    totalList.removeAt(selectedReg) // totalList에서도 삭제해서 갱신
+                    //totalList = (todayList.orEmpty() + regList.orEmpty()).toMutableList()
+                    //adapter.notifyItemRemoved(selectedReg) // 삭제되었음을 알림
+                    adapter.notifyDataSetChanged()
+                    selectedReg = -1
+                } else Toast.makeText(requireContext(), "삭제 할 일일 지출이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+            // 리사이클러뷰 객체 선택시 포지션 전달
+            adapter.setItemClickListener(object : ExpenditureAdapter.OnItemClickListener{
+                override fun onClick(v: View, position: Int) {
+                    selectedReg = position
+                    println("$selectedReg 번 선택")
+                }
+            })
         }
         // get Input 이거 갈아야함 -> 다른 화면에서 메인화면으로가면 자동으로 args가 있는걸로 인식해서 입렸했던 곳에 리스트 자동 추가됨 - 수정 필요 일부러 에러로 남겨둠
         //getInputData()

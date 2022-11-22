@@ -8,14 +8,18 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
-import java.lang.reflect.Executable
 
+
+//TODO 화요일에 할거
+//TODO 뷰모델로 데이터 관리
+//TODO 월별 지출 리사이클러뷰
+//TODO 상담때 말할거 정하기
 
 //TODO 한달 통계 데이터 관리
 //TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기
 //TODO 앱바 - 오른쪽에 버튼 누르면 한달 통계 리사이클러뷰
 //TODO 통계 - 데이터 입력
-
+//TODO sharedPreferences로 내부에 영구 저장 되게 하기
 
 //TODO 각 프래그먼트 xml 정리
 
@@ -46,6 +50,12 @@ fun addExpenditure(expd: Expenditure) {
         expenditureMap[dayInfo] = mutableListOf(expd)
     }
 }
+fun deleteExpenditure(expd: Expenditure) {
+    val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
+    expenditureMap.remove(dayInfo, mutableListOf(expd))
+    println("Key, Value: $dayInfo, ${mutableListOf(expd)}")
+    println("Now expendMap : $expenditureMap")
+}
 
 fun makeDayStr(year: Int, month: Int, day: Int): String {
     val yearStr = if (year == 0) "0000" else year.toString()
@@ -62,10 +72,16 @@ fun addRegExpenditure(expd: Expenditure){
         regExpdMap["000000"+expd.day] = mutableListOf(expd)
     }
 }
+fun deleteRegExpenditure(expd: Expenditure) {
+    val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
+    regExpdMap.remove(dayInfo, mutableListOf(expd))
+    println("Test: $dayInfo, ${mutableListOf(expd)}")
+    println("Now RegMap : $regExpdMap")
+}
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding :ActivityMainBinding
+    lateinit var binding : ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
 
 
@@ -74,8 +90,6 @@ class MainActivity : AppCompatActivity() {
 //    (Expenditure(0,0,0,0,Ecategory.ETC,"")))
     var totalExpense = 0
 
-    //TODO sharedPreferences로 내부에 영구 저장 되게 하기
-    //TODO put은 MainFragment에서 사용, value를 arraylist 넘기는 법 공부
 
 /*    // 입력 데이터 sharedPreferences에서 가져오기
     private fun getSharedPreference(key: String): String  {
@@ -108,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration) //네비게이션과 연결시킴
         binding.drawerNav.setupWithNavController(navController)
         setContentView(binding.root)
+
     }
 
     //up버튼에 대한 반응 세팅 - default-기본은 back 동작을 안함

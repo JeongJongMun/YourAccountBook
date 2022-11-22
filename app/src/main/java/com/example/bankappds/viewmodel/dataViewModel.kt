@@ -18,8 +18,5 @@ class dataViewModel: ViewModel() {
     fun plusExpense(data: Int) {
         _expense.value = data
     }
-    fun setZero() {
-        _expense.value = 0
-    }
 
 }
