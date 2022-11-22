@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMonthBinding
 import java.time.LocalDateTime
 
+var ele = 11
 class MonthFragment : Fragment() {
 
     var binding: FragmentMonthBinding? = null
@@ -30,7 +31,7 @@ class MonthFragment : Fragment() {
         var currentTime = LocalDateTime.now()
 
         val mon = currentTime.month
-        val ele = 11
+
         var temp = mutableListOf<Expenditure>()
         binding?.txtListMonth?.text = currentTime.month.toString()
 
@@ -46,6 +47,13 @@ class MonthFragment : Fragment() {
         binding?.recyclerView?.layoutManager = layoutManager
         binding?.recyclerView?.setHasFixedSize(true)
         binding?.recyclerView?.adapter = ExpenditureAdapter(temp)
+
+        binding?.btnRight?.setOnClickListener {
+            ele += 1
+        }
+        binding?.btnLeft?.setOnClickListener{
+            ele -= 1
+        }
 
     }
 

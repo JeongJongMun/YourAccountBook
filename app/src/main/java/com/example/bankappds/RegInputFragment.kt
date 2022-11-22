@@ -27,7 +27,7 @@ class RegInputFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var spnLst = resources.getStringArray(R.array.category_type)
+        val spnLst = resources.getStringArray(R.array.category_type)
         //ArrayAdapter의 두 번쨰 인자는 스피너 목록에 아이템을 그려줄 레이아웃을 지정하여 줍니다.
         val adapter = activity?.let {
             ArrayAdapter(it, android.R.layout.simple_spinner_item, spnLst)
