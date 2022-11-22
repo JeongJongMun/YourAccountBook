@@ -26,7 +26,7 @@ class MainFragment : Fragment() {
     // 뷰모델을 어떻게 초기화할지를 viewModels라는 함수에 위임(by)한다
     // val viewModel: MbtiViewModel by viewModels()
     // 우리는 엑티비티에 프래그먼트들이 물려있으니까 엑티비티뷰모델 사용
-
+    //sdasdsa
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
