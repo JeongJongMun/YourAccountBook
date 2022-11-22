@@ -38,20 +38,12 @@ var expenditureMap = mutableMapOf<String, MutableList<Expenditure>>()
 var regExpdMap = mutableMapOf<String,MutableList<Expenditure>>()
 
 fun addExpenditure(expd: Expenditure) {
-    if (expd.year == 0 ){
-        if (regExpdMap[expd.day.toString()] != null ){
-            regExpdMap[expd.day.toString()]?.add(expd)
-        } else {
-            regExpdMap.put(expd.day.toString(), mutableListOf(expd))
-        }
-    }
-
     val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
 
     if (expenditureMap[dayInfo] != null) {
         expenditureMap[dayInfo]?.add(expd)
     } else {
-        expenditureMap.put(dayInfo, mutableListOf(expd))
+        expenditureMap[dayInfo] = mutableListOf(expd)
     }
 }
 
@@ -67,7 +59,7 @@ fun addRegExpenditure(expd: Expenditure){
     if (regExpdMap["000000${expd.day}"] != null) {
         regExpdMap["000000${expd.day}"]?.add(expd)
     } else {
-        regExpdMap.put("000000"+expd.day, mutableListOf(expd))
+        regExpdMap["000000"+expd.day] = mutableListOf(expd)
     }
 }
 

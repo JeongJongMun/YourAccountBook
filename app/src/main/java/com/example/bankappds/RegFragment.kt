@@ -36,6 +36,7 @@ class RegFragment : Fragment() {
 
         var temp = mutableListOf<Expenditure>()
         var totalreg: Int = 0
+
         for ((K,V) in regExpdMap){
             for (expd in V) {
                 temp.add(expd)

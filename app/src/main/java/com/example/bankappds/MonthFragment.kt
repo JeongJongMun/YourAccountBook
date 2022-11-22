@@ -1,12 +1,15 @@
 package com.example.bankappds
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMonthBinding
+import java.time.LocalDateTime
 
 class MonthFragment : Fragment() {
 
@@ -20,13 +23,30 @@ class MonthFragment : Fragment() {
         return binding?.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var currentTime = LocalDateTime.now()
+
+        val mon = currentTime.month
+        val ele = 11
+        var temp = mutableListOf<Expenditure>()
+        binding?.txtListMonth?.text = currentTime.month.toString()
+
+
+
+        for ((K,V) in expenditureMap){
+            if (K.substring(4,6) == ele.toString()){
+                for (expd in V) temp.add(expd)
+            }
+        }
 
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
         binding?.recyclerView?.setHasFixedSize(true)
-        binding?.recyclerView?.adapter = ExpenditureAdapter((activity as MainActivity).expenditureMap["20221118"])
+        binding?.recyclerView?.adapter = ExpenditureAdapter(temp)
+
     }
 
 }
