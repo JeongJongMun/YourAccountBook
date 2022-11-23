@@ -30,6 +30,9 @@
             android:defaultValue="@null"
             app:argType="com.example.bankappds.Expenditure"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_monthListFragment"
+            app:destination="@id/monthListFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
@@ -97,4 +100,9 @@
         android:id="@+id/searchFragment"
         android:name="com.example.bankappds.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/monthListFragment"
+        android:name="com.example.bankappds.MonthListFragment"
+        android:label="이번달 지출 목록"
+        tools:layout="@layout/fragment_month_list" />
 </navigation>

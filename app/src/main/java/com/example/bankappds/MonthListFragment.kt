@@ -9,18 +9,18 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMonthBinding
+import com.example.bankappds.databinding.FragmentMonthListBinding
 import java.time.LocalDateTime
 
-var ele = 11
-class MonthFragment : Fragment() {
 
-    var binding: FragmentMonthBinding? = null
+class MonthListFragment : Fragment() {
+    var binding: FragmentMonthListBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMonthBinding.inflate(inflater, container, false)
+        binding = FragmentMonthListBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -33,7 +33,7 @@ class MonthFragment : Fragment() {
         val mon = currentTime.month
 
         var temp = mutableListOf<Expenditure>()
-        binding?.txtListMonth?.text = currentTime.month.toString()
+        binding?.txtNowmon?.text = currentTime.month.toString()
 
 
 
@@ -49,5 +49,4 @@ class MonthFragment : Fragment() {
         binding?.recyclerView?.adapter = ExpenditureAdapter(temp)
 
     }
-
 }
