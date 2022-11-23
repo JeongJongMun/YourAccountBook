@@ -15,7 +15,6 @@ enum class Ecategory {
     ETC
 }
 
-
 @Parcelize
 data class Expenditure(
     var year: Int = 0,

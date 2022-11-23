@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
 
         childFragmentManager.beginTransaction().replace(R.id.frm_fragment, DayCalendarFragment()).commit()
 
-        binding?.btnChange?.setOnClickListener {
+        binding?.imgBtnProfile?.setOnClickListener {
             val transaction = childFragmentManager.beginTransaction()
             when(position) {
                 FIRST_POSITION -> {
