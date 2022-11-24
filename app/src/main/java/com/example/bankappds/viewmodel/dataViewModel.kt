@@ -53,8 +53,9 @@ class dataViewModel: ViewModel() {
     fun deleteExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
         tempExpdMap[dayInfo]?.remove(expd)
+        println("delte ${tempExpdMap.values}")
         _expenditureMap.value = tempExpdMap
-        println("Delete Expenditrue $_expenditureMap")
+        println("Delete Expenditrue ${_expenditureMap.value}")
     }
     fun addRegExpenditure(expd: Expenditure){
         val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
