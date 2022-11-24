@@ -33,6 +33,9 @@ class DayCalendarFragment : Fragment() {
         viewModel.totalExpense.observe(viewLifecycleOwner) {
             println("TotalExpense : ${viewModel.totalExpense}")
         }
+        viewModel.totalRegExpense.observe(viewLifecycleOwner) {
+            println("TotalRegExpense : ${viewModel.totalRegExpense}")
+        }
         viewModel.expenditureMap.observe(viewLifecycleOwner) {
             println("ExpenditureMap : $it")
         }
