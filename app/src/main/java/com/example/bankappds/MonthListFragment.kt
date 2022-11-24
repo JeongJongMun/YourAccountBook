@@ -36,12 +36,13 @@ class MonthListFragment : Fragment() {
         binding?.txtNowmon?.text = currentTime.month.toString()
 
 
-
+/*
         for ((K,V) in expenditureMap){
             if (K.substring(4,6) == ele.toString()){
                 for (expd in V) temp.add(expd)
             }
         }
+*/
 
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager

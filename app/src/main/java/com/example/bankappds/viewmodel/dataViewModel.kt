@@ -22,11 +22,13 @@ class dataViewModel: ViewModel() {
     private val _regExpdMap = MutableLiveData<MutableMap<String, MutableList<Expenditure>>>()
     val regExpdMap : LiveData<MutableMap<String, MutableList<Expenditure>>> get() = _regExpdMap
 
+    var tempExpense: Int = 0
     var tempExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
     var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
 
     fun plusExpense(data: Int) {
-        _expense.value = data
+        tempExpense += data
+        _expense.value = tempExpense
     }
 
     fun makeDayStr(year: Int, month: Int, day: Int): String {

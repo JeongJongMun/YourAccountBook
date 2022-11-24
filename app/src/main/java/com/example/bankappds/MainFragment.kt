@@ -23,10 +23,6 @@ class MainFragment : Fragment() {
         const val SECOND_POSITION = 2
     }
 
-    // 뷰모델을 어떻게 초기화할지를 viewModels라는 함수에 위임(by)한다
-    // val viewModel: MbtiViewModel by viewModels()
-    // 우리는 엑티비티에 프래그먼트들이 물려있으니까 엑티비티뷰모델 사용
-    //sdasdsa
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,30 +51,4 @@ class MainFragment : Fragment() {
             }
         }
     }
-
-
-    /*
-    // 입력창에서 데이터 받아오기
-    @SuppressLint("NotifyDataSetChanged")
-    private fun getInputData() {
-        val args : MainFragmentArgs by navArgs()
-        if ( args.expenditureData != null ){ //.expense != null && args.expenditureData?.expense != 0 ) {
-            val year = args.expenditureData?.year
-            val month = args.expenditureData?.month
-            val day = args.expenditureData?.day
-            val expense = args.expenditureData?.expense
-            val typeT = args.expenditureData?.category
-            val memo = args.expenditureData?.memo.toString()
-
-
-            // 메인 리스트에 추가
-            (activity as MainActivity).addExpenditure(Expenditure(year!!, month!!, day!!, expense!!, typeT, memo))
-            // 리사이클러뷰가 변경되었음을 알림
-            binding?.recyclerView?.adapter?.notifyDataSetChanged()
-        }
-    }
-    */
-
-
-
 }
