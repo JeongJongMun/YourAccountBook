@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.databinding.FragmentBarChartBinding
+import com.example.bankappds.viewmodel.dataViewModel
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -18,6 +20,8 @@ import com.github.mikephil.charting.data.BarEntry
 
 class BarChart : Fragment() {
     var binding: FragmentBarChartBinding? = null
+    val viewModel: dataViewModel by activityViewModels()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View? {
         binding = FragmentBarChartBinding.inflate(inflater, container, false)
@@ -37,6 +41,7 @@ class BarChart : Fragment() {
 
         val valueList = ArrayList<BarEntry>()
         val title = "걸음 수"
+
 
         // 임의 데이터
         for (i in 0 until 5) {

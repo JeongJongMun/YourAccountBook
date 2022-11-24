@@ -70,6 +70,7 @@ class DayCalendarFragment : Fragment() {
             binding?.btnDelete?.setOnClickListener {
                 if (selectedReg != -1 && todayList != null) {
                     viewModel.deleteExpenditure(todayList[selectedReg]) // map에서 리스트 삭제
+                    totalList.remove(todayList[selectedReg])
                     //adapter.notifyItemRemoved(selectedReg) // 삭제되었음을 알림
                     adapter.notifyDataSetChanged()
                     selectedReg = -1
