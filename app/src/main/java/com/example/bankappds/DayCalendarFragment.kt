@@ -30,15 +30,15 @@ class DayCalendarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 뷰모델로 메인엑티비티에 있는 totalExpense에 더해주기
-        viewModel.totalExpense.observe(viewLifecycleOwner) {
-            (activity as MainActivity).totalExpense += viewModel.totalExpense.value!!
-            println("TotalExpense : ${(activity as MainActivity).totalExpense}")
+        viewModel.expense.observe(viewLifecycleOwner) {
+            println("TotalExpense : ${viewModel.expense}")
         }
         viewModel.expenditureMap.observe(viewLifecycleOwner) {
-            println("On DayCal Observe exp : $it")
+            println("ExpenditureMap : $it")
         }
-
-
+        viewModel.regExpdMap.observe(viewLifecycleOwner) {
+            println("RegExpenditureMap : $it")
+        }
 
         // 달력 날짜 선택시 날짜 전달, 이동
         binding?.calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -50,9 +50,7 @@ class DayCalendarFragment : Fragment() {
             binding?.recyclerView?.setHasFixedSize(true)
 
 
-            val todayList = viewModel.expenditureMap.value?.toMutableMap()?.get(makeDayStr(year,month+1,dayOfMonth))
-            println("ViewModel ExpenditureMap ${viewModel.expenditureMap.value?.toMutableMap()}")
-            println("TodayList : $todayList")
+            val todayList = viewModel.expenditureMap.value?.toMutableMap()?.get(viewModel.makeDayStr(year,month+1,dayOfMonth))
             val regList = viewModel.regExpdMap.value?.toMutableMap()?.get("000000${dayOfMonth}")
 
             val totalList: MutableList<Expenditure> = (todayList.orEmpty() + regList.orEmpty()).toMutableList()
@@ -86,8 +84,6 @@ class DayCalendarFragment : Fragment() {
             })
 
         }
-        // get Input 이거 갈아야함 -> 다른 화면에서 메인화면으로가면 자동으로 args가 있는걸로 인식해서 입렸했던 곳에 리스트 자동 추가됨 - 수정 필요 일부러 에러로 남겨둠
-        //getInputData()
     }
 
     override fun onDestroyView() {

@@ -23,85 +23,9 @@ import com.example.bankappds.databinding.ActivityMainBinding
 //TODO 앱 컨셉을 저축왕 느낌으로 게이지 채우는 형식
 //TODO 노티피케이션 api 등 외부 기능
 
-/*
-var testObject = Expenditure(0, 0,10,0,Ecategory.FOOD,"") // 객체 생성
-
-var map = mutableMapOf<Int, MutableList<Expenditure>>()
-if (map[testObject.day] != null) {
-    map[testObject.day]?.add(testObject)
-}
-else map.put(testObject.day, mutableListOf<Expenditure>(testObject))
-println(map[10])
-*/
-
-var expenditureMap = mutableMapOf<String, MutableList<Expenditure>>()
-var regExpdMap = mutableMapOf<String,MutableList<Expenditure>>()
-
-fun addExpenditure(expd: Expenditure) {
-    val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
-
-    if (expenditureMap[dayInfo] != null) {
-        expenditureMap[dayInfo]?.add(expd)
-    } else {
-        expenditureMap[dayInfo] = mutableListOf(expd)
-    }
-}
-fun deleteExpenditure(expd: Expenditure) {
-    val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
-    expenditureMap.remove(dayInfo, mutableListOf(expd))
-    println("Key, Value: $dayInfo, ${mutableListOf(expd)}")
-    println("Now expendMap : $expenditureMap")
-}
-
-fun makeDayStr(year: Int, month: Int, day: Int): String {
-    val yearStr = if (year == 0) "0000" else year.toString()
-    val monthStr = if (month > 9) month.toString() else "0"+month.toString()
-    val dayStr = day.toString()
-
-    return yearStr+monthStr+dayStr
-}
-
-fun addRegExpenditure(expd: Expenditure){
-    if (regExpdMap["000000${expd.day}"] != null) {
-        regExpdMap["000000${expd.day}"]?.add(expd)
-    } else {
-        regExpdMap["000000"+expd.day] = mutableListOf(expd)
-    }
-}
-fun deleteRegExpenditure(expd: Expenditure) {
-    val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
-    regExpdMap.remove(dayInfo, mutableListOf(expd))
-    println("Test: $dayInfo, ${mutableListOf(expd)}")
-    println("Now RegMap : $regExpdMap")
-}
-
-
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
-
-
-    var totalExpense = 0
-
-
-/*    // 입력 데이터 sharedPreferences에서 가져오기
-    private fun getSharedPreference(key: String): String  {
-        val shared = this.requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
-        var expense = shared.getString(key, "0").toString()
-        (activity as MainActivity).totalExpense += expense.toIntOrNull() ?: 0
-        println("Shared $expense, TotalExpense ${(activity as MainActivity).totalExpense}")
-        return expense
-    }
-    getSharedPreference("expense")
-
-    // 입력 데이터 sharedPreferences에 저장
-    private fun putSharedPreference(key: String, value: String) {
-        val shared = this.requireActivity().getSharedPreferences("data", Context.MODE_PRIVATE)
-        val editor = shared.edit()
-        if (value != null) editor.putString(key, value)
-        editor.apply()
-    }
-    putSharedPreference("expense", expense.toString())*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

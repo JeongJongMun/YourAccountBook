@@ -56,8 +56,6 @@ class MainInputFragment : Fragment() {
                     binding?.edtMoney?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemo?.text.toString())
                 viewModel.addExpenditure(temp)
-                addExpenditure(temp)
-                //var action = MainInputFragmentDirections.actionMainInputFragmentToMainFragment(temp)
                 findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)
             }
 
