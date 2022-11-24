@@ -16,35 +16,65 @@ class dataViewModel: ViewModel() {
     // 하지만 밖에서는 바꿀수없는 라이브데이터 - 일종의 패턴임임
     val expense : LiveData<Int> get() = _expense
 
-    private val _expenditure = MutableLiveData<MutableMap<String, MutableList<Expenditure>>>()
-    val expenditure : LiveData<MutableMap<String, MutableList<Expenditure>>> get() = _expenditure
+    private val _expenditureMap = MutableLiveData<MutableMap<String, MutableList<Expenditure>>>()
+    val expenditureMap : LiveData<MutableMap<String, MutableList<Expenditure>>> get() = _expenditureMap
 
-    var tempMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
+    private val _regExpdMap = MutableLiveData<MutableMap<String, MutableList<Expenditure>>>()
+    val regExpdMap : LiveData<MutableMap<String, MutableList<Expenditure>>> get() = _regExpdMap
+
+    var tempExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
+    var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
 
     fun plusExpense(data: Int) {
         _expense.value = data
     }
 
-    fun addExpenditure(expd: Expenditure) {
-        val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
-
-        // 기존 값 존재
-        if (expenditure.value?.get(dayInfo) != null) {
-            tempMap[dayInfo]?.add(expd)
-            _expenditure.value = tempMap
-            println("Add Expenditure ${_expenditure.value}")
-        } else { // 기존 값 존재 X
-            tempMap[dayInfo] = mutableListOf(expd)
-            _expenditure.value = tempMap
-            println("Add Expenditure ${_expenditure.value}")
-        }
-    }
     fun makeDayStr(year: Int, month: Int, day: Int): String {
         val yearStr = if (year == 0) "0000" else year.toString()
         val monthStr = if (month > 9) month.toString() else "0$month"
         val dayStr = day.toString()
 
         return yearStr+monthStr+dayStr
+    }
+    fun addExpenditure(expd: Expenditure) {
+        val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
+
+        if (expenditureMap.value?.get(dayInfo) != null) { // 기존 값 존재
+            tempExpdMap[dayInfo]?.add(expd)
+            _expenditureMap.value = tempExpdMap
+            println("Add Expenditure ${_expenditureMap.value}")
+        } else { // 기존 값 존재 X
+            tempExpdMap[dayInfo] = mutableListOf(expd)
+            _expenditureMap.value = tempExpdMap
+            println("Add Expenditure ${_expenditureMap.value}")
+        }
+    }
+
+    fun deleteExpenditure(expd: Expenditure) {
+        val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
+        tempExpdMap[dayInfo]?.remove(expd)
+        _expenditureMap.value = tempExpdMap
+        println("Delete Expenditrue $_expenditureMap")
+    }
+    fun addRegExpenditure(expd: Expenditure){
+        val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
+
+        if (regExpdMap.value?.get(dayInfo) != null) { // 기존 값 존재
+            tempRegExpdMap[dayInfo]?.add(expd)
+            _regExpdMap.value = tempRegExpdMap
+            println("Add RegExpenditure ${_regExpdMap.value}")
+        } else { // 기존 값 존재 X
+            tempRegExpdMap[dayInfo] = mutableListOf(expd)
+            _regExpdMap.value = tempRegExpdMap
+            println("Add RegExpenditure ${_regExpdMap.value}")
+        }
+    }
+    fun deleteRegExpenditure(expd: Expenditure) {
+        val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
+        tempRegExpdMap[dayInfo]?.remove(expd)
+        _regExpdMap.value = tempExpdMap
+        println("Delete RegExpenditure $_regExpdMap")
+
     }
 
 

@@ -8,13 +8,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.databinding.FragmentRegInputBinding
+import com.example.bankappds.viewmodel.dataViewModel
 
 
 class RegInputFragment : Fragment() {
     var binding : FragmentRegInputBinding ?= null
     var typeT : Ecategory? = null
+    val viewModel: dataViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +69,7 @@ class RegInputFragment : Fragment() {
                     binding?.edtPay?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemoReg?.text.toString()
                 )
+                viewModel.addRegExpenditure(temp)
                 addRegExpenditure(temp)
                 //val action = RegInputFragmentDirections.actionRegInputFragmentToRegFragment(temp)
                 findNavController().navigate(R.id.action_regInputFragment_to_regFragment)

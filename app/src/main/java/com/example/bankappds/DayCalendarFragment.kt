@@ -34,7 +34,7 @@ class DayCalendarFragment : Fragment() {
             (activity as MainActivity).totalExpense += viewModel.expense.value!!
             println("TotalExpense : ${(activity as MainActivity).totalExpense}")
         }
-        viewModel.expenditure.observe(viewLifecycleOwner) {
+        viewModel.expenditureMap.observe(viewLifecycleOwner) {
             println("On DayCal Observe exp : $it")
         }
 
@@ -49,9 +49,11 @@ class DayCalendarFragment : Fragment() {
             binding?.recyclerView?.layoutManager = layoutManager
             binding?.recyclerView?.setHasFixedSize(true)
 
-            val todayList = expenditureMap[makeDayStr(year,month+1,dayOfMonth)]
+
+            val todayList = viewModel.expenditureMap.value?.toMutableMap()?.get(makeDayStr(year,month+1,dayOfMonth))
+            println("ViewModel ExpenditureMap ${viewModel.expenditureMap.value?.toMutableMap()}")
             println("TodayList : $todayList")
-            val regList = regExpdMap["000000${dayOfMonth}"]
+            val regList = viewModel.regExpdMap.value?.toMutableMap()?.get("000000${dayOfMonth}")
 
             val totalList: MutableList<Expenditure> = (todayList.orEmpty() + regList.orEmpty()).toMutableList()
 
@@ -69,7 +71,7 @@ class DayCalendarFragment : Fragment() {
             var selectedReg = -1
             binding?.btnDelete?.setOnClickListener {
                 if (selectedReg != -1 && todayList != null) {
-                    deleteExpenditure(todayList[selectedReg]) // map에서 리스트 삭제
+                    viewModel.deleteExpenditure(todayList[selectedReg]) // map에서 리스트 삭제
                     totalList.removeAt(selectedReg) // totalList에서도 삭제해서 갱신
                     //totalList = (todayList.orEmpty() + regList.orEmpty()).toMutableList()
                     //adapter.notifyItemRemoved(selectedReg) // 삭제되었음을 알림
