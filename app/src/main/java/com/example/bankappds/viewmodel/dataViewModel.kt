@@ -30,7 +30,6 @@ class dataViewModel: ViewModel() {
     var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
 
 
-
     fun makeDayStr(year: Int, month: Int, day: Int): String {
         val yearStr = if (year == 0) "0000" else year.toString()
         val monthStr = if (month > 9) month.toString() else "0$month"
@@ -51,7 +50,7 @@ class dataViewModel: ViewModel() {
             println("Add Expenditure ${_expenditureMap.value}")
         }
 
-        _totalExpense.value = _totalExpense.value?:0 + expd.expense
+        _totalExpense.value = _totalExpense.value?.plus(expd.expense)
     }
 
     fun deleteExpenditure(expd: Expenditure) {
@@ -60,7 +59,7 @@ class dataViewModel: ViewModel() {
         println("delte ${tempExpdMap.values}")
         _expenditureMap.value = tempExpdMap
         println("Delete Expenditrue ${_expenditureMap.value}")
-        _totalExpense.value = _totalExpense.value?:0 - expd.expense
+        _totalExpense.value = _totalExpense.value?.minus(expd.expense)
     }
 
 
@@ -76,15 +75,15 @@ class dataViewModel: ViewModel() {
             _regExpdMap.value = tempRegExpdMap
             println("Add RegExpenditure ${_regExpdMap.value}")
         }
-        _totalRegExpense.value = _totalRegExpense.value?:0 + expd.expense
+        _totalRegExpense.value = _totalRegExpense.value?.plus(expd.expense)
     }
     fun deleteRegExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
         tempRegExpdMap[dayInfo]?.remove(expd)
         _regExpdMap.value = tempExpdMap
-        println("Delete RegExpenditure $_regExpdMap")
+        println("Delete RegExpenditure ${_regExpdMap.value}")
 
-        _totalRegExpense.value = _totalRegExpense.value?:0 - expd.expense
+        _totalRegExpense.value = _totalRegExpense.value?.minus(expd.expense)
     }
 
 

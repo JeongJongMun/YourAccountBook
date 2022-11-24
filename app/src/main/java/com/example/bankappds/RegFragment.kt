@@ -48,7 +48,10 @@ class RegFragment : Fragment() {
             }
         }
 
-        binding?.totalReg?.text = viewModel.totalRegExpense.value.toString()
+        viewModel.totalRegExpense.observe(viewLifecycleOwner) {
+            binding?.totalReg?.text = viewModel.totalRegExpense.value?.toString()
+            println("totalRegExpense ${viewModel.totalRegExpense.value}")
+        }
 
         val adapter = ExpenditureAdapter(adpatList)
         binding?.recPay?.adapter = adapter
@@ -63,7 +66,6 @@ class RegFragment : Fragment() {
             if (selectedReg != -1) {
                 viewModel.deleteRegExpenditure(adpatList[selectedReg]) // map에서 리스트 삭제
                 adpatList.removeAt(selectedReg)
-                binding?.totalReg?.text = viewModel.totalRegExpense.toString()
 
                 //adapter.notifyItemRemoved(selectedReg) // 삭제되었음을 알림
                 adapter.notifyDataSetChanged()

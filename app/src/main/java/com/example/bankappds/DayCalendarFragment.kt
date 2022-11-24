@@ -66,21 +66,26 @@ class DayCalendarFragment : Fragment() {
             }
 
             // 리사이클러뷰 객체 선택시 포지션 전달 받을 변수
-            var selectedReg = -1
+            var recPos = -1
             binding?.btnDelete?.setOnClickListener {
-                if (selectedReg != -1 && todayList != null) {
-                    viewModel.deleteExpenditure(todayList[selectedReg]) // map에서 리스트 삭제
-                    totalList.remove(todayList[selectedReg])
-                    //adapter.notifyItemRemoved(selectedReg) // 삭제되었음을 알림
+                if (recPos != -1) {
+                    if (totalList[recPos].year == 0) {
+                        viewModel.deleteRegExpenditure(totalList[recPos])
+                    }
+                    else {
+                        viewModel.deleteExpenditure(totalList[recPos])
+                    }
+                    totalList.removeAt(recPos)
                     adapter.notifyDataSetChanged()
-                    selectedReg = -1
-                } else Toast.makeText(requireContext(), "삭제 할 일일 지출이 없습니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "삭제 할 일일 지출이 없습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
             // 리사이클러뷰 객체 선택시 포지션 전달
             adapter.setItemClickListener(object : ExpenditureAdapter.OnItemClickListener{
                 override fun onClick(v: View, position: Int) {
-                    selectedReg = position
-                    println("$selectedReg 번 선택")
+                    recPos = position
+                    println("$recPos 번 선택")
                 }
             })
 
