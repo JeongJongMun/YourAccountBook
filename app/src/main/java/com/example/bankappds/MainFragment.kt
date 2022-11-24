@@ -33,7 +33,6 @@ class MainFragment : Fragment() {
     ): View? {
         binding = FragmentMainBinding.inflate(inflater)
 
-
         return binding?.root
     }
 

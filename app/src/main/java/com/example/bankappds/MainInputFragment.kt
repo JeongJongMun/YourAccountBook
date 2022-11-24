@@ -47,17 +47,15 @@ class MainInputFragment : Fragment() {
         // 저장 버튼 클릭시 date, expense, category, memo 전달
         binding?.btnSave?.setOnClickListener {
 
-            //TODO 지출 입력 안하고 뒤로가기 눌러도 전에 썼던 값이 계속 더해짐
-            //TODO 힌트도 isEmpty()에 영향이 있나...?
-
             if (typeT == null || binding?.edtMoney?.text.toString().isEmpty()  || binding?.edtMemo?.text.toString().isEmpty() ) {
                 Toast.makeText(requireContext(), "누락된 칸이 있습니다", Toast.LENGTH_SHORT).show()
             }
             else {
                 viewModel.plusExpense(binding?.edtMoney?.text.toString().toIntOrNull()?:0)
-                val temp = Expenditure(args.calendarDate[0], args.calendarDate[1], args.calendarDate[2], binding?.edtMoney?.text.toString().toIntOrNull()?:0,
+                val temp = Expenditure(args.calendarDate[0], args.calendarDate[1], args.calendarDate[2],
+                    binding?.edtMoney?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemo?.text.toString())
-
+                viewModel.addExpenditure(temp)
                 addExpenditure(temp)
                 //var action = MainInputFragmentDirections.actionMainInputFragmentToMainFragment(temp)
                 findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)

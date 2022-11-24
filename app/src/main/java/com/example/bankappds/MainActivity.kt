@@ -12,20 +12,16 @@ import com.example.bankappds.databinding.ActivityMainBinding
 
 //TODO 화요일에 할거
 //TODO 뷰모델로 데이터 관리
-//TODO 월별 지출 리사이클러뷰
-//TODO 상담때 말할거 정하기
 
-//TODO 한달 통계 데이터 관리
 //TODO 프로필 - 원래는 로그인창이였다가 로그인 하면 프로필 뜨기
-//TODO 앱바 - 오른쪽에 버튼 누르면 한달 통계 리사이클러뷰
 //TODO 통계 - 데이터 입력
-//TODO sharedPreferences로 내부에 영구 저장 되게 하기
 
 //TODO 각 프래그먼트 xml 정리
 
 //TODO 디자인은 마지막에
 
 //TODO 앱 컨셉을 저축왕 느낌으로 게이지 채우는 형식
+//TODO 노티피케이션 api 등 외부 기능
 
 /*
 var testObject = Expenditure(0, 0,10,0,Ecategory.FOOD,"") // 객체 생성

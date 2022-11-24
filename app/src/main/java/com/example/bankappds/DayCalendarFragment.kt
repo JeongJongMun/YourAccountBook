@@ -34,6 +34,10 @@ class DayCalendarFragment : Fragment() {
             (activity as MainActivity).totalExpense += viewModel.expense.value!!
             println("TotalExpense : ${(activity as MainActivity).totalExpense}")
         }
+        viewModel.expenditure.observe(viewLifecycleOwner) {
+            println("On DayCal Observe exp : $it")
+        }
+
 
 
         // 달력 날짜 선택시 날짜 전달, 이동
@@ -49,7 +53,7 @@ class DayCalendarFragment : Fragment() {
             println("TodayList : $todayList")
             val regList = regExpdMap["000000${dayOfMonth}"]
 
-            var totalList: MutableList<Expenditure> = (todayList.orEmpty() + regList.orEmpty()).toMutableList()
+            val totalList: MutableList<Expenditure> = (todayList.orEmpty() + regList.orEmpty()).toMutableList()
 
             val adapter = ExpenditureAdapter(totalList)
             binding?.recyclerView?.adapter = adapter
@@ -60,6 +64,7 @@ class DayCalendarFragment : Fragment() {
                 val send = com.example.bankappds.MainFragmentDirections.actionMainFragmentToMainInputFragment(caldata) // 전달
                 findNavController().navigate(send)
             }
+
             // 리사이클러뷰 객체 선택시 포지션 전달 받을 변수
             var selectedReg = -1
             binding?.btnDelete?.setOnClickListener {
@@ -79,6 +84,7 @@ class DayCalendarFragment : Fragment() {
                     println("$selectedReg 번 선택")
                 }
             })
+
         }
         // get Input 이거 갈아야함 -> 다른 화면에서 메인화면으로가면 자동으로 args가 있는걸로 인식해서 입렸했던 곳에 리스트 자동 추가됨 - 수정 필요 일부러 에러로 남겨둠
         //getInputData()
