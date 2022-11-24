@@ -81,9 +81,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var appBarConfiguration: AppBarConfiguration
 
 
-
-//    99 to mutableListOf
-//    (Expenditure(0,0,0,0,Ecategory.ETC,"")))
     var totalExpense = 0
 
 

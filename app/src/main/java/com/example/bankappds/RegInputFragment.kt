@@ -59,10 +59,10 @@ class RegInputFragment : Fragment() {
             }
         }
 
-//typeT == null || binding?.edtMoney?.text.toString().isEmpty()  || binding?.edtMemo?.text.toString().isEmpty()
+
         binding?.btnFin?.setOnClickListener {
             if (typeT == null || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty()){
-                Toast.makeText(requireContext(), "누락된 부분이 있다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "누락된 부분이 있습니다", Toast.LENGTH_SHORT).show()
             }
             else {
                 val temp = Expenditure(0, 0, binding?.edtDay?.text.toString().toIntOrNull()?:0,
@@ -70,8 +70,6 @@ class RegInputFragment : Fragment() {
                     typeT, binding?.edtMemoReg?.text.toString()
                 )
                 viewModel.addRegExpenditure(temp)
-                addRegExpenditure(temp)
-                //val action = RegInputFragmentDirections.actionRegInputFragmentToRegFragment(temp)
                 findNavController().navigate(R.id.action_regInputFragment_to_regFragment)
             }
         }

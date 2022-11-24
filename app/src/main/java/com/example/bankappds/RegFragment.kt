@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentRegBinding
+import com.example.bankappds.viewmodel.dataViewModel
 
 
 class RegFragment : Fragment() {
     var binding : FragmentRegBinding?= null
+    val viewModel: dataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,17 +34,23 @@ class RegFragment : Fragment() {
         binding?.recPay?.setHasFixedSize(true)
 
         // RegMap 데이터 가져오기
-        val temp = mutableListOf<Expenditure>()
-        var totalreg = 0
-        for ((K,V) in regExpdMap){
-            for (expd in V) {
-                temp.add(expd)
-                totalreg += expd.expense
+
+
+
+        val adpatList = mutableListOf<Expenditure>()
+
+        val temp = viewModel.regExpdMap.value?.toMap()
+        if (temp != null){
+            for ((K,V) in temp){
+                for (expd in V) {
+                    adpatList.add(expd)
+                }
             }
         }
-        binding?.totalReg?.text = totalreg.toString()
 
-        val adapter = ExpenditureAdapter(temp)
+        binding?.totalReg?.text = viewModel.totalRegExpense.value.toString()
+
+        val adapter = ExpenditureAdapter(adpatList)
         binding?.recPay?.adapter = adapter
 
         binding?.btnAdd?.setOnClickListener {
@@ -52,10 +61,10 @@ class RegFragment : Fragment() {
         // 삭제 버튼 클릭시
         binding?.btnDelete?.setOnClickListener {
             if (selectedReg != -1) {
-                deleteRegExpenditure(temp[selectedReg]) // map에서 리스트 삭제
-                totalreg -= temp[selectedReg].expense
-                binding?.totalReg?.text = totalreg.toString()
-                temp.removeAt(selectedReg) // temp 에서도 삭제하여 갱신
+                viewModel.deleteRegExpenditure(adpatList[selectedReg]) // map에서 리스트 삭제
+                adpatList.removeAt(selectedReg)
+                binding?.totalReg?.text = viewModel.totalRegExpense.toString()
+
                 //adapter.notifyItemRemoved(selectedReg) // 삭제되었음을 알림
                 adapter.notifyDataSetChanged()
                 selectedReg = -1

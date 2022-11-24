@@ -30,8 +30,8 @@ class DayCalendarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 뷰모델로 메인엑티비티에 있는 totalExpense에 더해주기
-        viewModel.expense.observe(viewLifecycleOwner) {
-            (activity as MainActivity).totalExpense += viewModel.expense.value!!
+        viewModel.totalExpense.observe(viewLifecycleOwner) {
+            (activity as MainActivity).totalExpense += viewModel.totalExpense.value!!
             println("TotalExpense : ${(activity as MainActivity).totalExpense}")
         }
         viewModel.expenditureMap.observe(viewLifecycleOwner) {
