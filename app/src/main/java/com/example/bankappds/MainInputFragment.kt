@@ -51,7 +51,6 @@ class MainInputFragment : Fragment() {
                 Toast.makeText(requireContext(), "누락된 칸이 있습니다", Toast.LENGTH_SHORT).show()
             }
             else {
-                viewModel.plusTotalExpense(binding?.edtMoney?.text.toString().toIntOrNull()?:0)
                 val temp = Expenditure(args.calendarDate[0], args.calendarDate[1], args.calendarDate[2],
                     binding?.edtMoney?.text.toString().toIntOrNull()?:0,
                     typeT, binding?.edtMemo?.text.toString())
