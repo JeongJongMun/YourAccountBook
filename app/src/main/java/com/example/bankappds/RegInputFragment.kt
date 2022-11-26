@@ -61,7 +61,8 @@ class RegInputFragment : Fragment() {
 
 
         binding?.btnFin?.setOnClickListener {
-            if (typeT == null || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty()){
+            if (typeT == null || binding?.edtDay?.text.toString().isEmpty()
+                || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty()){
                 Toast.makeText(requireContext(), "누락된 부분이 있습니다", Toast.LENGTH_SHORT).show()
             }
             else {

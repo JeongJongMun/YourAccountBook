@@ -29,9 +29,12 @@ class DayCalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 뷰모델로 메인엑티비티에 있는 totalExpense에 더해주기
         viewModel.totalExpense.observe(viewLifecycleOwner) {
-            println("TotalExpense : ${viewModel.totalExpense}")
+            Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}", Toast.LENGTH_SHORT).show()
+            if (it > (viewModel.goalExpense.value?.toInt() ?: 0)) {
+                Toast.makeText(requireContext(), "지출이 목표 지출을 넘어섰습니다!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}, 목표 지출 : ${viewModel.goalExpense.value}", Toast.LENGTH_SHORT).show()
+            }
         }
         viewModel.totalRegExpense.observe(viewLifecycleOwner) {
             println("TotalRegExpense : ${viewModel.totalRegExpense}")

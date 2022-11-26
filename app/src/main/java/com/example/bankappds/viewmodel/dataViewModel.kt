@@ -11,6 +11,8 @@ class dataViewModel: ViewModel() {
     // mbti를 읽으면 _mbti가 읽힘
 
 
+    private val _goalExpense = MutableLiveData<Int>(0)
+    val goalExpense : LiveData<Int> get() = _goalExpense
     // 내부적으로는 바꿀수있는 라이브데이터
     private val _totalExpense = MutableLiveData<Int>(0)
     // 하지만 밖에서는 바꿀수없는 라이브데이터 - 일종의 패턴임임
@@ -28,6 +30,10 @@ class dataViewModel: ViewModel() {
 
     var tempExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
     var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
+
+    fun setGoal(exp : Int) {
+        _goalExpense.value = exp
+    }
 
 
     fun makeDayStr(year: Int, month: Int, day: Int): String {

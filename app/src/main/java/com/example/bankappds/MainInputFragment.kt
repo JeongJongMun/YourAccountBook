@@ -24,7 +24,7 @@ class MainInputFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMainInputBinding.inflate(inflater)
 
-        return binding!!.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,10 +34,6 @@ class MainInputFragment : Fragment() {
 
         // 달력 날짜 전달 받기
         val args : MainInputFragmentArgs by navArgs()
-
-//        val year = args.calendarDate?.year
-//        val month = args.calendarDate?.month
-//        val day = args.calendarDate?.day
 
         // 입력창 달력 날짜 설정
         binding?.txtInputYear?.text = args.calendarDate[0].toString()

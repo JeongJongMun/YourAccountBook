@@ -38,7 +38,11 @@
         android:id="@+id/goalFragment"
         android:name="com.example.bankappds.GoalFragment"
         android:label="목표 지출 금액 설정"
-        tools:layout="@layout/fragment_goal" />
+        tools:layout="@layout/fragment_goal" >
+        <action
+            android:id="@+id/action_goalFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/regFragment"
         android:name="com.example.bankappds.RegFragment"

@@ -30,27 +30,12 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edt_expd"
+            android:id="@+id/edt_goal_expd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="목표 저축 금액"
-            android:textColor="#1390C8"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/edt_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
     </LinearLayout>
 
     <Button
