@@ -31,9 +31,11 @@ class DayCalendarFragment : Fragment() {
 
         viewModel.totalExpense.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}", Toast.LENGTH_SHORT).show()
-            if (it > (viewModel.goalExpense.value?.toInt() ?: 0)) {
-                Toast.makeText(requireContext(), "지출이 목표 지출을 넘어섰습니다!!", Toast.LENGTH_SHORT).show()
-                Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}, 목표 지출 : ${viewModel.goalExpense.value}", Toast.LENGTH_SHORT).show()
+            if (viewModel.goalExpense.value?.toInt() != 0) {
+                if (it > (viewModel.goalExpense.value?.toInt() ?: 0)) {
+                    Toast.makeText(requireContext(), "지출이 목표 지출을 넘어섰습니다!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}, 목표 지출 : ${viewModel.goalExpense.value}", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         viewModel.totalRegExpense.observe(viewLifecycleOwner) {

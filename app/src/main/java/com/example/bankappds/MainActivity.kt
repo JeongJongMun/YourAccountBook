@@ -39,21 +39,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
     val viewModel: dataViewModel by viewModels()
-    lateinit var binding2: FragmentMainBinding
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        binding2 = FragmentMainBinding.inflate(layoutInflater)
-
-        createNotificationChannel(CHANNEL_ID, "testChannel", "this is a test Channel")
-        binding2?.btnAlarm?.setOnClickListener {
-            displayNotification()
-        }
-
 
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         //action bar의 옛날이름
@@ -70,64 +59,5 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-    val CHANNEL_ID : String = "MY_CH"
-    private var notificationManager: NotificationManager? = null
-
-    private fun displayNotification() {
-        val notificationId = 45
-
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Example")
-            .setContentText("This is Notification Test")
-            .build()
-
-        notificationManager?.notify(notificationId, notification)
-    }
-
-    private fun createNotificationChannel(channelId: String, name: String, channelDescription: String) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_DEFAULT // set importance
-            val channel = NotificationChannel(channelId, name, importance).apply {
-                description = channelDescription
-            }
-            // Register the channel with the system
-            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager?.createNotificationChannel(channel)
-        }
-    }
-
-
-/*    val channel_name : String = "CHANNEL_1"
-    val notificationId: Int = 1002
-    private fun createNotificationChannel(builder: NotificationCompat.Builder,
-                                          notificationId: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val descriptionText = "1번 채널입니다."
-            val importance = NotificationManager.IMPORTANCE_DEFAULT // 중요도 설정
-            // 채널 생성
-            val channel = NotificationChannel(CHANNEL_ID, channel_name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-
-            notificationManager.notify(notificationId, builder.build())
-        }
-    }
-
-    private fun displayNotification() {
-        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Default notification")
-            .setContentText("Notification Test")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setAutoCancel(true) // 알랍 탭하면 삭제
-
-        createNotificationChannel(builder, notificationId)
-    }*/
 
 }
