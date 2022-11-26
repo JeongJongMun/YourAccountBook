@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.R
 import com.example.bankappds.databinding.FragmentCircleChartBinding
+import com.example.bankappds.viewmodel.dataViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.*
@@ -27,9 +29,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CircleChart.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+
+
 class CircleChart : Fragment() {
     var binding: FragmentCircleChartBinding? = null
     lateinit var pieChart: PieChart
+
+    val viewModel: dataViewModel by activityViewModels()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -124,10 +131,18 @@ class CircleChart : Fragment() {
 
         // on below line we are creating array list and
         // adding data to it to display in pie chart
+
+
         val entries: ArrayList<PieEntry> = ArrayList()
-        entries.add(PieEntry(70f))
-        entries.add(PieEntry(20f))
-        entries.add(PieEntry(10f))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.FOOD).toFloat()))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.ENTERTAIN).toFloat()))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.SHOPPING).toFloat()))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HOBBY).toFloat()))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HEALTH).toFloat()))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.FINANCE).toFloat()))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HOME).toFloat()))
+        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.ETC).toFloat()))
+
 
         // on below line we are setting pie data set
         val dataSet = PieDataSet(entries, "Mobile OS")

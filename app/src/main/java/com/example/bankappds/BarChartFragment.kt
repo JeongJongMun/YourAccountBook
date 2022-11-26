@@ -40,13 +40,18 @@ class BarChart : Fragment() {
         barChart.setScaleEnabled(false)
 
         val valueList = ArrayList<BarEntry>()
-        val title = "걸음 수"
+        val title = "지출 종류"
 
 
         // 임의 데이터
-        for (i in 0 until 5) {
-            valueList.add(BarEntry(i.toFloat(), i * 100f))
-        }
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.FOOD).toFloat()))
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.FINANCE).toFloat()))
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.HEALTH).toFloat()))
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.SHOPPING).toFloat()))
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.ENTERTAIN).toFloat()))
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.HOBBY).toFloat()))
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.HOME).toFloat()))
+        valueList.add(BarEntry(1f,viewModel.getArraybyCategory(Ecategory.ETC).toFloat()))
 
         val barDataSet = BarDataSet(valueList, title)
         // 바 색상 설정 (ColorTemplate.LIBERTY_COLORS)

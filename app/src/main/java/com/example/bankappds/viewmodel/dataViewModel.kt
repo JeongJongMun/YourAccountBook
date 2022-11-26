@@ -3,6 +3,7 @@ package com.example.bankappds.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bankappds.Ecategory
 import com.example.bankappds.Expenditure
 
 class dataViewModel: ViewModel() {
@@ -93,6 +94,45 @@ class dataViewModel: ViewModel() {
     }
 
 
+    fun getArraybyCategory(categoryType: Ecategory) : Int {
+        var sumExpenditure : Int = 0
 
+        if (expenditureMap.value != null){
+            for ((K,V) in expenditureMap.value!!) {
+                for (e in V) {
+                    if (e.category == categoryType) {
+                        sumExpenditure += e.expense
+                    }
+                }
+            }
+        }
+        if (regExpdMap.value != null) {
+            for ((K,V) in regExpdMap.value!!) {
+                for (e in V) {
+                    if (e.category == categoryType) {
+                        sumExpenditure += e.expense
+                    }
+                }
+            }
+        }
+
+
+        return sumExpenditure
+    }
+
+    fun getMonthList(month: Int) : MutableList<Expenditure>{
+        var temp = mutableListOf<Expenditure>()
+        val tempMap = _expenditureMap.value?.toSortedMap()
+
+        print(tempMap)
+        if (tempMap != null){
+            for ((K,V) in tempMap!!) {
+                if (K.substring(4,6).toInt() == month) {
+                    for (i in V) temp.add(i)
+                }
+            }
+        }
+        return temp
+    }
 
 }

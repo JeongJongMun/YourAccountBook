@@ -7,14 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMonthBinding
 import com.example.bankappds.databinding.FragmentMonthListBinding
+import com.example.bankappds.viewmodel.dataViewModel
 import java.time.LocalDateTime
 
 
 class MonthListFragment : Fragment() {
     var binding: FragmentMonthListBinding? = null
+    val viewModel: dataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,22 +35,16 @@ class MonthListFragment : Fragment() {
 
         val mon = currentTime.month
 
-        var temp = mutableListOf<Expenditure>()
+
         binding?.txtNowmon?.text = currentTime.month.toString()
 
 
-/*
-        for ((K,V) in expenditureMap){
-            if (K.substring(4,6) == ele.toString()){
-                for (expd in V) temp.add(expd)
-            }
-        }
-*/
+
 
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
         binding?.recyclerView?.setHasFixedSize(true)
-        binding?.recyclerView?.adapter = ExpenditureAdapter(temp)
+        binding?.recyclerView?.adapter = ExpenditureAdapter(viewModel.getMonthList(11))
 
     }
 }
