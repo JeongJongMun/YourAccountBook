@@ -14,22 +14,11 @@ import com.example.bankappds.databinding.FragmentCircleChartBinding
 import com.example.bankappds.viewmodel.dataViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
 import kotlin.collections.ArrayList
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CircleChart.newInstance] factory method to
- * create an instance of this fragment.
- */
-
 
 
 class CircleChart : Fragment() {
@@ -38,50 +27,14 @@ class CircleChart : Fragment() {
 
     val viewModel: dataViewModel by activityViewModels()
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentCircleChartBinding.inflate(inflater, container, false)
         setDate()
-        binding?.btnBarChart?.setOnClickListener {
-            findNavController().navigate(R.id.action_circleChart_to_barChart)
-        }
 
         return binding?.root
     }
 
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CircleChart.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CircleChart().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
     private fun setDate() {
         // on below line we are initializing our
@@ -91,7 +44,10 @@ class CircleChart : Fragment() {
         // on below line we are setting user percent value,
         // setting description as enabled and offset for pie chart
         pieChart.setUsePercentValues(true)
-        pieChart.description.isEnabled = false
+        pieChart.description.isEnabled = true
+        pieChart.description.text = "카테고리 별 지출 금액" // 차트 제목
+        pieChart.description.setPosition(840F,200F) // 제목 위치
+        pieChart.description.textSize = 30F // 제목 크기
         pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
 
         // on below line we are setting drag for our pie chart
@@ -125,27 +81,45 @@ class CircleChart : Fragment() {
         pieChart.animateY(1400, Easing.EaseInOutQuad)
 
         // on below line we are disabling our legend for pie chart
-        pieChart.legend.isEnabled = false
-        pieChart.setEntryLabelColor(Color.WHITE)
-        pieChart.setEntryLabelTextSize(12f)
+        pieChart.legend.isEnabled = true
+        pieChart.legend.textSize = 15F
+        pieChart.legend.isWordWrapEnabled = true; // 레전드 넘어가면 줄 넘김
+        pieChart.setEntryLabelColor(Color.BLACK) // 차트 내 카테고리 색깔
+        pieChart.setEntryLabelTextSize(12f) // 차트 내 글자 크기
 
         // on below line we are creating array list and
         // adding data to it to display in pie chart
 
 
         val entries: ArrayList<PieEntry> = ArrayList()
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.FOOD).toFloat()))
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.ENTERTAIN).toFloat()))
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.SHOPPING).toFloat()))
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HOBBY).toFloat()))
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HEALTH).toFloat()))
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.FINANCE).toFloat()))
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HOME).toFloat()))
-        entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.ETC).toFloat()))
+        if (viewModel.getArraybyCategory(Ecategory.FOOD) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.FOOD).toFloat(), "FOOD"))
+        }
+        if (viewModel.getArraybyCategory(Ecategory.ENTERTAIN) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.ENTERTAIN).toFloat(), "ENTERTAIN"))
+        }
+        if (viewModel.getArraybyCategory(Ecategory.SHOPPING) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.SHOPPING).toFloat(), "SHOPPING"))
+        }
+        if (viewModel.getArraybyCategory(Ecategory.HOBBY) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HOBBY).toFloat(), "HOBBY"))
+        }
+        if (viewModel.getArraybyCategory(Ecategory.HEALTH) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HEALTH).toFloat(), "HEALTH"))
+        }
+        if (viewModel.getArraybyCategory(Ecategory.FINANCE) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.FINANCE).toFloat(), "FINANCE"))
+        }
+        if (viewModel.getArraybyCategory(Ecategory.HOME) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.HOME).toFloat(), "HOME"))
+        }
+        if (viewModel.getArraybyCategory(Ecategory.ETC) != 0) {
+            entries.add(PieEntry(viewModel.getArraybyCategory(Ecategory.ETC).toFloat(), "ETC"))
+        }
 
 
         // on below line we are setting pie data set
-        val dataSet = PieDataSet(entries, "Mobile OS")
+        val dataSet = PieDataSet(entries, "Category")
 
         // on below line we are setting icons.
         dataSet.setDrawIcons(false)
@@ -160,6 +134,11 @@ class CircleChart : Fragment() {
         colors.add(resources.getColor(R.color.purple_200))
         colors.add(resources.getColor(R.color.yellow))
         colors.add(resources.getColor(R.color.red))
+        colors.add(resources.getColor(R.color.green))
+        colors.add(resources.getColor(R.color.blue))
+        colors.add(resources.getColor(R.color.grey))
+        colors.add(resources.getColor(R.color.brown))
+        colors.add(resources.getColor(R.color.purple))
 
         // on below line we are setting colors.
         dataSet.colors = colors
@@ -167,9 +146,9 @@ class CircleChart : Fragment() {
         // on below line we are setting pie data set
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(15f)
+        data.setValueTextSize(15f) // 숫자 크기
         data.setValueTypeface(Typeface.DEFAULT_BOLD)
-        data.setValueTextColor(Color.WHITE)
+        data.setValueTextColor(Color.BLACK) // 숫자 색깔
         pieChart.data = data
 
         // undo all highlights

@@ -16,7 +16,7 @@
         android:id="@+id/regFragment"
         android:title="고정지출" />
     <item
-        android:id="@+id/barChart"
+        android:id="@+id/circleChart"
         android:title="통계" />
     <item
         android:id="@+id/searchFragment"

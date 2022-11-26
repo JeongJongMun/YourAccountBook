@@ -100,7 +100,7 @@ class dataViewModel: ViewModel() {
         if (expenditureMap.value != null){
             for ((K,V) in expenditureMap.value!!) {
                 for (e in V) {
-                    if (e.category == categoryType) {
+                    if (e.category == categoryType && e.expense != 0) {
                         sumExpenditure += e.expense
                     }
                 }
@@ -109,13 +109,12 @@ class dataViewModel: ViewModel() {
         if (regExpdMap.value != null) {
             for ((K,V) in regExpdMap.value!!) {
                 for (e in V) {
-                    if (e.category == categoryType) {
+                    if (e.category == categoryType && e.expense != 0) {
                         sumExpenditure += e.expense
                     }
                 }
             }
         }
-
 
         return sumExpenditure
     }
