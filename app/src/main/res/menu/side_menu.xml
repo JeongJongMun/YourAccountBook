@@ -19,7 +19,7 @@
         android:id="@+id/exchangeRateFragment"
         android:title="환율 계산기" />
     <item
-        android:id="@+id/barChart"
+        android:id="@+id/circleChartFragment"
         android:title="통계" />
     <item
         android:id="@+id/searchFragment"

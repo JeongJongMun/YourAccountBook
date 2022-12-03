@@ -12,19 +12,19 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:background="@color/primebg"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/frm_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:fontFamily="@font/lineseedkrrg"
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
+            android:fontFamily="@font/lineseedkrrg"
             android:text="Unknown"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
