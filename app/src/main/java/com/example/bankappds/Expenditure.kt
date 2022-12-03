@@ -1,9 +1,8 @@
 package com.example.bankappds
 
 import android.os.Parcelable
-import androidx.annotation.Keep
 import kotlinx.android.parcel.Parcelize
-import org.checkerframework.checker.units.qual.K
+import kotlin.collections.HashMap as HashMap
 
 enum class Ecategory {
     FOOD,
@@ -17,32 +16,30 @@ enum class Ecategory {
 }
 
 @Parcelize
-data class Expenditure(
+class Expenditure(
     var year: Int = 0,
     var month: Int = 0,
-    val day: Int,
-    val expense: Int,
-    val category: Ecategory?,
-    val memo: String ): Parcelable
-{
-    //TODO hashmap -> 클래스로 바꾸는 함수를
+    var day: Int = 0,
+    var expense: Int = 0,
+    var category: Ecategory? = null,
+    var memo: String = "" ) : Parcelable {
+
+    constructor(hashMap: HashMap<Any, Any>) : this() {
+        year = hashMap["year"].toString().toInt()
+        month = hashMap["month"].toString().toInt()
+        day = hashMap["day"].toString().toInt()
+        expense = hashMap["expense"].toString().toInt()
+        category = when (hashMap["category"]){
+            "FOOD" ->Ecategory.FOOD
+            "FINANCE" ->Ecategory.FINANCE
+            "SHOPPING" ->Ecategory.SHOPPING
+            "ENTERTAIN" ->Ecategory.ENTERTAIN
+            "HOBBY" ->Ecategory.HOBBY
+            "HEALTH" ->Ecategory.HEALTH
+            "HOME" ->Ecategory.HOME
+            "ETC" ->Ecategory.ETC
+            else -> null
+        }
+        memo = hashMap["memo"].toString()
+    }
 }
-
-
-@Keep
-data class Test(
-    var ExpenditureMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
-)
-
-
-// cloud 에서 데이터 가져오기 위한 클래스
-// deserialize 역직렬화 : 어떤 외부 파일의 데이터를 프로그램 내의 object로 read 해오는 것
-// no-argument constructor : 기본 생성자
-data class ExpMap(
-    val TotalExpense: Int = 0,
-    val Email: String = "",
-    val ExpenditureMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf(),
-    val RegTotalExpense: Int = 0,
-    val Name: String = "",
-    val Password: String = ""
-)

@@ -47,7 +47,8 @@ class dataViewModel: ViewModel() {
         repository.getRealTimeName(_name)
         repository.getRealTimeTotalExpense(_totalExpense)
         repository.getRealTimeTotalRegExpense(_totalRegExpense)
-//        repository.getRealTimeExpendtureMap(_expenditureMap)
+        repository.getRealTimeExpendtureMap(_expenditureMap)
+        repository.getRealTimeRegExpendtureMap(_regExpdMap)
     }
 
     // 목표 금액 설정
@@ -78,8 +79,8 @@ class dataViewModel: ViewModel() {
         } else { // 기존 값 존재 X
             tempExpdMap[dayInfo] = mutableListOf(expd)
         }
+
         //TODO 여기서 총지출 넘기는 거 관리
-//        repository.testPost(_email.value.toString(), expd)
         _expenditureMap.value = tempExpdMap
         _totalExpense.value = _totalExpense.value?.plus(expd.expense)
         // realtime 에 저장

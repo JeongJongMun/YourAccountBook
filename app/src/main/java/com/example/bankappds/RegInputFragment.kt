@@ -68,7 +68,7 @@ class RegInputFragment : Fragment() {
             else {
                 val temp = Expenditure(0, 0, binding?.edtDay?.text.toString().toIntOrNull()?:0,
                     binding?.edtPay?.text.toString().toIntOrNull()?:0,
-                    typeT, binding?.edtMemoReg?.text.toString()
+                    typeT!!, binding?.edtMemoReg?.text.toString()
                 )
                 viewModel.addRegExpenditure(temp)
                 findNavController().navigate(R.id.action_regInputFragment_to_regFragment)

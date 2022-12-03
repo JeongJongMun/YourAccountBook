@@ -49,7 +49,7 @@ class MainInputFragment : Fragment() {
             else {
                 val temp = Expenditure(args.calendarDate[0], args.calendarDate[1], args.calendarDate[2],
                     binding?.edtMoney?.text.toString().toIntOrNull()?:0,
-                    typeT, binding?.edtMemo?.text.toString())
+                    typeT!!, binding?.edtMemo?.text.toString())
                 viewModel.addExpenditure(temp)
                 findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)
             }

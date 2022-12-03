@@ -2,7 +2,6 @@ package com.example.bankappds.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.bankappds.Expenditure
-import com.example.bankappds.Test
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -23,38 +22,60 @@ class Repository {
     val userRefRegExpenditureMap = database.getReference("RegExpenditureMap")
     val userRefTotalExpense = database.getReference("TotalExpense")
     val userRefTotalRegExpense = database.getReference("TotalRegExpense")
+    fun makeDayStr(year: Int, month: Int, day: Int): String {
+        val yearStr = if (year == 0) "0000" else year.toString()
+        val monthStr = if (month > 9) month.toString() else "0$month"
+        val dayStr = day.toString()
 
-    fun getDataFromServer(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
-        db.collection("Data")
-            .document("whdans4005@gmail.com")
-            .get()
-            .addOnSuccessListener {
-                exp.value = it.data?.get("ExpenditureMap") as MutableMap<String, MutableList<Expenditure>>
-
-            }
+        return yearStr+monthStr+dayStr
     }
+    fun addExpenditure(map: MutableMap<String, MutableList<Expenditure>>, expd: Expenditure) {
+        val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
 
-
+        if (map[dayInfo] != null) { // 기존 값 존재
+            map[dayInfo]?.add(expd)
+        } else { // 기존 값 존재 X
+            map[dayInfo] = mutableListOf(expd)
+        }
+    }
+    // 앱 처음 실행시 realtime 에서 가져와서 ViewModel로 넘겨줌
     fun getRealTimeExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
         userRefExpenditureMap.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                println("Test ${snapshot.value}")
-                println("Test ${snapshot.value!!::class.simpleName}")
-                exp.postValue(snapshot.value as MutableMap<String, MutableList<Expenditure>>)
-/*                val item : Test? = snapshot.getValue(Test::class.java)
-                exp.postValue(item?.ExpenditureMap)
-                println(item?.ExpenditureMap)
-
-                val temp = snapshot.value as MutableMap<String, MutableList<Expenditure>>
-                exp.value = temp*/
-
+                val serverMap = snapshot.value as MutableMap<String, MutableList<HashMap<Any,Any>>>?
+                val changedServerMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
+                if (serverMap != null) {
+                    for ((K,V) in serverMap){
+                        for (expd in V) {
+                            addExpenditure(changedServerMap, Expenditure(expd))
+                        }
+                    }
+                }
+                exp.postValue(changedServerMap)
             }
-
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
-    // 앱 처음 실행시 realtime 에서 가져와서 ViewModel로 넘겨줌
+    fun getRealTimeRegExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
+        userRefRegExpenditureMap.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val serverMap = snapshot.value as MutableMap<String, MutableList<HashMap<Any,Any>>>?
+                val changedServerMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
+                if (serverMap != null) {
+                    for ((K,V) in serverMap){
+                        for (expd in V) {
+                            addExpenditure(changedServerMap, Expenditure(expd))
+                        }
+                    }
+                }
+                exp.postValue(changedServerMap)
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
     fun getRealTimeEmail(email: MutableLiveData<String>) {
         userRefEmail.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -118,8 +139,5 @@ class Repository {
         userRefTotalRegExpense.setValue(newValue)
         db.collection("Users").document(email).update("RegTotalExpense", newValue)
     }
-    fun testPost(email: String, newValue : Expenditure) {
-        db.collection("Data").document(email).update(newValue.year.toString()+newValue.month.toString()+newValue.day.toString(), newValue)
-//        ("Exp", newValue)
-    }
+
 }

@@ -48,8 +48,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        getDataFromServer()
-
         viewModel.name.observe(viewLifecycleOwner) {
             binding?.txtName?.text = viewModel.name.value?: "Unknown"
         }
@@ -71,7 +69,6 @@ class MainFragment : Fragment() {
                 if (it > viewModel.goalExpense.value.toString().toInt()) {
                     displayNotification()
                 }
-
             }
         }
     }
@@ -92,8 +89,6 @@ class MainFragment : Fragment() {
             .setContentIntent(mPendingIntent) // PendingIntent 설정
             .build()
 
-
-
         notificationManager?.notify(notificationId, notification)
     }
 
@@ -107,67 +102,5 @@ class MainFragment : Fragment() {
             notificationManager?.createNotificationChannel(channel)
         }
     }
-    private fun getDataFromServer() {
-        db.collection("Users")
-            .get()
-            .addOnSuccessListener {
-                for (document in it) {
-                    val result = ExpMap(document["TotalExpense"].toString().toInt()
-                        , document["Email"] as String
-                        , document["ExpenditureMap"] as MutableMap<String, MutableList<Expenditure>>
-                        , document["RegTotalExpense"].toString().toInt()
-                        , document["Name"] as String
-                        , document["Password"] as String
-                    )
-                    val temp = result.ExpenditureMap
-                    for ((K,V) in temp) {
-                        V.forEach{
-//                            val temp2 = Expenditure(hash.year,hash.month,hash.day,
-//                                hash.expense,hash.category,hash.memo)
-//                            viewModel.addExpenditure(temp2)
-                        }
-                    }
-//                    val temp2 = temp["20221115"]
-//                    println(temp)
-//                    println(temp2!!::class.simpleName)
-//                    println(temp2[0])
-//                    println(temp2[0]::class.simpleName)
 
-//                    for ((K,V) in temp) {
-//                        for (expd in V) {
-//                            val temp2 = Expenditure(expd.year, expd.month, expd.day,
-//                                expd.expense, expd.category, expd.memo)
-//                            println("Get From Server : $expd")
-//                            viewModel.addExpenditure(temp2) // 지출 설정
-//                        }
-//                    }
-
-                }
-//                val test = it.toObject(ExpMap::class.java)
-//                println("In Server : ${test?.ExpenditureMap}")
-//                println("In Server : ${test?.TotalExpense}")
-//                test?.TotalExpense?.let { it1 -> viewModel.getTotalExp(it1) } // 총 지출 설정
-//                val temp = test?.ExpenditureMap
-//                if (temp != null) {
-//                    for ((K,V) in temp) {
-//                        for (expd in V) {
-//                            println("Get From Server : $expd")
-//                            viewModel.addExpenditure(expd) // 지출 설정
-//                        }
-//                    }
-//                }
-            }
-    }
-
-    private fun getDataFromServer3() {
-        db.collection("Data")
-            .document("whdans4005@gmail.com")
-            .get()
-            .addOnSuccessListener {
-                val test : Expenditure? = it.toObject(Expenditure::class.java)
-                if (test != null) {
-                    viewModel.addExpenditure(test)
-                }
-            }
-    }
 }
