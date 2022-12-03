@@ -8,6 +8,8 @@
     tools:context=".MainInputFragment">
 
     <EditText
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/edt_memo"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
@@ -23,6 +25,9 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner_input_category" />
 
     <Button
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
+        android:background="@color/primebg"
         android:id="@+id/btn_back"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -34,6 +39,9 @@
         app:layout_constraintTop_toTopOf="@+id/btn_save" />
 
     <Button
+        android:background="@color/primebg"
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/btn_save"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -45,6 +53,8 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/txt_input_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,6 +67,8 @@
         app:layout_constraintTop_toTopOf="@+id/txt_input_month" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/txt_input_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,6 +81,8 @@
         app:layout_constraintTop_toTopOf="@+id/txt_input_month" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/txt_input_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,6 +96,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/edt_money"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
@@ -99,6 +115,9 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
+        android:background="@color/primebg"
         android:id="@+id/spinner_input_category"
         android:layout_width="240dp"
         android:layout_height="50dp"
@@ -110,6 +129,8 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_input_month" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,6 +144,8 @@
         app:layout_constraintTop_toTopOf="@+id/edt_money" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,6 +159,8 @@
         app:layout_constraintTop_toTopOf="@+id/spinner_input_category" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -29,6 +29,7 @@ class DayCalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         viewModel.totalExpense.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}", Toast.LENGTH_SHORT).show()
             if (viewModel.goalExpense.value?.toInt() != 0) {

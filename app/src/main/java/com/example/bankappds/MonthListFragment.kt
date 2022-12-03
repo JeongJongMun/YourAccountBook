@@ -44,7 +44,7 @@ class MonthListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
         binding?.recyclerView?.setHasFixedSize(true)
-        binding?.recyclerView?.adapter = ExpenditureAdapter(viewModel.getMonthList(11))
+        binding?.recyclerView?.adapter = ExpenditureAdapter(viewModel.getMonthList(12))
 
     }
 }

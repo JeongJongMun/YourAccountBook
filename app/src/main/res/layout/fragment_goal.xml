@@ -21,16 +21,21 @@
         app:layout_constraintVertical_bias="0.37">
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="@color/white"
             android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="목표 지출 금액"
-            android:textColor="#610902"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <EditText
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="@color/white"
             android:id="@+id/edt_goal_expd"
+            android:hint="원"
+            android:textColorHint="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -39,6 +44,9 @@
     </LinearLayout>
 
     <Button
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape"
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -10,12 +10,13 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
             android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="월"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,13 +26,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/txt_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:ems="1"
             android:text="00"
-            android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,12 +41,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="년"
-            android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,13 +55,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/txt_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:ems="2"
             android:text="2022"
-            android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -81,13 +85,14 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/txt_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:ems="1"
             android:text="00"
-            android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -95,12 +100,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
             android:text="일"
-            android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -114,23 +120,27 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/txt_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="카테고리"
-            android:textColor="#000000"
+
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/txt_memo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="메모"
-            android:textColor="#000000"
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,25 +153,29 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="가격"
-            android:textColor="#000000"
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:textColor="#FFFFFF"
             android:id="@+id/txt_expense"
             android:layout_width="78dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:ems="3"
             android:text="0000"
-            android:textColor="#000000"
+
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

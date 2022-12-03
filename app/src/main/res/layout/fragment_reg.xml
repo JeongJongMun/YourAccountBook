@@ -29,26 +29,30 @@
         app:layout_constraintTop_toBottomOf="@+id/rec_pay">
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:background="@color/primebg"
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#62CD65"
-            android:text="한달 고정 지출 총액"
+
+            android:text="고정 지출 총액"
             android:textAlignment="center"
             android:textColor="#FFFAFA"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
+            android:fontFamily="@font/lineseedkrrg"
+            android:background="@color/primebg"
             android:id="@+id/total_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#61CF65"
+
             android:textAlignment="center"
             android:textColor="#FFFAFA"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 

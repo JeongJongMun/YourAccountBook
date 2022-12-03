@@ -15,7 +15,13 @@
     <color name="purple">#673AB7</color>
     <color name="blue">#69B3ED</color>
     <color name="brown">#795353</color>
-    <color name="grey">#A5A4A4</color>
+    <color name="grey">#A4A3A3</color>
 
-    <color name="allbg">#CDE4CE</color>
+    <color name="allbg">#3D3F41</color>
+    <color name="primebg">#2B2B2B</color>
+
+
+    <color name="plus">#8BC34A</color>
+    <color name="minus">#F44336</color>
+
 </resources>

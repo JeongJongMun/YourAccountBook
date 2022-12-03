@@ -9,6 +9,7 @@
 
 
     <FrameLayout
+
         android:id="@+id/frm_fragment_category"
         android:layout_width="0dp"
         android:layout_height="200dp"
@@ -20,6 +21,8 @@
     </FrameLayout>
 
     <EditText
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/editTextNumber"
         android:layout_width="100dp"
         android:layout_height="48dp"
@@ -27,12 +30,15 @@
         android:ems="10"
         android:gravity="end"
         android:hint="원"
+        android:textColorHint="#FFFFFF"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -44,11 +50,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="메모"
+        android:textColorHint="#FFFFFF"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
@@ -58,6 +67,8 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -71,6 +82,8 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -82,12 +95,15 @@
         app:layout_constraintStart_toStartOf="@+id/textView" />
 
     <EditText
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/editTextNumber3"
         android:layout_width="100dp"
         android:layout_height="48dp"
         android:ems="10"
         android:gravity="end"
         android:hint="원"
+        android:textColorHint="#FFFFFF"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +111,8 @@
         app:layout_constraintTop_toTopOf="@+id/editTextNumber" />
 
     <TextView
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/txt_year_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,13 +124,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:fontFamily="@font/lineseedkrrg"
+        android:textColor="#FFFFFF"
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Name"
+
         app:layout_constraintBottom_toBottomOf="@+id/txt_name"
         app:layout_constraintEnd_toEndOf="@+id/editTextNumber3"
         app:layout_constraintStart_toStartOf="@+id/editTextNumber"
@@ -120,6 +140,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
+
         android:id="@+id/btn_category"
         android:layout_width="20dp"
         android:layout_height="20dp"
