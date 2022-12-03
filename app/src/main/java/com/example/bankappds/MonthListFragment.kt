@@ -36,7 +36,7 @@ class MonthListFragment : Fragment() {
         val mon = currentTime.month
 
 
-        binding?.txtNowmon?.text = currentTime.month.toString()
+        //binding?.txtNowmon?.text = currentTime.month.toString()
 
 
 

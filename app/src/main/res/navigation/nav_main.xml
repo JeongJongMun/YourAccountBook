@@ -32,9 +32,6 @@
             app:argType="com.example.bankappds.Expenditure"
             app:nullable="true" />
         <action
-            android:id="@+id/action_mainFragment_to_monthListFragment"
-            app:destination="@id/monthListFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_exchangeRateFragment"
             app:destination="@id/exchangeRateFragment" />
         <action
@@ -46,6 +43,9 @@
         <action
             android:id="@+id/action_mainFragment_to_logoutFragment"
             app:destination="@id/logoutFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_monthFragment"
+            app:destination="@id/monthFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
@@ -98,11 +98,6 @@
         android:name="com.example.bankappds.SearchFragment"
         android:label="SearchFragment" />
     <fragment
-        android:id="@+id/monthListFragment"
-        android:name="com.example.bankappds.MonthListFragment"
-        android:label="이번달 지출 목록"
-        tools:layout="@layout/fragment_month_list" />
-    <fragment
         android:id="@+id/circleChart"
         android:name="com.example.bankappds.CircleChart"
         android:label="통계" />
@@ -135,11 +130,6 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/monthListFragment"
-        android:name="com.example.bankappds.MonthListFragment"
-        android:label="이번달 지출 목록"
-        tools:layout="@layout/fragment_month_list" />
-    <fragment
         android:id="@+id/exchangeRateFragment"
         android:name="com.example.bankappds.ExchangeRateFragment"
         android:label="환율 계산기"
@@ -157,4 +147,8 @@
             android:id="@+id/action_logoutFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/monthFragment"
+        android:name="com.example.bankappds.MonthFragment"
+        android:label="MonthFragment" />
 </navigation>
