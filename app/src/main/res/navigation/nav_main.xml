@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
@@ -20,6 +21,9 @@
             android:id="@+id/action_mainFragment_to_mainInputFragment"
             app:destination="@id/mainInputFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_barChart2"
+            app:destination="@id/barChart" />
+        <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <argument
@@ -30,6 +34,9 @@
         <action
             android:id="@+id/action_mainFragment_to_monthListFragment"
             app:destination="@id/monthListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_exchangeRateFragment"
+            app:destination="@id/exchangeRateFragment" />
         <action
             android:id="@+id/action_mainFragment_to_circleChart2"
             app:destination="@id/circleChart" />
@@ -127,6 +134,17 @@
             android:id="@+id/action_signInFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/monthListFragment"
+        android:name="com.example.bankappds.MonthListFragment"
+        android:label="이번달 지출 목록"
+        tools:layout="@layout/fragment_month_list" />
+    <fragment
+        android:id="@+id/exchangeRateFragment"
+        android:name="com.example.bankappds.ExchangeRateFragment"
+        android:label="환율 계산기"
+        tools:layout="@layout/fragment_exchange_rate" />
+
     <fragment
         android:id="@+id/logoutFragment"
         android:name="com.example.bankappds.LogoutFragment"
