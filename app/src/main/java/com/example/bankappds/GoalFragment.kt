@@ -13,7 +13,7 @@ import com.example.bankappds.databinding.FragmentMainInputBinding
 import com.example.bankappds.viewmodel.dataViewModel
 
 class GoalFragment : Fragment() {
-    private var binding: FragmentGoalBinding    ? = null
+    private var binding: FragmentGoalBinding? = null
     val viewModel: dataViewModel by activityViewModels()
 
 

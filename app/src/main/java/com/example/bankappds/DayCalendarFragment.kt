@@ -39,10 +39,14 @@ class DayCalendarFragment : Fragment() {
             }
         }
         viewModel.totalRegExpense.observe(viewLifecycleOwner) {
-            println("TotalRegExpense : ${viewModel.totalRegExpense}")
+            println("TotalRegExpense : $it")
         }
         viewModel.expenditureMap.observe(viewLifecycleOwner) {
             println("ExpenditureMap : $it")
+/*            println("ExpenditureMap Type : ${it::class.simpleName}")
+            val test = it["20221115"]
+            println(test!!::class.simpleName)
+            println(test[0]::class.simpleName)*/
         }
         viewModel.regExpdMap.observe(viewLifecycleOwner) {
             println("RegExpenditureMap : $it")

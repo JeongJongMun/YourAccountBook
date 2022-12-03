@@ -35,6 +35,11 @@ import com.example.bankappds.viewmodel.dataViewModel
 
 //TODO 앱 컨셉을 저축왕 느낌으로 게이지 채우는 형식
 
+//TODO 진행상황 - 차트, 데이터 뷰모델로 관리, 서버 연결(어센티케이션, 리얼타임, 파이어스토어) but 데이터 읽기 쓰기 가능하나 커스텀 데이터 클래스가 안됨
+// 목표 금액보다 총 지출이 넘으면 알람 설정
+// 기능적인 부분이 다른 조보다 단순한 면이 있음 -> 전략을 기능 추가하는 쪽으로 할지, 코드 최적화 하는 식으로 할지
+
+
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration

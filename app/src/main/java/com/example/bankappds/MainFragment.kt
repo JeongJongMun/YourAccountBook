@@ -10,30 +10,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.bankappds.databinding.FragmentMainBinding
 import com.example.bankappds.viewmodel.dataViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class MainFragment : Fragment() {
 
     // 프래그먼트에서 context 사용 가능
     lateinit var mainActivity: MainActivity
+    val db : FirebaseFirestore = FirebaseFirestore.getInstance()
 
     private var binding : FragmentMainBinding? = null
     val viewModel: dataViewModel by activityViewModels()
     private val channelId: String = "MY_CH"
-
-
-    private var position = FIRST_POSITION
-    companion object {
-        const val FIRST_POSITION = 1
-        const val SECOND_POSITION = 2
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,20 +48,22 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        getDataFromServer()
+
+        viewModel.name.observe(viewLifecycleOwner) {
+            binding?.txtName?.text = viewModel.name.value?: "Unknown"
+        }
+        viewModel.email.observe(viewLifecycleOwner) {
+            println(it)
+        }
+
         childFragmentManager.beginTransaction().replace(R.id.frm_fragment, DayCalendarFragment()).commit()
 
         binding?.imgBtnProfile?.setOnClickListener {
-            val transaction = childFragmentManager.beginTransaction()
-            when(position) {
-                FIRST_POSITION -> {
-                    transaction.replace(R.id.frm_fragment, MonthFragment()).commit()
-                    position = SECOND_POSITION
-                }
-                SECOND_POSITION -> {
-                    transaction.replace(R.id.frm_fragment, DayCalendarFragment()).commit()
-                    position = FIRST_POSITION
-                }
+            if (MyApplication.checkAuth()) {
+                findNavController().navigate(R.id.action_mainFragment_to_logoutFragment)
             }
+            else findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
         }
         createNotificationChannel(channelId, "warningChannel", "totalExpense over goalExpense")
         viewModel.totalExpense.observe(viewLifecycleOwner) { // 총 지출이 목표 지출보다 높을 경우 경고 알람
@@ -99,19 +98,76 @@ class MainFragment : Fragment() {
     }
 
     private fun createNotificationChannel(channelId: String, name: String, channelDescription: String) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_DEFAULT // set importance
             val channel = NotificationChannel(channelId, name, importance).apply {
                 description = channelDescription
             }
-            // Register the channel with the system
             notificationManager = mainActivity.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager?.createNotificationChannel(channel)
         }
     }
+    private fun getDataFromServer() {
+        db.collection("Users")
+            .get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    val result = ExpMap(document["TotalExpense"].toString().toInt()
+                        , document["Email"] as String
+                        , document["ExpenditureMap"] as MutableMap<String, MutableList<Expenditure>>
+                        , document["RegTotalExpense"].toString().toInt()
+                        , document["Name"] as String
+                        , document["Password"] as String
+                    )
+                    val temp = result.ExpenditureMap
+                    for ((K,V) in temp) {
+                        V.forEach{
+//                            val temp2 = Expenditure(hash.year,hash.month,hash.day,
+//                                hash.expense,hash.category,hash.memo)
+//                            viewModel.addExpenditure(temp2)
+                        }
+                    }
+//                    val temp2 = temp["20221115"]
+//                    println(temp)
+//                    println(temp2!!::class.simpleName)
+//                    println(temp2[0])
+//                    println(temp2[0]::class.simpleName)
 
+//                    for ((K,V) in temp) {
+//                        for (expd in V) {
+//                            val temp2 = Expenditure(expd.year, expd.month, expd.day,
+//                                expd.expense, expd.category, expd.memo)
+//                            println("Get From Server : $expd")
+//                            viewModel.addExpenditure(temp2) // 지출 설정
+//                        }
+//                    }
 
+                }
+//                val test = it.toObject(ExpMap::class.java)
+//                println("In Server : ${test?.ExpenditureMap}")
+//                println("In Server : ${test?.TotalExpense}")
+//                test?.TotalExpense?.let { it1 -> viewModel.getTotalExp(it1) } // 총 지출 설정
+//                val temp = test?.ExpenditureMap
+//                if (temp != null) {
+//                    for ((K,V) in temp) {
+//                        for (expd in V) {
+//                            println("Get From Server : $expd")
+//                            viewModel.addExpenditure(expd) // 지출 설정
+//                        }
+//                    }
+//                }
+            }
+    }
 
+    private fun getDataFromServer3() {
+        db.collection("Data")
+            .document("whdans4005@gmail.com")
+            .get()
+            .addOnSuccessListener {
+                val test : Expenditure? = it.toObject(Expenditure::class.java)
+                if (test != null) {
+                    viewModel.addExpenditure(test)
+                }
+            }
+    }
 }
