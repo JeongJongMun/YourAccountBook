@@ -1,17 +1,19 @@
 package com.example.bankappds
 
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentDayCalendarBinding
 import com.example.bankappds.viewmodel.DataViewModel
+
 
 class DayCalendarFragment : Fragment() {
     var binding: FragmentDayCalendarBinding? = null
@@ -29,6 +31,9 @@ class DayCalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val goalExpense = if (viewModel.goalExpense.value?:0 == 0) 1 else viewModel.goalExpense.value?:0
+        val monthTotalExpense  = viewModel.getMonthExpense(12).toFloat()
+        binding?.progressBar?.progress= ((monthTotalExpense / goalExpense) * 100).toInt()
 
         viewModel.totalExpense.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}", Toast.LENGTH_SHORT).show()
@@ -57,6 +62,8 @@ class DayCalendarFragment : Fragment() {
             val layoutManager = LinearLayoutManager(context)
             binding?.recyclerView?.layoutManager = layoutManager
             binding?.recyclerView?.setHasFixedSize(true)
+
+
 
 
             val todayList = viewModel.expenditureMap.value?.toMutableMap()?.get(viewModel.makeDayStr(year,month+1,dayOfMonth))

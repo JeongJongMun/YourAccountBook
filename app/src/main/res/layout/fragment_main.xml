@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/allbg"
+    android:orientation="vertical"
     tools:context=".MainFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/primebg"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/frm_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/primebg">
 
         <TextView
             android:id="@+id/txt_name"
@@ -47,16 +43,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
     <FrameLayout
         android:id="@+id/frm_fragment"
         android:layout_width="409dp"
-        android:layout_height="664dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+        android:layout_height="664dp">
 
     </FrameLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

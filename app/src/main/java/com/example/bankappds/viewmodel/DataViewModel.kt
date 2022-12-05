@@ -171,4 +171,19 @@ class DataViewModel: ViewModel() {
         return temp
     }
 
+    fun getMonthExpense(month: Int) : Int{
+        val tempMap = _expenditureMap.value?.toSortedMap()
+        var totalExpense = 0
+        if (tempMap != null){
+            for ((K,V) in tempMap!!) {
+                if (K.substring(4,6).toInt() == month) {
+                    for ( expd in V) {
+                        totalExpense += expd.expense
+                    }
+                }
+            }
+        }
+        return totalExpense
+    }
+
 }
