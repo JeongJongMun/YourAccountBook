@@ -17,6 +17,7 @@ class SignInFragment : Fragment() {
     private var binding: FragmentSignInBinding? = null
     val viewModel: DataViewModel by activityViewModels()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance() // 인스턴스 생성
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

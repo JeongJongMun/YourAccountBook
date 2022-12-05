@@ -14,10 +14,12 @@ import com.example.bankappds.viewmodel.DataViewModel
 import java.time.LocalDateTime
 import java.util.*
 
-
+//해당 월별 지출을 확인하기 위한 프래그먼트
 class MonthListFragment : Fragment() {
     var binding: FragmentMonthListBinding? = null
     val viewModel: DataViewModel by activityViewModels()
+
+    //캘린더 클래스를 통해 해당 월이 몇월인지 읽어옴
     val calendar: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -28,15 +30,17 @@ class MonthListFragment : Fragment() {
         return binding?.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var currentTime = LocalDateTime.now()
-
+        //현재 해당하는 달을 읽어 옴
         val mon = calendar.get(Calendar.MONTH)+1
 
-        binding?.txtNowmon?.text = "${mon}월 지출 내역"
+        //현재 몇월인지 출력하는 텍스트
+        binding?.txtMonListTitle?.text = "${mon}월 지출 내역"
+
+        //mon월에 해당하는 데이터만 가져오기 위해 리스트를 만들고 이를 날짜 순으로 정렬하여 리사이클러뷰에 추가함
         var sortedMonthList = mutableListOf<Expenditure>()
         for (expd in viewModel.getMonthList(mon)){
             for (i in 1 .. 31){
@@ -46,9 +50,10 @@ class MonthListFragment : Fragment() {
             }
         }
 
+        //해당 월 총 지출
         binding?.txtTotalMonthExpense?.text = viewModel.getMonthExpense(mon).toString()
 
-
+        //리사이클러 뷰 어댑터에 전달
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
         binding?.recyclerView?.setHasFixedSize(true)

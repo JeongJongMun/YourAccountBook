@@ -14,25 +14,26 @@ import androidx.navigation.fragment.navArgs
 import com.example.bankappds.databinding.FragmentMainInputBinding
 import com.example.bankappds.viewmodel.DataViewModel
 
+//일일 지출 입력창
 
 class MainInputFragment : Fragment() {
     private var binding: FragmentMainInputBinding? = null
-    var typeT : Ecategory? = null
+    var categoryType : Ecategory? = null
 
     val viewModel: DataViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMainInputBinding.inflate(inflater)
-
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //스피너를 세팅하기 위한 함수
         spinnerSetting()
 
-        // 달력 날짜 전달 받기
+        // Safe Args를 사용하기 위한 변수 설정 : 달력에서 날짜 클릭시 safe args를 통해 날짜 전달
         val args : MainInputFragmentArgs by navArgs()
 
         // 입력창 달력 날짜 설정
@@ -41,23 +42,22 @@ class MainInputFragment : Fragment() {
         binding?.txtInputDay?.text = args.calendarDate[2].toString()
 
         // 저장 버튼 클릭시 date, expense, category, memo 전달
-        binding?.btnSave?.setOnClickListener {
-
-            if (typeT == null || binding?.edtMoney?.text.toString().isEmpty()  || binding?.edtMemo?.text.toString().isEmpty() ) {
+        binding?.btnDaySave?.setOnClickListener {
+            //입력에 누락이 있을 경우
+            if (categoryType == null || binding?.edtMoney?.text.toString().isEmpty()  || binding?.edtMemo?.text.toString().isEmpty() ) {
                 Toast.makeText(requireContext(), "누락된 칸이 있습니다", Toast.LENGTH_SHORT).show()
             }
             else {
                 val temp = Expenditure(args.calendarDate[0], args.calendarDate[1], args.calendarDate[2],
                     binding?.edtMoney?.text.toString().toIntOrNull()?:0,
-                    typeT!!, binding?.edtMemo?.text.toString())
+                    categoryType!!, binding?.edtMemo?.text.toString())
                 viewModel.addExpenditure(temp)
                 findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)
             }
 
-
         }
         // 뒤로가기
-        binding?.btnBack?.setOnClickListener {
+        binding?.btnDayBack?.setOnClickListener {
             findNavController().navigate(R.id.action_mainInputFragment_to_mainFragment)
         }
 
@@ -80,7 +80,7 @@ class MainInputFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 //position은 선택한 아이템의 위치를 넘겨주는 인자입니다.
-                typeT = when(spnLst[position]){
+                categoryType = when(spnLst[position]){
                     "분류" -> null
                     "식비" ->Ecategory.FOOD
                     "금융" ->Ecategory.FINANCE
