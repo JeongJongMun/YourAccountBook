@@ -36,7 +36,9 @@ class Repository {
     fun getRealTimeGoalExp(goal: MutableLiveData<Int>) {
         goalExpenseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                goal.postValue(snapshot.value.toString().toInt())
+                if (snapshot.value != null) {
+                    goal.postValue(snapshot.value.toString().toInt())
+                }
             }
             override fun onCancelled(error: DatabaseError) {
             }
