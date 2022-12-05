@@ -51,6 +51,7 @@ class DataViewModel: ViewModel() {
         repository.getRealTimeRegExpendtureMap(_regExpdMap)
     }
 
+
     // 목표 금액 설정
     fun setGoal(exp : Int) {
         _goalExpense.value = exp

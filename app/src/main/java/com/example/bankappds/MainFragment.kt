@@ -60,7 +60,7 @@ class MainFragment : Fragment() {
             }
             else findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
         }
-        createNotificationChannel(channelId, "warningChannel", "totalExpense over goalExpense")
+        createNotificationChannel("MY_CH", "warningChannel", "totalExpense over goalExpense")
         viewModel.totalExpense.observe(viewLifecycleOwner) { // 총 지출이 목표 지출보다 높을 경우 경고 알람
             if (viewModel.goalExpense.value?.toInt() != 0){
                 if (it > viewModel.goalExpense.value.toString().toInt()) {
@@ -72,7 +72,7 @@ class MainFragment : Fragment() {
 
     private var notificationManager: NotificationManager? = null
 
-    private fun displayNotification() {
+    fun displayNotification() {
         val notificationId = 45
         // 알람 클릭시 넘어갈 엑티비티 설정
         val mPendingIntent = PendingIntent.getActivity(requireContext(), 0,
@@ -89,7 +89,7 @@ class MainFragment : Fragment() {
         notificationManager?.notify(notificationId, notification)
     }
 
-    private fun createNotificationChannel(channelId: String, name: String, channelDescription: String) {
+    fun createNotificationChannel(channelId: String, name: String, channelDescription: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_DEFAULT // set importance
             val channel = NotificationChannel(channelId, name, importance).apply {
