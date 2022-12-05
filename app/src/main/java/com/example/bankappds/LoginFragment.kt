@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
                     db.collection("Users").document(email).get()
                         .addOnSuccessListener { documentSnapshot ->
                             val name: String = documentSnapshot.get("Name") as String // 로그인 시 서버에서 이름 가져오기
-                            viewModel.getPrivacy(email, password, name) // 뷰모델에 개인정보 저장
+                            viewModel.privacy(email, password, name) // 뷰모델에 개인정보 저장
                             findNavController().navigate(R.id.action_loginFragment_to_logoutFragment)
                         }
                 }

@@ -25,7 +25,6 @@ class CircleChart : Fragment() {
     val viewModel: DataViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = FragmentCircleChartBinding.inflate(inflater, container, false)
         setChartData()
 

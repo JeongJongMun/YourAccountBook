@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.bankappds.Ecategory
 import com.example.bankappds.Expenditure
 import com.example.bankappds.repository.Repository
-import java.util.*
 
 class DataViewModel: ViewModel() {
     // Firestore = 이름, 총지출, 고정지출
@@ -14,7 +13,9 @@ class DataViewModel: ViewModel() {
 
     private val repository = Repository()
 
+    // 내부적으로는 바꿀수있는 라이브데이터
     private val _email = MutableLiveData("")
+    // 하지만 밖에서는 바꿀수없는 라이브데이터 - 일종의 패턴임임
     val email : LiveData<String> get() = _email
 
     private val _password = MutableLiveData("")
@@ -24,25 +25,21 @@ class DataViewModel: ViewModel() {
 
     private val _goalExpense = MutableLiveData(0)
     val goalExpense : LiveData<Int> get() = _goalExpense
-    // 내부적으로는 바꿀수있는 라이브데이터
     private val _totalExpense = MutableLiveData(0)
-    // 하지만 밖에서는 바꿀수없는 라이브데이터 - 일종의 패턴임임
     val totalExpense : LiveData<Int> get() = _totalExpense
-
     private val _totalRegExpense = MutableLiveData(0)
     val totalRegExpense : LiveData<Int> get() = _totalRegExpense
 
 
     private val _expenditureMap = MutableLiveData<MutableMap<String, MutableList<Expenditure>>>()
     val expenditureMap : LiveData<MutableMap<String, MutableList<Expenditure>>> get() = _expenditureMap
-
     private val _regExpdMap = MutableLiveData<MutableMap<String, MutableList<Expenditure>>>()
     val regExpdMap : LiveData<MutableMap<String, MutableList<Expenditure>>> get() = _regExpdMap
 
     var tempExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
     var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
 
-    init { // realtime 에서 데이터 가져오기
+    init { // 앱 시작시 realtime 에서 데이터 가져오기
         repository.getRealTimeEmail(_email)
         repository.getRealTimeName(_name)
         repository.getRealTimeTotalExpense(_totalExpense)
@@ -51,23 +48,21 @@ class DataViewModel: ViewModel() {
         repository.getRealTimeRegExpendtureMap(_regExpdMap)
         repository.getRealTimeGoalExp(_goalExpense)
     }
-    private val calendar: Calendar = Calendar.getInstance()
-    private val mon = calendar.get(Calendar.MONTH)+1
 
     // 목표 금액 설정
     fun setGoal(exp : Int) {
         _goalExpense.value = exp
         repository.postGoalExpense(_goalExpense.value.toString().toInt())
     }
-    // 로그인시 viewModel, realtime에 저장
-    fun getPrivacy(email: String, password: String, name: String) {
+    // 로그인시 개인정보 viewModel, realtime에 저장
+    fun privacy(email: String, password: String, name: String) {
         _email.value = email
         _password.value = password
         _name.value = name
         repository.postPrivacy(_email.value.toString(), _password.value.toString(), _name.value.toString())
     }
 
-    // 연, 월, 일 합치기
+    // 연, 월, 일 Int 를 String 으로  합치기
     fun makeDayStr(year: Int, month: Int, day: Int): String {
         val yearStr = if (year == 0) "0000" else year.toString()
         val monthStr = if (month > 9) month.toString() else "0$month"
@@ -75,6 +70,7 @@ class DataViewModel: ViewModel() {
 
         return yearStr+monthStr+dayStr
     }
+    // Map에 Expenditure 객체 추가
     fun addExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
 
@@ -83,27 +79,29 @@ class DataViewModel: ViewModel() {
         } else { // 기존 값 존재 X
             tempExpdMap[dayInfo] = mutableListOf(expd)
         }
+        // 뷰모델에 맵 저장
         _expenditureMap.value = tempExpdMap
         _totalExpense.value = _totalExpense.value?.plus(expd.expense)
-        // realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value, _email.value.toString())
-        // realtime, cloud 에 저장
+        // 맵 = realtime 에 저장
+        repository.postExpenditureMap(_expenditureMap.value)
+        // 총지출 = realtime, cloud 에 저장
         repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
     }
 
+    // Map 에서 Expenditure 객체 삭제
     fun deleteExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
         tempExpdMap[dayInfo]?.remove(expd)
         _expenditureMap.value = tempExpdMap
         _totalExpense.value = _totalExpense.value?.minus(expd.expense)
 
-        // realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value, _email.value.toString())
-        // cloud, realtime 에 저장
+        // 맵 = realtime 에 저장
+        repository.postExpenditureMap(_expenditureMap.value)
+        // 총지출 = cloud, realtime 에 저장
         repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
     }
 
-
+    // 고정지출 맵에 Expenditure 객체 저장
     fun addRegExpenditure(expd: Expenditure){
         val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
 
@@ -119,6 +117,7 @@ class DataViewModel: ViewModel() {
         // cloud, realtime 에 저장
         repository.postTotalRegExpense(_email.value.toString(), _totalRegExpense.value ?: 0)
     }
+    // 고정지출 맵에서 Expenditure 객체 삭제
     fun deleteRegExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
         tempRegExpdMap[dayInfo]?.remove(expd)
@@ -134,6 +133,7 @@ class DataViewModel: ViewModel() {
     fun getArraybyCategory(categoryType: Ecategory) : Int {
         var sumExpenditure = 0
 
+        // 지출 맵에서 가져오기
         if (expenditureMap.value != null){
             for ((K,V) in expenditureMap.value!!) {
                 for (e in V) {
@@ -143,6 +143,7 @@ class DataViewModel: ViewModel() {
                 }
             }
         }
+        // 고정지출 맵에서 가져오기
         if (regExpdMap.value != null) {
             for ((K,V) in regExpdMap.value!!) {
                 for (e in V) {
@@ -161,9 +162,9 @@ class DataViewModel: ViewModel() {
         val temp = mutableListOf<Expenditure>()
         val tempMap = _expenditureMap.value?.toSortedMap()
 
-        print(tempMap)
         if (tempMap != null){
-            for ((K,V) in tempMap!!) {
+            for ((K,V) in tempMap) {
+                // 객체 별로 월 체크
                 if (K.substring(4,6).toInt() == month) {
                     for (i in V) temp.add(i)
                 }
@@ -172,11 +173,12 @@ class DataViewModel: ViewModel() {
         return temp
     }
 
+    // 월별 총지출 가져오기
     fun getMonthExpense(month: Int) : Int{
         val tempMap = _expenditureMap.value?.toSortedMap()
         var totalExpense = 0
         if (tempMap != null){
-            for ((K,V) in tempMap!!) {
+            for ((K,V) in tempMap) {
                 if (K.substring(4,6).toInt() == month) {
                     for ( expd in V) {
                         totalExpense += expd.expense

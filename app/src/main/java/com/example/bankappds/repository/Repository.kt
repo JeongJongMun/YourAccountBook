@@ -32,7 +32,6 @@ class Repository {
         return yearStr+monthStr+dayStr
     }
 
-
     // 앱 처음 실행시 realTime 에서 목표 금액 가져와 ViewModel 로 넘겨주기
     fun getRealTimeGoalExp(goal: MutableLiveData<Int>) {
         goalExpenseRef.addValueEventListener(object : ValueEventListener {
@@ -77,6 +76,7 @@ class Repository {
             }
         })
     }
+    // 앱 처음 실행시 realTime 에서 고정지출Map 가져와 ViewModel로 넘겨주기
     fun getRealTimeRegExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
         regExpenditureMapRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -96,6 +96,7 @@ class Repository {
         })
     }
 
+    // 앱 처음 실행시 realTime 에서 Email 가져와 ViewModel로 넘겨주기
     fun getRealTimeEmail(email: MutableLiveData<String>) {
         emailRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -106,6 +107,7 @@ class Repository {
         })
     }
 
+    // 앱 처음 실행시 realTime 에서 Name 가져와 ViewModel로 넘겨주기
     fun getRealTimeName(name: MutableLiveData<String>) {
         nameRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -116,6 +118,7 @@ class Repository {
         })
     }
 
+    // 앱 처음 실행시 realTime 에서 총 지출 가져와 ViewModel로 넘겨주기
     fun getRealTimeTotalExpense(totalExpense: MutableLiveData<Int>) {
         totalExpenseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -125,6 +128,8 @@ class Repository {
             }
         })
     }
+
+    // 앱 처음 실행시 realTime 에서 고정 지출 가져와 ViewModel로 넘겨주기
     fun getRealTimeTotalRegExpense(totalRegExpense: MutableLiveData<Int>) {
         totalRegExpenseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -147,15 +152,14 @@ class Repository {
     }
 
     // ExpMap, RegExpMap은 realTime에만 저장
-    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?, email: String) {
+    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         expenditureMapRef.setValue(newValue)
-        db.collection("Users").document(email).update("ExpenditureMap", newValue)
-
     }
     fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         regExpenditureMapRef.setValue(newValue)
     }
-    // total 들은 realTime, cloud 에 저장
+
+    // 총지출, 고정지출들은 realTime, cloud 에 저장
     fun postTotalExpense(email: String, newValue: Int) {
         totalExpenseRef.setValue(newValue)
         db.collection("Users").document(email).update("TotalExpense", newValue)

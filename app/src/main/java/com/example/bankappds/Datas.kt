@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import kotlin.collections.HashMap as HashMap
 
+// 카테고리 Enum
 enum class Ecategory {
     FOOD,
     ENTERTAIN,
@@ -44,6 +45,7 @@ class Expenditure(
     }
 }
 
+// 랭킹을 위한 데이터 클래스
 data class FireStoreData(
     var Name : String? = null,
     var TotalExpense: Int? = null,
