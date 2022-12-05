@@ -30,8 +30,10 @@ class RankingFragment : Fragment() {
 
         // 검색 기능을 사용할 경우 (검색 내용은 사용자 이름)
         binding?.searchBtn?.setOnClickListener {
-            // RankingAdapter 내에 있는 search 함수를 불러와 검색 기능을 활성화
-            (binding?.recRanking?.adapter as RankingAdapter).search(binding?.searchWord?.text.toString())
+            if (binding?.searchBtn?.text?.isEmpty() == false) {
+                // RankingAdapter 내에 있는 search 함수를 불러와 검색 기능을 활성화
+                (binding?.recRanking?.adapter as RankingAdapter).search(binding?.searchWord?.text.toString())
+            }
         }
     }
 }
