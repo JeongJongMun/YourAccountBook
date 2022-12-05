@@ -27,7 +27,7 @@
         android:id="@+id/btn_logout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/button_shape2"
         android:text="로그아웃"
         android:textColor="@color/white"
         android:textSize="16sp"

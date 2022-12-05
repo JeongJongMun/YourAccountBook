@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -76,7 +77,17 @@ class MainFragment : Fragment() {
         val mon = calendar.get(Calendar.MONTH)+1
         val goalExpense = if ((viewModel.goalExpense.value ?: 0) == 0) 1 else viewModel.goalExpense.value?:0
         val monthTotalExpense  = viewModel.getMonthExpense(mon).toFloat()
-        binding?.progressBar?.progress= ((monthTotalExpense / goalExpense) * 100).toInt()
+        val percentage = if ( ((monthTotalExpense / goalExpense) * 100).toInt() >= 100 ) 100
+        else ((monthTotalExpense / goalExpense) * 100).toInt()
+
+        if (percentage == 100) {
+            binding?.txtPercent?.setTextColor(Color.parseColor("red"))
+        } else if (percentage > 50) {
+            binding?.txtPercent?.setTextColor(Color.parseColor("yellow"))
+        }
+        binding?.progressBar?.progress= percentage
+        binding?.txtPercent?.text = percentage.toString()
+
 
         viewModel.totalExpense.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "현재 총 지출 : ${viewModel.totalExpense.value}", Toast.LENGTH_SHORT).show()

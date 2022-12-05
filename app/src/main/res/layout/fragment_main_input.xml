@@ -28,7 +28,7 @@
     <Button
         android:fontFamily="@font/lineseedkrrg"
         android:textColor="#FFFFFF"
-        android:background="@color/primebg"
+        android:background="@drawable/button_shape2"
         android:id="@+id/btn_day_back"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@+id/btn_day_save" />
 
     <Button
-        android:background="@color/primebg"
+        android:background="@drawable/button_shape2"
         android:fontFamily="@font/lineseedkrrg"
         android:textColor="#FFFFFF"
         android:id="@+id/btn_day_save"
