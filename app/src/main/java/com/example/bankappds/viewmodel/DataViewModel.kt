@@ -49,12 +49,13 @@ class DataViewModel: ViewModel() {
         repository.getRealTimeTotalRegExpense(_totalRegExpense)
         repository.getRealTimeExpendtureMap(_expenditureMap)
         repository.getRealTimeRegExpendtureMap(_regExpdMap)
+        repository.getRealTimeGoalExp(_goalExpense)
     }
-
 
     // 목표 금액 설정
     fun setGoal(exp : Int) {
         _goalExpense.value = exp
+        repository.postGoalExpense(_goalExpense.value.toString().toInt())
     }
     // 로그인시 viewModel, realtime에 저장
     fun getPrivacy(email: String, password: String, name: String) {
