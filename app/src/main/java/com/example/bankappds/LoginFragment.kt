@@ -31,7 +31,11 @@ class LoginFragment : Fragment() {
 
         // 로그인 과정
         binding?.btnLogin?.setOnClickListener {
-            Login()
+            if (binding?.edtEmail?.text?.isEmpty() == false && binding?.edtPassword?.text?.isEmpty() == false) {
+                Login()
+            } else {
+                Toast.makeText(requireContext(), "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding?.root
@@ -57,7 +61,7 @@ class LoginFragment : Fragment() {
                 else Toast.makeText(requireContext(), "전송된 메일로 이메일 인증이 되지 않았습니다", Toast.LENGTH_SHORT).show()
             }
             // 로그인 실패한 경우
-            else Toast.makeText(requireContext(), "로그인 실패", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(requireContext(), "이메일 또는 비밀번호가 잘못 입력 되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
     override fun onDestroy() {

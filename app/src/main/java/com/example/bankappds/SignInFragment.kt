@@ -52,7 +52,7 @@ class SignInFragment : Fragment() {
                             "Password" to password,
                             "Name" to name,
                             "TotalExpense" to 0,
-                            "TotalRegExpense" to 0
+                            "RegTotalExpense" to 0
                         )
 
                         db.collection("Users").document(email).set(user)

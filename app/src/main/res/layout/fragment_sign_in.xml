@@ -19,7 +19,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/edt_name"
@@ -32,6 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 
     <EditText
@@ -42,6 +46,8 @@
         android:inputType="textPassword"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/edt_name"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_email" />
@@ -53,7 +59,8 @@
         android:layout_marginBottom="64dp"
         android:background="@drawable/button_shape"
         android:text="회원가입"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="visible"

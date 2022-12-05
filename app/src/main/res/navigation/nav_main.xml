@@ -20,7 +20,9 @@
         <action
             android:id="@+id/action_mainFragment_to_mainInputFragment"
             app:destination="@id/mainInputFragment" />
-
+        <action
+            android:id="@+id/action_mainFragment_to_barChart2"
+            app:destination="@id/circleChart" />
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -33,8 +35,8 @@
             android:id="@+id/action_mainFragment_to_exchangeRateFragment"
             app:destination="@id/exchangeRateFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_circleChartFragment"
-            app:destination="@id/circleChartFragment" />
+            android:id="@+id/action_mainFragment_to_circleChart2"
+            app:destination="@id/circleChart" />
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -44,6 +46,9 @@
         <action
             android:id="@+id/action_mainFragment_to_monthFragment"
             app:destination="@id/monthFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
@@ -96,7 +101,7 @@
         android:name="com.example.bankappds.SearchFragment"
         android:label="SearchFragment" />
     <fragment
-        android:id="@+id/circleChartFragment"
+        android:id="@+id/circleChart"
         android:name="com.example.bankappds.CircleChart"
         android:label="통계" />
     <fragment
@@ -112,10 +117,6 @@
         <action
             android:id="@+id/action_loginFragment_to_logoutFragment"
             app:destination="@id/logoutFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
@@ -139,14 +140,17 @@
         android:label="fragment_logout"
         tools:layout="@layout/fragment_logout" >
         <action
-            android:id="@+id/action_logoutFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-        <action
             android:id="@+id/action_logoutFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/monthFragment"
         android:name="com.example.bankappds.MonthFragment"
         android:label="MonthFragment" />
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.example.bankappds.RankingFragment"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" />
 </navigation>
