@@ -55,7 +55,6 @@ class Repository {
         }
     }
 
-
     // 앱 처음 실행시 realtime 에서 지출Map 가져와 ViewModel 로 넘겨주기
     fun getRealTimeExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
         expenditureMapRef.addValueEventListener(object : ValueEventListener {
@@ -148,8 +147,10 @@ class Repository {
     }
 
     // ExpMap, RegExpMap은 realTime에만 저장
-    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
+    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?, email: String) {
         expenditureMapRef.setValue(newValue)
+        db.collection("Users").document(email).update("ExpenditureMap", newValue)
+
     }
     fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         regExpenditureMapRef.setValue(newValue)

@@ -14,6 +14,7 @@ class RankingAdapter
     val userData : ArrayList<FireStoreData> = arrayListOf()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
+
     // 첫 화면에 모든 목록을 띄울 준비
     init {  // users의 문서를 불러온 뒤 person으로 변환해 ArrayList에 담는다
         db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
@@ -29,20 +30,20 @@ class RankingAdapter
                     }
                 }
             }
+
             userData.sortByDescending { it.TotalExpense }
             notifyDataSetChanged()
         }
     }
 
     // 검색 기능을 사용하는 함수
-    fun search(searchWord : String, option : String) {
+    fun search(searchWord : String) {
         db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
             // ArrayList 비워줌
             userData.clear()
-
             if (querySnapshot != null) {
                 for (snapshot in querySnapshot.documents) {
-                    if (snapshot.getString(option)?.contains(searchWord) == true) {
+                    if (snapshot.getString("Name")?.contains(searchWord) == true) {
                         val item = snapshot.toObject(FireStoreData::class.java)
                         if (item != null) {
                             userData.add(item)

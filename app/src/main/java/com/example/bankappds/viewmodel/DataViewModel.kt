@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.bankappds.Ecategory
 import com.example.bankappds.Expenditure
 import com.example.bankappds.repository.Repository
+import java.util.*
 
 class DataViewModel: ViewModel() {
     // Firestore = 이름, 총지출, 고정지출
@@ -50,6 +51,8 @@ class DataViewModel: ViewModel() {
         repository.getRealTimeRegExpendtureMap(_regExpdMap)
         repository.getRealTimeGoalExp(_goalExpense)
     }
+    private val calendar: Calendar = Calendar.getInstance()
+    private val mon = calendar.get(Calendar.MONTH)+1
 
     // 목표 금액 설정
     fun setGoal(exp : Int) {
@@ -80,11 +83,10 @@ class DataViewModel: ViewModel() {
         } else { // 기존 값 존재 X
             tempExpdMap[dayInfo] = mutableListOf(expd)
         }
-
         _expenditureMap.value = tempExpdMap
         _totalExpense.value = _totalExpense.value?.plus(expd.expense)
         // realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value)
+        repository.postExpenditureMap(_expenditureMap.value, _email.value.toString())
         // realtime, cloud 에 저장
         repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
     }
@@ -96,7 +98,7 @@ class DataViewModel: ViewModel() {
         _totalExpense.value = _totalExpense.value?.minus(expd.expense)
 
         // realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value)
+        repository.postExpenditureMap(_expenditureMap.value, _email.value.toString())
         // cloud, realtime 에 저장
         repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
     }

@@ -50,6 +50,9 @@ class MainFragment : Fragment() {
         viewModel.name.observe(viewLifecycleOwner) {
             binding?.txtName?.text = viewModel.name.value?: "Unknown"
         }
+        viewModel.email.observe(viewLifecycleOwner){
+            println(it)
+        }
 
         childFragmentManager.beginTransaction().replace(R.id.frm_fragment, DayCalendarFragment()).commit()
 

@@ -17,20 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:fontFamily="@font/lineseedkrrg"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:entries="@array/rank_search"
-            android:gravity="center"/>
 
         <EditText
             android:id="@+id/searchWord"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="입력"
+            android:hint="찾을 사용자의 이름을 입력하세요."
+            android:textSize="15sp"
+            android:gravity="center"
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
