@@ -44,76 +44,68 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txt_after_calc"
-            app:layout_constraintEnd_toEndOf="@+id/exchange_spinner"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/exchange_spinner"
-            app:layout_constraintTop_toBottomOf="@+id/exchange_spinner" />
+            app:layout_constraintBottom_toBottomOf="@+id/exchange_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/exchange_spinner"
+            app:layout_constraintTop_toTopOf="@+id/exchange_spinner" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/lineseedkrrg"
             android:text="환율 계산, 변환기"
             android:textColor="@color/white"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/exchange_spinner"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.109"
+            app:layout_constraintHorizontal_bias="0.163"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.51"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintVertical_chainStyle="spread" />
 
         <TextView
             android:id="@+id/txt_after_calc"
-            android:layout_width="320dp"
-            android:layout_height="32dp"
+            android:layout_width="240dp"
+            android:layout_height="31dp"
             android:fontFamily="@font/lineseedkrrg"
-            android:text="환율 계산 결과"
+            android:textAlignment="textEnd"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/edt_won_to"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/edt_won_to"
-            app:layout_constraintTop_toBottomOf="@+id/edt_won_to" />
+            app:layout_constraintBottom_toBottomOf="@+id/btn_calculate"
+            app:layout_constraintEnd_toStartOf="@+id/btn_calculate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_calculate" />
 
         <Spinner
             android:id="@+id/exchange_spinner"
-            android:layout_width="150dp"
-            android:layout_height="34dp"
-            app:layout_constraintBottom_toTopOf="@+id/edt_won_to"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
+            android:layout_width="111dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <Button
             android:id="@+id/btn_calculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/button_shape2"
             android:fontFamily="@font/lineseedkrrg"
-            android:text="계산"
+            android:text="변환"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/edt_won_to"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/edt_won_to"
-            app:layout_constraintTop_toTopOf="@+id/edt_won_to" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/right_arrow"
-            app:layout_constraintBottom_toTopOf="@+id/txt_after_calc"
-            app:layout_constraintEnd_toEndOf="@+id/txt_after_calc"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/txt_after_calc"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edt_won_to"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.050000012" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

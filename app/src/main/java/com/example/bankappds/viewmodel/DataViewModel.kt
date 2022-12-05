@@ -3,9 +3,11 @@ package com.example.bankappds.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bankappds.Ecategory
 import com.example.bankappds.Expenditure
 import com.example.bankappds.repository.Repository
+import kotlinx.coroutines.launch
 
 class DataViewModel: ViewModel() {
     // Firestore = 이름, 총지출, 고정지출
@@ -36,8 +38,25 @@ class DataViewModel: ViewModel() {
     private val _regExpdMap = MutableLiveData<MutableMap<String, MutableList<Expenditure>>>()
     val regExpdMap : LiveData<MutableMap<String, MutableList<Expenditure>>> get() = _regExpdMap
 
+
+    //환율 정보에 대한 데이터
+    private val _exchangeDollarRate = MutableLiveData<Float>(0f)
+    val exchangeDollarRate : LiveData<Float> get() = _exchangeDollarRate
+
+    private val _exchangeEuroRate = MutableLiveData<Float>(0f)
+    val exchangeEuroRate : LiveData<Float> get() = _exchangeEuroRate
+
+    private val _exchangeYenRate = MutableLiveData<Float>(0f)
+    val exchangeYenRate : LiveData<Float> get() = _exchangeYenRate
+
+
+
     var tempExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
     var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
+
+
+
+
 
     init { // 앱 시작시 realtime 에서 데이터 가져오기
         repository.getRealTimeEmail(_email)
@@ -47,6 +66,33 @@ class DataViewModel: ViewModel() {
         repository.getRealTimeExpendtureMap(_expenditureMap)
         repository.getRealTimeRegExpendtureMap(_regExpdMap)
         repository.getRealTimeGoalExp(_goalExpense)
+        retrieveAllRates()
+    }
+
+
+    fun retrieveExchangeDollarRate() {
+        viewModelScope.launch {
+            val temp = repository.readDollarExchangeRate()
+            _exchangeDollarRate.value = temp
+        }
+    }
+    fun retrieveExchangeEuroRate() {
+        viewModelScope.launch {
+            val temp = repository.readEuroExchangeRate()
+            _exchangeEuroRate.value = temp
+        }
+    }
+    fun retrieveExchangeYenRate() {
+        viewModelScope.launch {
+            val temp = repository.readYenExchangeRate()
+            _exchangeYenRate.value = temp
+        }
+    }
+
+    fun retrieveAllRates(){
+        retrieveExchangeDollarRate()
+        retrieveExchangeEuroRate()
+        retrieveExchangeYenRate()
     }
 
     // 목표 금액 설정

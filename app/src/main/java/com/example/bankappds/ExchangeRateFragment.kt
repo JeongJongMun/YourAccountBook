@@ -10,8 +10,10 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bankappds.databinding.FragmentExchangeRateBinding
+import com.example.bankappds.viewmodel.DataViewModel
 import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -20,11 +22,9 @@ import java.io.IOException
 
 class ExchangeRateFragment : Fragment() {
     private var binding: FragmentExchangeRateBinding? = null
-    var exchangeRateDollar: Float = 0f
-    var exchangeRateEuro: Float = 0f
-    var exchangeRateYen: Float = 0f
+    val viewModel: DataViewModel by activityViewModels()
 
-    var exchangeWhere : Float = 0f
+    var exchangeWhere : Float? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,38 +36,42 @@ class ExchangeRateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Thread(Runnable {
-            try {
-                //원달러 환율
-                val docDollar = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.naver?marketindexCd=FX_USDKRW").get()
-                val tempDollar = docDollar.select(".no_today").text()
-                print("dollar")
-                println(tempDollar)
-                exchangeRateDollar = tempDollar.substring(0,8).replace(",","").toFloat()
 
-                val docEuro = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_EURKRW").get()
-                val tempEuro = docEuro.select(".no_today").text()
-                exchangeRateEuro = tempEuro.substring(0,8).replace(",","").toFloat()
-
-                val docYen = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_JPYKRW").get()
-                val tempYen = docYen.select(".no_today").text()
-                exchangeRateYen = tempYen.substring(0,7).replace(",","").toFloat()
-
-                val ratesList = listOf(exchangeRateDollar,exchangeRateEuro,exchangeRateYen)
-                val adapter = CardviewAdapter(ratesList)
-                binding?.viewPager?.adapter = CardviewAdapter(ratesList)
-            }
-            catch (e:Exception) {
-                e.printStackTrace()
-            }
-        }).start()
+//        Thread(Runnable {
+//            try {
+//                //원달러 환율
+//                val docDollar = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.naver?marketindexCd=FX_USDKRW").get()
+//                val tempDollar = docDollar.select(".no_today").text()
+//                print("dollar")
+//                println(tempDollar)
+//                exchangeRateDollar = tempDollar.substring(0,8).replace(",","").toFloat()
+//
+//                val docEuro = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_EURKRW").get()
+//                val tempEuro = docEuro.select(".no_today").text()
+//                exchangeRateEuro = tempEuro.substring(0,8).replace(",","").toFloat()
+//
+//                val docYen = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_JPYKRW").get()
+//                val tempYen = docYen.select(".no_today").text()
+//                exchangeRateYen = tempYen.substring(0,7).replace(",","").toFloat()
+//
+//                val ratesList = listOf(exchangeRateDollar,exchangeRateEuro,exchangeRateYen)
+//                val adapter = CardviewAdapter(ratesList)
+//                binding?.viewPager?.adapter = CardviewAdapter(ratesList)
+//            }
+//            catch (e:Exception) {
+//                e.printStackTrace()
+//            }
+//        }).start()
 
         //스피너 세팅
         spinnerSetting()
-//
-//        val ratesList = listOf(exchangeRateDollar,exchangeRateEuro,exchangeRateYen)
-//        val adapter = CardviewAdapter(ratesList)
-//        binding?.viewPager?.adapter = CardviewAdapter(ratesList)
+
+        val exchangeRateList = mutableListOf<Float>()
+        exchangeRateList.add(viewModel.exchangeDollarRate.value?:0f)
+        exchangeRateList.add(viewModel.exchangeEuroRate.value?:0f)
+        exchangeRateList.add(viewModel.exchangeEuroRate.value?:0f)
+
+        binding?.viewPager?.adapter = CardviewAdapter(exchangeRateList)
 
         binding?.viewPager?.setPadding(30, 0, 30, 0)
         binding?.viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -84,11 +88,13 @@ class ExchangeRateFragment : Fragment() {
             }
         })
 
+
+
         binding?.btnCalculate?.setOnClickListener {
-            if (binding?.edtWonTo?.text != null && exchangeWhere != 0f ) {
+            if (binding?.edtWonTo?.text != null && exchangeWhere != null ) {
                 val tempWon = binding?.edtWonTo?.text.toString().toFloat()
-                val tempExRate = exchangeWhere
-                binding?.txtAfterCalc?.text = (tempWon * tempExRate).toString()
+                val tempExRate = exchangeWhere?:0f
+                binding?.txtAfterCalc?.text = (tempWon * tempExRate).toInt().toString() +"원"
             } else {
                 Toast.makeText(requireContext(), "누락된 부분이 있습니다", Toast.LENGTH_SHORT).show()
             }
@@ -107,11 +113,10 @@ class ExchangeRateFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 //position은 선택한 아이템의 위치를 넘겨주는 인자입니다.
                 exchangeWhere = when(spnLst[position]){
-                    "분류" -> 0f
-                    "달러" -> exchangeRateDollar
-                    "유로" -> exchangeRateEuro
-                    "엔" -> exchangeRateYen
-                    else -> 0f
+                    "달러" -> viewModel.exchangeDollarRate.value
+                    "유로" -> viewModel.exchangeDollarRate.value
+                    "엔" -> viewModel.exchangeDollarRate.value
+                    else -> null
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {

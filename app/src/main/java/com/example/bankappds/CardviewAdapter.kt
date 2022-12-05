@@ -8,7 +8,7 @@ import com.example.bankappds.databinding.CardviewItemBinding
 
 
 class CardviewAdapter (
-    var exchangeList: List<Float>
+    val exchangeList: List<Float>?
 ) : RecyclerView.Adapter<CardviewAdapter.Holder>() {
 
     override fun getItemCount(): Int {
@@ -21,8 +21,11 @@ class CardviewAdapter (
     }
 
     override fun onBindViewHolder(holder: CardviewAdapter.Holder, position: Int) {
-        val exRate = exchangeList[position]
-        holder.bind(position, exRate)
+        if (exchangeList != null){
+            val exRate = exchangeList[position]
+            holder.bind(position, exRate)
+        }
+
     }
 
     class Holder(private val binding: CardviewItemBinding) :RecyclerView.ViewHolder(binding.root) {

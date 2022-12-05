@@ -1,6 +1,8 @@
 package com.example.bankappds.repository
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.bankappds.CardviewAdapter
 import com.example.bankappds.Expenditure
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -8,6 +10,10 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 
 class Repository {
     val database = Firebase.database
@@ -170,5 +176,31 @@ class Repository {
         totalRegExpenseRef.setValue(newValue)
         db.collection("Users").document(email).update("RegTotalExpense", newValue)
     }
+
+
+    suspend fun readDollarExchangeRate(): Float {
+        return withContext(Dispatchers.IO){
+            val docDollar = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.naver?marketindexCd=FX_USDKRW").get()
+            val tempDollar = docDollar.select(".no_today").text()
+            tempDollar.substring(0,8).replace(",","").toFloat()
+        }
+    }
+
+    suspend fun readEuroExchangeRate(): Float {
+        return withContext(Dispatchers.IO){
+            val docEuro = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_EURKRW").get()
+            val tempEuro = docEuro.select(".no_today").text()
+            tempEuro.substring(0,8).replace(",","").toFloat()
+        }
+    }
+    suspend fun readYenExchangeRate(): Float {
+        return withContext(Dispatchers.IO){
+            val docYen = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_JPYKRW").get()
+            val tempYen = docYen.select(".no_today").text()
+            tempYen.substring(0,7).replace(",","").toFloat()
+        }
+    }
+
+
 
 }
