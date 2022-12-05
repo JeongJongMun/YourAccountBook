@@ -27,6 +27,7 @@ class GoalFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.goalExpense.value?.toString().let { binding?.edtGoalExpd?.setText(it) }
 
         binding?.btnSave?.setOnClickListener {
             if (binding?.edtGoalExpd?.text.toString().isEmpty()) {

@@ -62,7 +62,7 @@ class MainFragment : Fragment() {
         }
         createNotificationChannel("MY_CH", "warningChannel", "totalExpense over goalExpense")
         viewModel.totalExpense.observe(viewLifecycleOwner) { // 총 지출이 목표 지출보다 높을 경우 경고 알람
-            if (viewModel.goalExpense.value?.toInt() != 0){
+            if (viewModel.goalExpense.value?.toString() != null){
                 if (it > viewModel.goalExpense.value.toString().toInt()) {
                     displayNotification()
                 }
