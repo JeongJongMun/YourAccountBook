@@ -9,7 +9,8 @@
 
     <EditText
         android:fontFamily="@font/lineseedkrrg"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:id="@+id/edt_memo"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
@@ -97,7 +98,8 @@
 
     <EditText
         android:fontFamily="@font/lineseedkrrg"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:id="@+id/edt_money"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
@@ -115,9 +117,9 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
+
         android:fontFamily="@font/lineseedkrrg"
-        android:textColor="#FFFFFF"
-        android:background="@color/primebg"
+        android:entries="@array/category_type"
         android:id="@+id/spinner_input_category"
         android:layout_width="240dp"
         android:layout_height="50dp"

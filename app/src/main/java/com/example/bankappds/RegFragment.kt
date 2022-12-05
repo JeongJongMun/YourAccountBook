@@ -46,7 +46,6 @@ class RegFragment : Fragment() {
 
         viewModel.totalRegExpense.observe(viewLifecycleOwner) {
             binding?.totalReg?.text = viewModel.totalRegExpense.value?.toString() // 총 고정 지출 설정
-            println("totalRegExpense ${viewModel.totalRegExpense.value}")
         }
 
         val adapter = ExpenditureAdapter(adpatList)
@@ -71,7 +70,6 @@ class RegFragment : Fragment() {
         adapter.setItemClickListener(object : ExpenditureAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 selectedReg = position
-                println("$selectedReg 번 선택")
             }
         })
 

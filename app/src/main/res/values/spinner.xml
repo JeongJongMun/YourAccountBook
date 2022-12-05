@@ -11,5 +11,10 @@
         <item>주거</item>
         <item>기타</item>
     </string-array>
+    <string-array name="rank_search">
+        <item>이름</item>
+        <item>총 일반 지출</item>
+        <item>총 정기 지출</item>
+    </string-array>
 
 </resources>

@@ -28,12 +28,7 @@ class RankingFragment : Fragment() {
 
         // spinner를 이용한 검색 설정
         binding?.spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (binding?.spinner?.getItemAtPosition(position)) {
                     // 이름으로 선택하면 이름을 검색
                     "이름" -> {

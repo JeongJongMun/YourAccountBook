@@ -44,7 +44,7 @@ class Expenditure(
     }
 }
 
-data class Person(
+data class FireStoreData(
     var Name : String? = null,
     var TotalExpense: Int? = null,
     var RegTotalExpense: Int? = null)

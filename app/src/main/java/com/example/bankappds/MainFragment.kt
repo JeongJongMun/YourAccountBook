@@ -50,9 +50,6 @@ class MainFragment : Fragment() {
         viewModel.name.observe(viewLifecycleOwner) {
             binding?.txtName?.text = viewModel.name.value?: "Unknown"
         }
-        viewModel.email.observe(viewLifecycleOwner) {
-            println(it)
-        }
 
         childFragmentManager.beginTransaction().replace(R.id.frm_fragment, DayCalendarFragment()).commit()
 
@@ -62,7 +59,7 @@ class MainFragment : Fragment() {
             }
             else findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
         }
-        createNotificationChannel("MY_CH", "warningChannel", "totalExpense over goalExpense")
+        createNotificationChannel(channelId, "warningChannel", "totalExpense over goalExpense")
         viewModel.totalExpense.observe(viewLifecycleOwner) { // 총 지출이 목표 지출보다 높을 경우 경고 알람
             if (viewModel.goalExpense.value?.toString() != null){
                 if (it > viewModel.goalExpense.value.toString().toInt()) {

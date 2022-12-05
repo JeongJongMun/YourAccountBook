@@ -31,7 +31,7 @@ class DayCalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val goalExpense = if (viewModel.goalExpense.value?:0 == 0) 1 else viewModel.goalExpense.value?:0
+        val goalExpense = if ((viewModel.goalExpense.value ?: 0) == 0) 1 else viewModel.goalExpense.value?:0
         val monthTotalExpense  = viewModel.getMonthExpense(12).toFloat()
         binding?.progressBar?.progress= ((monthTotalExpense / goalExpense) * 100).toInt()
 
@@ -44,27 +44,14 @@ class DayCalendarFragment : Fragment() {
                 }
             }
         }
-        viewModel.totalRegExpense.observe(viewLifecycleOwner) {
-            println("TotalRegExpense : $it")
-        }
-        viewModel.expenditureMap.observe(viewLifecycleOwner) {
-            println("ExpenditureMap : $it")
-        }
-        viewModel.regExpdMap.observe(viewLifecycleOwner) {
-            println("RegExpenditureMap : $it")
-        }
-
         // 달력 날짜 선택시 날짜 전달, 이동
-        binding?.calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
+        binding?.calendarView?.setOnDateChangeListener { _, year, month, dayOfMonth ->
             binding?.btnDelete?.isVisible = true
             binding?.btnAdd?.isVisible = true
             // 메인 리스트 리사이클러뷰
             val layoutManager = LinearLayoutManager(context)
             binding?.recyclerView?.layoutManager = layoutManager
             binding?.recyclerView?.setHasFixedSize(true)
-
-
-
 
             val todayList = viewModel.expenditureMap.value?.toMutableMap()?.get(viewModel.makeDayStr(year,month+1,dayOfMonth))
             val regList = viewModel.regExpdMap.value?.toMutableMap()?.get("000000${dayOfMonth}")
@@ -101,10 +88,8 @@ class DayCalendarFragment : Fragment() {
             adapter.setItemClickListener(object : ExpenditureAdapter.OnItemClickListener{
                 override fun onClick(v: View, position: Int) {
                     recPos = position
-                    println("$recPos 번 선택")
                 }
             })
-
         }
     }
 
@@ -112,6 +97,5 @@ class DayCalendarFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
-
 
 }

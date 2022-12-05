@@ -19,27 +19,30 @@
 
         <Spinner
             android:id="@+id/spinner"
+            android:fontFamily="@font/lineseedkrrg"
             android:layout_width="wrap_content"
-
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:entries="@array/option" />
+            android:layout_height="50dp"
+            android:entries="@array/rank_search"
+            android:gravity="center"/>
 
         <EditText
             android:id="@+id/searchWord"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="입력"
+            android:inputType="text"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:inputType="text" />
+            android:textColorHint="@color/white" />
 
         <Button
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="검색" />
+            android:layout_height="match_parent"
+            android:background="@color/primebg"
+            android:text="검색"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

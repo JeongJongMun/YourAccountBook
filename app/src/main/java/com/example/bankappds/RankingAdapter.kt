@@ -11,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 @SuppressLint("NotifyDataSetChanged")
 class RankingAdapter
     : RecyclerView.Adapter<RankingAdapter.Holder>() {
-    val userData : ArrayList<Person> = arrayListOf()
+    val userData : ArrayList<FireStoreData> = arrayListOf()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     // 첫 화면에 모든 목록을 띄울 준비
@@ -21,9 +21,13 @@ class RankingAdapter
             userData.clear()
 
             // userData 안에 cloud firestore에 담긴 모든 정보가 들어온다
-            for (snapshot in querySnapshot!!.documents) {
-                val item = snapshot.toObject(Person::class.java)
-                userData.add(item!!)
+            if (querySnapshot != null) {
+                for (snapshot in querySnapshot.documents) {
+                    val item = snapshot.toObject(FireStoreData::class.java)
+                    if (item != null) {
+                        userData.add(item)
+                    }
+                }
             }
             userData.sortByDescending { it.TotalExpense }
             notifyDataSetChanged()
@@ -36,10 +40,14 @@ class RankingAdapter
             // ArrayList 비워줌
             userData.clear()
 
-            for (snapshot in querySnapshot!!.documents) {
-                if (snapshot.getString(option)!!.contains(searchWord)) {
-                    var item = snapshot.toObject(Person::class.java)
-                    userData.add(item!!)
+            if (querySnapshot != null) {
+                for (snapshot in querySnapshot.documents) {
+                    if (snapshot.getString(option)?.contains(searchWord) == true) {
+                        val item = snapshot.toObject(FireStoreData::class.java)
+                        if (item != null) {
+                            userData.add(item)
+                        }
+                    }
                 }
             }
             notifyDataSetChanged()
@@ -58,7 +66,7 @@ class RankingAdapter
     override fun getItemCount() = userData.size
 
     class Holder(private val binding : RankingListBinding): ViewHolder(binding.root) {
-        fun bind(user: Person, position: Int) {
+        fun bind(user: FireStoreData, position: Int) {
             binding.txtName.text = user.Name
             binding.txtTotalExpense.text = user.TotalExpense.toString()
             binding.txtTotalRegExpense.text = user.RegTotalExpense.toString()

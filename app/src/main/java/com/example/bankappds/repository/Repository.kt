@@ -15,7 +15,7 @@ class Repository {
     val db : FirebaseFirestore = FirebaseFirestore.getInstance()
 
     // realtime 데이터 변수들
-    val userRef = database.getReference("User")
+    val emailRef = database.getReference("Email")
     val passwordRef = database.getReference("Password")
     val nameRef = database.getReference("Name")
     val expenditureMapRef = database.getReference("ExpenditureMap")
@@ -89,7 +89,7 @@ class Repository {
     }
 
     fun getRealTimeEmail(email: MutableLiveData<String>) {
-        userRef.addValueEventListener(object : ValueEventListener {
+        emailRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 email.postValue(snapshot.value.toString())
             }
@@ -129,7 +129,7 @@ class Repository {
 
     // 로그인시 realtime으로 개인정보 전달
     fun postPrivacy(email: String, pasword: String, name: String) {
-        userRef.setValue(email)
+        emailRef.setValue(email)
         passwordRef.setValue(pasword)
         nameRef.setValue(name)
     }
@@ -139,11 +139,10 @@ class Repository {
     }
 
     // ExpMap, RegExpMap은 realTime에만 저장
-    fun postExpenditureMap(email: String, newValue: MutableMap<String, MutableList<Expenditure>>?) {
+    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         expenditureMapRef.setValue(newValue)
-        db.collection("Users").document(email).update("ExpenditureMap", newValue)
     }
-    fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?, email: String) {
+    fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         regExpenditureMapRef.setValue(newValue)
     }
     // total 들은 realTime, cloud 에 저장

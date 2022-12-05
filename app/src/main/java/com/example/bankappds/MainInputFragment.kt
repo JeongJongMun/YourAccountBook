@@ -70,7 +70,7 @@ class MainInputFragment : Fragment() {
 
     // 카테고리 스피너 설정
     private fun spinnerSetting() {
-        var spnLst = resources.getStringArray(R.array.category_type)
+        val spnLst = resources.getStringArray(R.array.category_type)
         //ArrayAdapter의 두 번쨰 인자는 스피너 목록에 아이템을 그려줄 레이아웃을 지정하여 줍니다.
         val adapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, spnLst)
         //activity_main에서 만들어 놓은 spinner에 adapter 연결하여 줍니다.
