@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="exchange_where">
+        <item>분류</item>
+        <item>달러</item>
+        <item>유로</item>
+        <item>엔</item>
+    </string-array>
+</resources>
