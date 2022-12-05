@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMonthListBinding
 import com.example.bankappds.viewmodel.DataViewModel
 import java.time.LocalDateTime
+import java.util.*
 
 
 class MonthListFragment : Fragment() {
     var binding: FragmentMonthListBinding? = null
     val viewModel: DataViewModel by activityViewModels()
+    val calendar: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,18 +34,25 @@ class MonthListFragment : Fragment() {
 
         var currentTime = LocalDateTime.now()
 
-        val mon = currentTime.month
+        val mon = calendar.get(Calendar.MONTH)+1
 
+        binding?.txtNowmon?.text = "${mon}월 지출 내역"
+        var sortedMonthList = mutableListOf<Expenditure>()
+        for (expd in viewModel.getMonthList(mon)){
+            for (i in 1 .. 31){
+                if (expd.day == i) {
+                    sortedMonthList.add(expd)
+                }
+            }
+        }
 
-        //binding?.txtNowmon?.text = currentTime.month.toString()
-
-
+        binding?.txtTotalMonthExpense?.text = viewModel.getMonthExpense(mon).toString()
 
 
         val layoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.layoutManager = layoutManager
         binding?.recyclerView?.setHasFixedSize(true)
-        binding?.recyclerView?.adapter = ExpenditureAdapter(viewModel.getMonthList(12))
+        binding?.recyclerView?.adapter = ExpenditureAdapter(sortedMonthList)
 
     }
 }
