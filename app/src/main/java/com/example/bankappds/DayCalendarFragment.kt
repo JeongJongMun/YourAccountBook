@@ -13,12 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentDayCalendarBinding
 import com.example.bankappds.viewmodel.DataViewModel
+import java.util.*
 
 
 class DayCalendarFragment : Fragment() {
     var binding: FragmentDayCalendarBinding? = null
     val viewModel: DataViewModel by activityViewModels()
-
+    val calendar: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +32,9 @@ class DayCalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val mon = calendar.get(Calendar.MONTH)+1
         val goalExpense = if ((viewModel.goalExpense.value ?: 0) == 0) 1 else viewModel.goalExpense.value?:0
-        val monthTotalExpense  = viewModel.getMonthExpense(12).toFloat()
+        val monthTotalExpense  = viewModel.getMonthExpense(mon).toFloat()
         binding?.progressBar?.progress= ((monthTotalExpense / goalExpense) * 100).toInt()
 
         viewModel.totalExpense.observe(viewLifecycleOwner) {
