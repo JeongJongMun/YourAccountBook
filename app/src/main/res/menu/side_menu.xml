@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="메인 화면" />
     <item
-        android:id="@+id/monthFragment"
+        android:id="@+id/monthListFragment"
         android:title="월별 지출 목록" />
     <item
         android:id="@+id/goalFragment"
