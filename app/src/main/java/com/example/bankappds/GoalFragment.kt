@@ -9,12 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.databinding.FragmentGoalBinding
-import com.example.bankappds.databinding.FragmentMainInputBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 
 class GoalFragment : Fragment() {
     private var binding: FragmentGoalBinding? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
 
 
     override fun onCreateView(

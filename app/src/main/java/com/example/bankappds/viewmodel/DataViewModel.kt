@@ -7,7 +7,7 @@ import com.example.bankappds.Ecategory
 import com.example.bankappds.Expenditure
 import com.example.bankappds.repository.Repository
 
-class dataViewModel: ViewModel() {
+class DataViewModel: ViewModel() {
     // 뷰모델은 데이터 자료구조를 가지고 있음
     // 뷰모델은 프레그먼트를 직접 보지 않는다.
     // mbti를 읽으면 _mbti가 읽힘

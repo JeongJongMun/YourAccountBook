@@ -22,9 +22,6 @@
         android:id="@+id/circleChart"
         android:title="통계" />
     <item
-        android:id="@+id/searchFragment"
-        android:title="검색" />
-    <item
         android:id="@+id/rankingFragment"
         android:title="랭킹" />
 </menu>

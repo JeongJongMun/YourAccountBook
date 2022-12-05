@@ -10,15 +10,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.bankappds.databinding.FragmentMainBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -29,7 +26,7 @@ class MainFragment : Fragment() {
     val db : FirebaseFirestore = FirebaseFirestore.getInstance()
 
     private var binding : FragmentMainBinding? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
     private val channelId: String = "MY_CH"
 
     override fun onAttach(context: Context) {

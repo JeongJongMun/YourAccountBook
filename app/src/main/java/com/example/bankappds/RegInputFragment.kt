@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.databinding.FragmentRegInputBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 
 
 class RegInputFragment : Fragment() {
     var binding : FragmentRegInputBinding ?= null
     var typeT : Ecategory? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
 
 
     override fun onCreateView(

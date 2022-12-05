@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.bankappds.databinding.FragmentLoginBinding
 import com.example.bankappds.databinding.FragmentLogoutBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 
 
 class LogoutFragment : Fragment() {
     private var binding: FragmentLogoutBinding? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -9,15 +9,14 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bankappds.databinding.FragmentMonthBinding
 import com.example.bankappds.databinding.FragmentMonthListBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 import java.time.LocalDateTime
 
 
 class MonthListFragment : Fragment() {
     var binding: FragmentMonthListBinding? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -9,14 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.MyApplication.Companion.auth
-import com.example.bankappds.databinding.FragmentLoginBinding
 import com.example.bankappds.databinding.FragmentSignInBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SignInFragment : Fragment() {
     private var binding: FragmentSignInBinding? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance() // 인스턴스 생성
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

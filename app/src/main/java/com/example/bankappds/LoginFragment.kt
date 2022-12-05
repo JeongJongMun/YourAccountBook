@@ -10,13 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankappds.MyApplication.Companion.auth
 import com.example.bankappds.databinding.FragmentLoginBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 
 class LoginFragment : Fragment() {
     private var binding: FragmentLoginBinding? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance() // 인스턴스 생성
 
     override fun onCreateView(

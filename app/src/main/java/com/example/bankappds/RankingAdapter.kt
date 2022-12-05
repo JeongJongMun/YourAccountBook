@@ -25,6 +25,7 @@ class RankingAdapter
                 val item = snapshot.toObject(Person::class.java)
                 userData.add(item!!)
             }
+            userData.sortByDescending { it.TotalExpense }
             notifyDataSetChanged()
         }
     }
@@ -51,16 +52,17 @@ class RankingAdapter
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(userData[position])
+        holder.bind(userData[position], position)
     }
 
     override fun getItemCount() = userData.size
 
     class Holder(private val binding : RankingListBinding): ViewHolder(binding.root) {
-        fun bind(user: Person) {
+        fun bind(user: Person, position: Int) {
             binding.txtName.text = user.Name
             binding.txtTotalExpense.text = user.TotalExpense.toString()
             binding.txtTotalRegExpense.text = user.RegTotalExpense.toString()
+            binding.txtRank.text = (position+1).toString()
         }
     }
 }

@@ -10,14 +10,14 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMonthBinding
-import com.example.bankappds.viewmodel.dataViewModel
+import com.example.bankappds.viewmodel.DataViewModel
 import java.time.LocalDateTime
 
 var ele = 11
 class MonthFragment : Fragment() {
 
     var binding: FragmentMonthBinding? = null
-    val viewModel: dataViewModel by activityViewModels()
+    val viewModel: DataViewModel by activityViewModels()
     val months = arrayListOf<Int>(1,2,3,4,5,6,7,8,9,10,11,12)
     val monthsName = arrayListOf<String>("Jan","Feb","Mar","Apr","May","June","July"
         ,"Aug","Sep","Oct","Nov","Dec")

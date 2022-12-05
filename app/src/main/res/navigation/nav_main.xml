@@ -23,9 +23,6 @@
         <action
             android:id="@+id/action_mainFragment_to_barChart2"
             app:destination="@id/circleChart" />
-        <action
-            android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
         <argument
             android:name="expenditureData"
             android:defaultValue="@null"
@@ -97,33 +94,33 @@
             app:argType="integer[]" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.example.bankappds.SearchFragment"
-        android:label="SearchFragment" />
-    <fragment
         android:id="@+id/circleChart"
         android:name="com.example.bankappds.CircleChart"
         android:label="통계" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.bankappds.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:label="로그인"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signInFragment"
             app:destination="@id/signInFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
             android:id="@+id/action_loginFragment_to_logoutFragment"
             app:destination="@id/logoutFragment"
+            app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.bankappds.SignInFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
+        android:label="회원가입"
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -137,12 +134,12 @@
     <fragment
         android:id="@+id/logoutFragment"
         android:name="com.example.bankappds.LogoutFragment"
-        android:label="fragment_logout"
-        tools:layout="@layout/fragment_logout" >
+        android:label="계정"
+        tools:layout="@layout/fragment_logout">
         <action
             android:id="@+id/action_logoutFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/mainFragment" />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/monthFragment"
@@ -151,6 +148,6 @@
     <fragment
         android:id="@+id/rankingFragment"
         android:name="com.example.bankappds.RankingFragment"
-        android:label="fragment_ranking"
+        android:label="랭킹"
         tools:layout="@layout/fragment_ranking" />
 </navigation>
