@@ -29,7 +29,7 @@ class GoalFragment : Fragment() {
 
         viewModel.goalExpense.value?.toString().let { binding?.edtGoalExpd?.setText(it) }
 
-        binding?.btnSave?.setOnClickListener {
+        binding?.btnGoalSave?.setOnClickListener {
             if (binding?.edtGoalExpd?.text.toString().isEmpty()) {
                 Toast.makeText(requireContext(), "누락된 칸이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
