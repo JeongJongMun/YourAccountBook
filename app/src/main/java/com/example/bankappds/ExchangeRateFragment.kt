@@ -30,6 +30,8 @@ class ExchangeRateFragment : Fragment() {
 
         var exchangeRate : Float = 0f
 
+
+
         binding?.btnF5?.setOnClickListener {
             GlobalScope.launch {
                 try {

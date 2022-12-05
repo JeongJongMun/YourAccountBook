@@ -59,7 +59,6 @@ class RegInputFragment : Fragment() {
             }
         }
 
-
         binding?.btnFin?.setOnClickListener {
             if (typeT == null || binding?.edtDay?.text.toString().isEmpty()
                 || binding?.edtDay?.text.toString().isEmpty() || binding?.edtDay?.text.toString().isEmpty()){

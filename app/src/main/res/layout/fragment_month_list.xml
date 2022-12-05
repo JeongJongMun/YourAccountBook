@@ -12,8 +12,8 @@
         android:layout_height="50dp"
         android:background="@color/primebg"
         android:fontFamily="@font/lineseedkrrg"
-        android:text="Month"
         android:gravity="center_vertical"
+        android:text="이번달 지출 내역"
 
         android:textAlignment="center"
         android:textColor="#FFFFFF"
