@@ -11,16 +11,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 @SuppressLint("NotifyDataSetChanged")
 class RankingAdapter
     : RecyclerView.Adapter<RankingAdapter.Holder>() {
+    // 리사이클러뷰로 출력할 데이터를 받기 위해 ArrayList를 선언
     val userData : ArrayList<FireStoreData> = arrayListOf()
+
+    // Firestore Database에서 데이터를 불러오기 위해 FirebaseFirestore를 선언
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
     // 첫 화면에 모든 목록을 띄울 준비
     init {  // users의 문서를 불러온 뒤 person으로 변환해 ArrayList에 담는다
         db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-            // ArrayList를 초기화
-            userData.clear()
-
             // userData 안에 cloud firestore에 담긴 모든 정보가 들어온다
             if (querySnapshot != null) {
                 for (snapshot in querySnapshot.documents) {
@@ -31,6 +31,7 @@ class RankingAdapter
                 }
             }
 
+            // 내림차순으로 정렬
             userData.sortByDescending { it.TotalExpense }
             notifyDataSetChanged()
         }
@@ -39,10 +40,10 @@ class RankingAdapter
     // 검색 기능을 사용하는 함수
     fun search(searchWord : String) {
         db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-            // ArrayList 비워줌
-            userData.clear()
             if (querySnapshot != null) {
                 for (snapshot in querySnapshot.documents) {
+                    // 우선 Firestore Database에 있는 데이터 중 "Name"을 키로 갖는 데이터만 불러온다
+                    // 그리고 그 중 searchWord와 일치하는 데이터를 ArrayList에 넣는다.
                     if (snapshot.getString("Name")?.contains(searchWord) == true) {
                         val item = snapshot.toObject(FireStoreData::class.java)
                         if (item != null) {
