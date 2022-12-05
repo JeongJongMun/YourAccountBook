@@ -11,10 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.bankappds.databinding.ActivityMainBinding
 import com.example.bankappds.viewmodel.DataViewModel
 
-//TODO 함수 클래스 변수 이름 정리
-//TODO 알람 뷰모델에서
-
-
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding

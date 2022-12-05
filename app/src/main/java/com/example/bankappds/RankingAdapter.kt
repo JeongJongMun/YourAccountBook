@@ -17,7 +17,6 @@ class RankingAdapter
     // Firestore Database에서 데이터를 불러오기 위해 FirebaseFirestore를 선언
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-
     // 첫 화면에 모든 목록을 띄울 준비
     init {  // users의 문서를 불러온 뒤 person으로 변환해 ArrayList에 담는다
         db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->

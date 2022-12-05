@@ -73,7 +73,7 @@ class RegInputFragment : Fragment() {
             else {
                 val temp = Expenditure(0, 0, binding?.edtDay?.text.toString().toIntOrNull()?:0,
                     binding?.edtPay?.text.toString().toIntOrNull()?:0,
-                    categoryType!!, binding?.edtMemoReg?.text.toString()
+                    categoryType, binding?.edtMemoReg?.text.toString()
                 )
                 //뷰모델을 통해 데이터 저장 & 네비게이션 이동
                 viewModel.addRegExpenditure(temp)
