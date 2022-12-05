@@ -46,6 +46,7 @@ class CircleChart : Fragment() {
         pieChart.setUsePercentValues(true)
         pieChart.description.isEnabled = true
         pieChart.description.text = "카테고리 별 지출 금액" // 차트 제목
+        pieChart.description.textColor = Color.WHITE
         pieChart.description.setPosition(840F,200F) // 제목 위치
         pieChart.description.textSize = 30F // 제목 크기
         pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
