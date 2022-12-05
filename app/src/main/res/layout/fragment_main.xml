@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:background="@color/primebg"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/frm_fragment"
@@ -36,11 +36,11 @@
 
         <ImageButton
             android:id="@+id/img_btn_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-
-            android:src="@drawable/profile"
+            android:background="@color/primebg"
+            android:src="@drawable/user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

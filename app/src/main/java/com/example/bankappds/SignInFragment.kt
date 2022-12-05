@@ -47,8 +47,6 @@ class SignInFragment : Fragment() {
                         ).show()
 
                         val user = hashMapOf(
-                            "Email" to email,
-                            "Password" to password,
                             "Name" to name,
                             "TotalExpense" to 0,
                             "RegTotalExpense" to 0

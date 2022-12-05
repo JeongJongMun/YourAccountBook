@@ -96,9 +96,9 @@ class DataViewModel: ViewModel() {
         _totalExpense.value = _totalExpense.value?.minus(expd.expense)
 
         // realtime 에 저장
-        repository.postExpenditureMap(email.value ?: "", _expenditureMap.value)
+        repository.postExpenditureMap(email.value.toString(), _expenditureMap.value)
         // cloud, realtime 에 저장
-        repository.postTotalExpense(email.value ?: "", _totalExpense.value ?: 0)
+        repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
     }
 
 
