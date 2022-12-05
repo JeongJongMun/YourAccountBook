@@ -65,13 +65,13 @@
         android:entries="@array/category_type"
         android:fontFamily="@font/lineseedkrrg"
         android:popupBackground="@color/primebg"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/edt_memo_reg"
         app:layout_constraintEnd_toEndOf="@+id/edt_day"
         app:layout_constraintTop_toBottomOf="@+id/edt_day" />
 
     <Button
-        android:id="@+id/btn_fin"
+        android:id="@+id/btn_reg_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.26" />
 
     <Button
-        android:id="@+id/btn_cancle"
+        android:id="@+id/btn_reg_cancle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_shape"

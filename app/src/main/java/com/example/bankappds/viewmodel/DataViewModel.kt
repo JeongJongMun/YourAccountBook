@@ -75,6 +75,7 @@ class DataViewModel: ViewModel() {
 
         return yearStr+monthStr+dayStr
     }
+
     fun addExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
 
@@ -152,7 +153,6 @@ class DataViewModel: ViewModel() {
                 }
             }
         }
-
         return sumExpenditure
     }
 

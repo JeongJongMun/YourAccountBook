@@ -12,7 +12,7 @@
     tools:context=".RegFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rec_pay"
+        android:id="@+id/rec_reg_pays"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:background="@color/allbg"
@@ -26,7 +26,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/rec_pay">
+        app:layout_constraintTop_toBottomOf="@+id/rec_reg_pays">
 
         <TextView
             android:fontFamily="@font/lineseedkrrg"
@@ -57,7 +57,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_reg_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
-        android:id="@+id/btn_delete"
+        android:id="@+id/btn_reg_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -85,7 +85,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btn_add"
+        app:layout_constraintStart_toEndOf="@+id/btn_reg_add"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,27 +29,27 @@
         android:fontFamily="@font/lineseedkrrg"
         android:textColor="#FFFFFF"
         android:background="@color/primebg"
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_day_back"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="뒤로가기"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_save"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_day_save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_save"
-        app:layout_constraintTop_toTopOf="@+id/btn_save" />
+        app:layout_constraintStart_toEndOf="@+id/btn_day_save"
+        app:layout_constraintTop_toTopOf="@+id/btn_day_save" />
 
     <Button
         android:background="@color/primebg"
         android:fontFamily="@font/lineseedkrrg"
         android:textColor="#FFFFFF"
-        android:id="@+id/btn_save"
+        android:id="@+id/btn_day_save"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:text="저장"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_back"
+        app:layout_constraintEnd_toStartOf="@+id/btn_day_back"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -109,7 +109,7 @@
         android:hint="0원"
         android:inputType="number"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_back"
+        app:layout_constraintBottom_toTopOf="@+id/btn_day_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView9"
