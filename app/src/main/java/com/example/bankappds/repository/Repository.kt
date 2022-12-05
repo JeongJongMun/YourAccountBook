@@ -11,10 +11,9 @@ import com.google.firebase.ktx.Firebase
 
 class Repository {
     val database = Firebase.database
-
     val db : FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    // realtime 데이터 변수들
+    // realtime에서 데이터 가져올 변수들
     val emailRef = database.getReference("Email")
     val passwordRef = database.getReference("Password")
     val nameRef = database.getReference("Name")
@@ -24,6 +23,7 @@ class Repository {
     val totalRegExpenseRef = database.getReference("TotalRegExpense")
     val goalExpenseRef = database.getReference("GoalExpense")
 
+    // 연, 월, 일을 합쳐서 String으로 변환
     fun makeDayStr(year: Int, month: Int, day: Int): String {
         val yearStr = if (year == 0) "0000" else year.toString()
         val monthStr = if (month > 9) month.toString() else "0$month"
@@ -31,16 +31,9 @@ class Repository {
 
         return yearStr+monthStr+dayStr
     }
-    fun addExpenditure(map: MutableMap<String, MutableList<Expenditure>>, expd: Expenditure) {
-        val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
 
-        if (map[dayInfo] != null) { // 기존 값 존재
-            map[dayInfo]?.add(expd)
-        } else { // 기존 값 존재 X
-            map[dayInfo] = mutableListOf(expd)
-        }
-    }
-    // realTime 에서 목표 금액 가져오기
+
+    // 앱 처음 실행시 realTime 에서 목표 금액 가져와 ViewModel 로 넘겨주기
     fun getRealTimeGoalExp(goal: MutableLiveData<Int>) {
         goalExpenseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -50,15 +43,31 @@ class Repository {
             }
         })
     }
-    // 앱 처음 실행시 realtime 에서 가져와서 ViewModel로 넘겨줌
+
+    // 서버에서 가져온 HashMap<ArrayList<HashMap>> 을 내부 데이터 형식으로 바꾸기
+    fun addExpenditure(map: MutableMap<String, MutableList<Expenditure>>, expd: Expenditure) {
+        val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
+
+        if (map[dayInfo] != null) { // 기존 값 존재
+            map[dayInfo]?.add(expd)
+        } else { // 기존 값 존재 X
+            map[dayInfo] = mutableListOf(expd)
+        }
+    }
+
+
+    // 앱 처음 실행시 realtime 에서 지출Map 가져와 ViewModel 로 넘겨주기
     fun getRealTimeExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
         expenditureMapRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                // 서버에서 가져온 맵 ( HashMap<ArrayList<HashMap>> 형태로 저장됨
                 val serverMap = snapshot.value as MutableMap<String, MutableList<HashMap<Any,Any>>>?
+                // 내부 데이터 형식에 맞게 변환하기 위해 빈 맵 생성
                 val changedServerMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
                 if (serverMap != null) {
                     for ((K,V) in serverMap){
                         for (expd in V) {
+                            // 빈 맵에 내부 데이터 형식에 맞게 바뀐 객체 집어넣기
                             addExpenditure(changedServerMap, Expenditure(expd))
                         }
                     }

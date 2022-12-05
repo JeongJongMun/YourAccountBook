@@ -66,6 +66,8 @@
 
     <Spinner
         android:fontFamily="@font/lineseedkrrg"
+        android:entries="@array/category_type"
+        android:popupBackground="@color/primebg"
         android:textColor="@color/white"
         android:id="@+id/spinner"
         android:layout_width="150dp"
