@@ -82,13 +82,9 @@ class MainFragment : Fragment() {
         val percentage = if ( ((monthTotalExpense / goalExpense) * 100).toInt() >= 100 ) 100
         else ((monthTotalExpense / goalExpense) * 100).toInt()
 
-        if (percentage == 100) {
-            binding?.txtPercent?.setTextColor(Color.parseColor("red"))
-        } else if (percentage > 50) {
-            binding?.txtPercent?.setTextColor(Color.parseColor("yellow"))
-        }
+
         binding?.progressBar?.progress= percentage
-        binding?.txtPercent?.text = percentage.toString()
+
 
 
         viewModel.totalExpense.observe(viewLifecycleOwner) {

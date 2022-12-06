@@ -224,7 +224,7 @@ class DataViewModel: ViewModel() {
         if (tempMap != null){
             for ((K,V) in tempMap) {
                 // 객체 별로 월 체크
-                if (K.substring(0,5).toInt() == year && K.substring(4,6).toInt() == month) {
+                if (K.substring(0,4).toInt() == year && K.substring(4,6).toInt() == month) {
                     for (i in V) temp.add(i)
                 }
             }
@@ -238,7 +238,7 @@ class DataViewModel: ViewModel() {
         var totalExpense = 0
         if (tempMap != null){
             for ((K,V) in tempMap) {
-                if (K.substring(0,5).toInt() == year && K.substring(4,6).toInt() == month) {
+                if (K.substring(0,4).toInt() == year && K.substring(4,6).toInt() == month) {
                     for ( expd in V) {
                         totalExpense += expd.expense
                     }
