@@ -68,5 +68,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_name" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_name"
+        tools:background="@drawable/button_shape2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
