@@ -62,13 +62,13 @@ class DataViewModel: ViewModel() {
     init { // 앱 시작시 realtime 에서 데이터 가져오기
         repository.getRealTimeEmail(_email)
         repository.getRealTimeName(_name)
-        repository.getRealTimeTotalExpense(_totalExpense)
+//        repository.getRealTimeTotalExpense(_totalExpense)
         repository.getRealTimeTotalRegExpense(_totalRegExpense)
 //        repository.getRealTimeExpendtureMap(_expenditureMap)
         repository.getRealTimeRegExpendtureMap(_regExpdMap)
         repository.getRealTimeGoalExp(_goalExpense)
         retrieveAllRates()
-        repository.getExpenditureMapFromFireStore(_expenditureMap)
+        repository.getExpenditureMapFromFireStore(_expenditureMap,_totalExpense)
     }
 
 
