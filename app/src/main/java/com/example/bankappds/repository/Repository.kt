@@ -60,30 +60,7 @@ class Repository {
             map[dayInfo] = mutableListOf(expd)
         }
     }
-    // 앱 처음 실행시 firestroe 에서 데이터 가져와 ViewModel 로 넘겨주기
-    fun getExpenditureMapFromFireStore(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>, totalExp : MutableLiveData<Int>) {
-        db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-            if (querySnapshot != null) {
-                for (snapshot in querySnapshot.documents) {
-                    val item = snapshot.toObject(FireStoreData::class.java)
-                    val serverMap =
-                        item?.ExpMap as MutableMap<String, MutableList<HashMap<Any, Any>>>?
-                    val changedServerMap: MutableMap<String, MutableList<Expenditure>> =
-                        mutableMapOf()
-                    if (serverMap != null) {
-                        for ((K, V) in serverMap) {
-                            for (expd in V) {
-                                // 빈 맵에 내부 데이터 형식에 맞게 바뀐 객체 집어넣기
-                                addExpenditure(changedServerMap, Expenditure(expd))
-                            }
-                        }
-                    }
-                    totalExp.postValue(item?.TotalExpense)
-                    exp.postValue(changedServerMap)
-                }
-            }
-        }
-    }
+
 
     // 앱 처음 실행시 realtime 에서 지출Map 가져와 ViewModel 로 넘겨주기
     fun getRealTimeExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
@@ -149,7 +126,7 @@ class Repository {
         })
     }
 
-/*    // 앱 처음 실행시 realTime 에서 총 지출 가져와 ViewModel로 넘겨주기
+    // 앱 처음 실행시 realTime 에서 총 지출 가져와 ViewModel로 넘겨주기
     fun getRealTimeTotalExpense(totalExpense: MutableLiveData<Int>) {
         totalExpenseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -158,7 +135,7 @@ class Repository {
             override fun onCancelled(error: DatabaseError) {
             }
         })
-    }*/
+    }
 
     // 앱 처음 실행시 realTime 에서 고정 지출 가져와 ViewModel로 넘겨주기
     fun getRealTimeTotalRegExpense(totalRegExpense: MutableLiveData<Int>) {
