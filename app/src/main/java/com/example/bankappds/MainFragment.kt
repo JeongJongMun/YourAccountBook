@@ -76,11 +76,11 @@ class MainFragment : Fragment() {
         val month = calendar.get(Calendar.MONTH)+1
         val year = calendar.get(Calendar.YEAR)
 
-        val tempRegExps = viewModel.totalRegExpense.value?:0
-        val tempMonthExps = viewModel.getMonthExpense(year,month)
+
+
 
         val goalExpense = if ((viewModel.goalExpense.value ?: 0) == 0) 1 else viewModel.goalExpense.value?:0
-        val monthTotalExpense  = tempRegExps + tempMonthExps
+        val monthTotalExpense  = viewModel.getMonthExpense(year,month).toFloat()
 
         val percentage = if ( ((monthTotalExpense.toFloat() / goalExpense) * 100).toInt() >= 100 ) 100
         else ((monthTotalExpense / goalExpense) * 100).toInt()

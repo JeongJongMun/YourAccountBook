@@ -248,6 +248,14 @@ class DataViewModel: ViewModel() {
                 }
             }
         }
+        val tempRegMap = regExpdMap.value
+        if (tempRegMap!=null){
+            for ((K,V) in tempRegMap){
+                for ( expd in V) {
+                    totalExpense += expd.expense
+                }
+            }
+        }
         return totalExpense
     }
 
