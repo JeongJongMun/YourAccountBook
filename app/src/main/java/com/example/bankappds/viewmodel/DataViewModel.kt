@@ -64,10 +64,11 @@ class DataViewModel: ViewModel() {
         repository.getRealTimeName(_name)
         repository.getRealTimeTotalExpense(_totalExpense)
         repository.getRealTimeTotalRegExpense(_totalRegExpense)
-        repository.getRealTimeExpendtureMap(_expenditureMap)
+//        repository.getRealTimeExpendtureMap(_expenditureMap)
         repository.getRealTimeRegExpendtureMap(_regExpdMap)
         repository.getRealTimeGoalExp(_goalExpense)
         retrieveAllRates()
+        repository.getExpenditureMapFromFireStore(_expenditureMap)
     }
 
 
