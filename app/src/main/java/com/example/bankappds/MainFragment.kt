@@ -159,7 +159,7 @@ class MainFragment : Fragment() {
             PendingIntent.FLAG_IMMUTABLE
         )
         val notification = NotificationCompat.Builder(requireContext(), channelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.account_book_round)
             .setContentTitle("지출 경고!!")
             .setContentText("총 지출이 목표 지출을 넘어섰습니다!! 총 지출 : ${viewModel.totalExpense.value}, 목표 지출 : ${viewModel.goalExpense.value} ")
             .setContentIntent(mPendingIntent) // PendingIntent 설정
