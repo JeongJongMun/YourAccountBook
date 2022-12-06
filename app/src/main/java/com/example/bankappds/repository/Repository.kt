@@ -61,7 +61,7 @@ class Repository {
         }
     }
     // 앱 처음 실행시 firestroe 에서 데이터 가져와 ViewModel 로 넘겨주기
-    fun getExpenditureMapFromFireStore(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
+    fun getExpenditureMapFromFireStore(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>, totalExp : MutableLiveData<Int>) {
         db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
             if (querySnapshot != null) {
                 for (snapshot in querySnapshot.documents) {
@@ -78,6 +78,7 @@ class Repository {
                             }
                         }
                     }
+                    totalExp.postValue(item?.TotalExpense)
                     exp.postValue(changedServerMap)
                 }
             }
@@ -148,7 +149,7 @@ class Repository {
         })
     }
 
-    // 앱 처음 실행시 realTime 에서 총 지출 가져와 ViewModel로 넘겨주기
+/*    // 앱 처음 실행시 realTime 에서 총 지출 가져와 ViewModel로 넘겨주기
     fun getRealTimeTotalExpense(totalExpense: MutableLiveData<Int>) {
         totalExpenseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -157,7 +158,7 @@ class Repository {
             override fun onCancelled(error: DatabaseError) {
             }
         })
-    }
+    }*/
 
     // 앱 처음 실행시 realTime 에서 고정 지출 가져와 ViewModel로 넘겨주기
     fun getRealTimeTotalRegExpense(totalRegExpense: MutableLiveData<Int>) {
