@@ -32,7 +32,7 @@ class RankingAdapter
             }
 
             // 내림차순으로 정렬
-            userData.sortByDescending { it.TotalExpense }
+            userData.sortByDescending { it.MonthExpense }
             notifyDataSetChanged()
         }
     }
@@ -53,7 +53,7 @@ class RankingAdapter
                     }
                 }
             }
-            userData.sortByDescending { it.TotalExpense }
+            userData.sortByDescending { it.MonthExpense }
             notifyDataSetChanged()
         }
     }
@@ -72,8 +72,7 @@ class RankingAdapter
     class Holder(private val binding : RankingListBinding): ViewHolder(binding.root) {
         fun bind(user: FireStoreData, position: Int) {
             binding.txtName.text = user.Name
-            binding.txtTotalExpense.text = user.TotalExpense.toString()
-            binding.txtTotalRegExpense.text = user.RegTotalExpense.toString()
+            binding.txtMonthexpense.text = user.MonthExpense.toString()
             binding.txtRank.text = (position+1).toString()
         }
     }

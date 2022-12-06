@@ -166,7 +166,11 @@ class Repository {
     fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         regExpenditureMapRef.setValue(newValue)
     }
-
+    // 총지출, 고정지출들은 realTime, cloud 에 저장
+    fun postMonthExpense(email: String, newValue: Int) {
+        totalExpenseRef.setValue(newValue)
+        db.collection("Users").document(email).update("MonthExpense", newValue)
+    }
     // 총지출, 고정지출들은 realTime, cloud 에 저장
     fun postTotalExpense(email: String, newValue: Int) {
         totalExpenseRef.setValue(newValue)
