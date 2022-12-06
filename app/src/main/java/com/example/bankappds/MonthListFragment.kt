@@ -1,17 +1,15 @@
 package com.example.bankappds
 
-import android.os.Build
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bankappds.databinding.FragmentMonthListBinding
 import com.example.bankappds.viewmodel.DataViewModel
-import java.time.LocalDateTime
 import java.util.*
 
 //해당 월별 지출을 확인하기 위한 프래그먼트

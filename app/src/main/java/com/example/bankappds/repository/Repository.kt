@@ -177,7 +177,6 @@ class Repository {
         db.collection("Users").document(email).update("RegTotalExpense", newValue)
     }
 
-
     suspend fun readDollarExchangeRate(): Float {
         return withContext(Dispatchers.IO){
             val docDollar = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.naver?marketindexCd=FX_USDKRW").get()
@@ -193,6 +192,7 @@ class Repository {
             tempEuro.substring(0,8).replace(",","").toFloat()
         }
     }
+
     suspend fun readYenExchangeRate(): Float {
         return withContext(Dispatchers.IO){
             val docYen = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_JPYKRW").get()
@@ -200,7 +200,4 @@ class Repository {
             tempYen.substring(0,7).replace(",","").toFloat()
         }
     }
-
-
-
 }
