@@ -1,9 +1,6 @@
 package com.example.bankappds.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.bankappds.CardviewAdapter
 import com.example.bankappds.Expenditure
 import com.example.bankappds.FireStoreData
 import com.google.firebase.database.DataSnapshot
@@ -13,7 +10,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 
@@ -64,7 +60,29 @@ class Repository {
             map[dayInfo] = mutableListOf(expd)
         }
     }
-
+    // 앱 처음 실행시 firestroe 에서 데이터 가져와 ViewModel 로 넘겨주기
+    fun getExpenditureMapFromFireStore(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
+        db.collection("Users").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            if (querySnapshot != null) {
+                for (snapshot in querySnapshot.documents) {
+                    val item = snapshot.toObject(FireStoreData::class.java)
+                    val serverMap =
+                        item?.ExpMap as MutableMap<String, MutableList<HashMap<Any, Any>>>?
+                    val changedServerMap: MutableMap<String, MutableList<Expenditure>> =
+                        mutableMapOf()
+                    if (serverMap != null) {
+                        for ((K, V) in serverMap) {
+                            for (expd in V) {
+                                // 빈 맵에 내부 데이터 형식에 맞게 바뀐 객체 집어넣기
+                                addExpenditure(changedServerMap, Expenditure(expd))
+                            }
+                        }
+                    }
+                    exp.postValue(changedServerMap)
+                }
+            }
+        }
+    }
 
     // 앱 처음 실행시 realtime 에서 지출Map 가져와 ViewModel 로 넘겨주기
     fun getRealTimeExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {

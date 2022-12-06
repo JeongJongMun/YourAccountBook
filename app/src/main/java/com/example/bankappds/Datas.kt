@@ -47,5 +47,6 @@ class Expenditure(
 
 // 랭킹을 위한 데이터 클래스
 data class FireStoreData(
+    var ExpMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf(),
     var Name : String? = null,
     var MonthExpense: Int = 0)
