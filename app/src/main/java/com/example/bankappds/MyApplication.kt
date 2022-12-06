@@ -16,7 +16,7 @@ class MyApplication: MultiDexApplication() {
         fun checkAuth(): Boolean {
             val currentUser = auth.currentUser // firebase에 등록한 유저 정보 불러오기
             return currentUser?.let {
-                email = currentUser.email // 유저 정보가 있으면 email 가져옥
+                email = currentUser.email // 유저 정보가 있으면 email 가져오기
 
                 // 로그인 되어있는 경우
                 currentUser.isEmailVerified
