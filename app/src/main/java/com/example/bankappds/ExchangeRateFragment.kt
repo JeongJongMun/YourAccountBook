@@ -69,7 +69,7 @@ class ExchangeRateFragment : Fragment() {
         val exchangeRateList = mutableListOf<Float>()
         exchangeRateList.add(viewModel.exchangeDollarRate.value?:0f)
         exchangeRateList.add(viewModel.exchangeEuroRate.value?:0f)
-        exchangeRateList.add(viewModel.exchangeEuroRate.value?:0f)
+        exchangeRateList.add(viewModel.exchangeYenRate.value?:0f)
 
         binding?.viewPager?.adapter = CardviewAdapter(exchangeRateList)
 
