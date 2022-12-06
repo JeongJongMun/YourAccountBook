@@ -189,9 +189,10 @@ class DataViewModel: ViewModel() {
     fun getArraybyCategory(categoryType: Ecategory) : Int {
         var sumExpenditure = 0
 
+        val tempMap = expenditureMap.value
         // 지출 맵에서 가져오기
-        if (expenditureMap.value != null){
-            for ((K,V) in expenditureMap.value!!) {
+        if (tempMap != null){
+            for ((K,V) in tempMap) {
                 for (e in V) {
                     if (e.category == categoryType && e.expense != 0) {
                         sumExpenditure += e.expense
@@ -200,8 +201,10 @@ class DataViewModel: ViewModel() {
             }
         }
         // 고정지출 맵에서 가져오기
-        if (regExpdMap.value != null) {
-            for ((K,V) in regExpdMap.value!!) {
+        val tempRegMap = regExpdMap.value
+
+        if (tempRegMap != null) {
+            for ((K,V) in tempRegMap) {
                 for (e in V) {
                     if (e.category == categoryType && e.expense != 0) {
                         sumExpenditure += e.expense
@@ -214,14 +217,14 @@ class DataViewModel: ViewModel() {
     }
 
     // 월별 지출 가져오기
-    fun getMonthList(month: Int) : MutableList<Expenditure>{
+    fun getMonthList(year: Int, month: Int) : MutableList<Expenditure>{
         val temp = mutableListOf<Expenditure>()
         val tempMap = _expenditureMap.value?.toSortedMap()
 
         if (tempMap != null){
             for ((K,V) in tempMap) {
                 // 객체 별로 월 체크
-                if (K.substring(4,6).toInt() == month) {
+                if (K.substring(0,5).toInt() == year && K.substring(4,6).toInt() == month) {
                     for (i in V) temp.add(i)
                 }
             }
@@ -230,12 +233,12 @@ class DataViewModel: ViewModel() {
     }
 
     // 월별 총지출 가져오기
-    fun getMonthExpense(month: Int) : Int{
+    fun getMonthExpense(year: Int ,month: Int) : Int{
         val tempMap = _expenditureMap.value?.toSortedMap()
         var totalExpense = 0
         if (tempMap != null){
             for ((K,V) in tempMap) {
-                if (K.substring(4,6).toInt() == month) {
+                if (K.substring(0,5).toInt() == year && K.substring(4,6).toInt() == month) {
                     for ( expd in V) {
                         totalExpense += expd.expense
                     }
