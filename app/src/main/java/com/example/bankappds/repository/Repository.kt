@@ -1,9 +1,11 @@
 package com.example.bankappds.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bankappds.CardviewAdapter
 import com.example.bankappds.Expenditure
+import com.example.bankappds.FireStoreData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -28,6 +30,7 @@ class Repository {
     val totalExpenseRef = database.getReference("TotalExpense")
     val totalRegExpenseRef = database.getReference("TotalRegExpense")
     val goalExpenseRef = database.getReference("GoalExpense")
+    val monthExpenseRef = database.getReference("MonthExpense")
 
     // 연, 월, 일을 합쳐서 String으로 변환
     fun makeDayStr(year: Int, month: Int, day: Int): String {
@@ -61,6 +64,7 @@ class Repository {
             map[dayInfo] = mutableListOf(expd)
         }
     }
+
 
     // 앱 처음 실행시 realtime 에서 지출Map 가져와 ViewModel 로 넘겨주기
     fun getRealTimeExpendtureMap(exp: MutableLiveData<MutableMap<String, MutableList<Expenditure>>>) {
@@ -160,14 +164,19 @@ class Repository {
     }
 
     // ExpMap, RegExpMap은 realTime에만 저장
-    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
+    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?, email: String) {
         expenditureMapRef.setValue(newValue)
+        db.collection("Users").document(email).update("ExpenditureMap", newValue)
     }
-    fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
+    fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?, email: String) {
         regExpenditureMapRef.setValue(newValue)
+        db.collection("Users").document(email).update("RegExpenditureMap", newValue)
     }
-
-    // 총지출, 고정지출들은 realTime, cloud 에 저장
+    // 총지출, 고정지출, 월별지출들은 realTime, cloud 에 저장
+    fun postMonthExpense(email: String, newValue: Int) {
+        monthExpenseRef.setValue(newValue)
+        db.collection("Users").document(email).update("MonthExpense", newValue)
+    }
     fun postTotalExpense(email: String, newValue: Int) {
         totalExpenseRef.setValue(newValue)
         db.collection("Users").document(email).update("TotalExpense", newValue)

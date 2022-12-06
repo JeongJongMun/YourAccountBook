@@ -8,14 +8,20 @@ import com.example.bankappds.Ecategory
 import com.example.bankappds.Expenditure
 import com.example.bankappds.repository.Repository
 import kotlinx.coroutines.launch
+import java.util.*
 
 class DataViewModel: ViewModel() {
     // Firestore = 이름, 총지출, 고정지출
     // Realtime = 이름, 이메일, 비밀번호, 총지출맵, 고정지출맵, 총지출, 고정지출, 목표금액
 
+
     private val repository = Repository()
 
-    // 내부적으로는 바꿀수있는 라이브데이터
+    private val _monthExp = MutableLiveData(0)
+    val monthExp : LiveData<Int> get() = _monthExp
+
+
+        // 내부적으로는 바꿀수있는 라이브데이터
     private val _email = MutableLiveData("")
     // 하지만 밖에서는 바꿀수없는 라이브데이터 - 일종의 패턴임임
     val email : LiveData<String> get() = _email
@@ -49,13 +55,8 @@ class DataViewModel: ViewModel() {
     private val _exchangeYenRate = MutableLiveData<Float>(0f)
     val exchangeYenRate : LiveData<Float> get() = _exchangeYenRate
 
-
-
     var tempExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
     var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
-
-
-
 
 
     init { // 앱 시작시 realtime 에서 데이터 가져오기
@@ -129,9 +130,21 @@ class DataViewModel: ViewModel() {
         _expenditureMap.value = tempExpdMap
         _totalExpense.value = _totalExpense.value?.plus(expd.expense)
         // 맵 = realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value)
+        repository.postExpenditureMap(_expenditureMap.value, email.value.toString())
         // 총지출 = realtime, cloud 에 저장
         repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
+
+        // 월별지출 뷰모델
+        val calendar: Calendar = Calendar.getInstance()
+        val mon = calendar.get(Calendar.MONTH)+1
+        val year = calendar.get(Calendar.YEAR)
+
+        if (dayInfo.substring(0,4).toInt() == year && dayInfo.substring(4,6).toInt() == mon) {
+            _monthExp.value = _monthExp.value?.plus(expd.expense)
+            repository.postMonthExpense(email.value.toString(), _monthExp.value ?: 0)
+            println(_monthExp.value)
+        }
+
     }
 
     // Map 에서 Expenditure 객체 삭제
@@ -142,7 +155,7 @@ class DataViewModel: ViewModel() {
         _totalExpense.value = _totalExpense.value?.minus(expd.expense)
 
         // 맵 = realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value)
+        repository.postExpenditureMap(_expenditureMap.value, email.value.toString())
         // 총지출 = cloud, realtime 에 저장
         repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
     }
@@ -158,7 +171,7 @@ class DataViewModel: ViewModel() {
         }
         _regExpdMap.value = tempRegExpdMap
         // realtime 에 저장
-        repository.postRegExpenditureMap(_regExpdMap.value)
+        repository.postRegExpenditureMap(_regExpdMap.value, email.value.toString())
         _totalRegExpense.value = _totalRegExpense.value?.plus(expd.expense)
         // cloud, realtime 에 저장
         repository.postTotalRegExpense(_email.value.toString(), _totalRegExpense.value ?: 0)
@@ -169,7 +182,7 @@ class DataViewModel: ViewModel() {
         tempRegExpdMap[dayInfo]?.remove(expd)
         _regExpdMap.value = tempExpdMap
         // realtime에 저장
-        repository.postRegExpenditureMap(_regExpdMap.value)
+        repository.postRegExpenditureMap(_regExpdMap.value, email.value.toString())
         _totalRegExpense.value = _totalRegExpense.value?.minus(expd.expense)
         // cloud, realtime 에 저장
         repository.postTotalRegExpense(_email.value.toString(), _totalRegExpense.value ?: 0)

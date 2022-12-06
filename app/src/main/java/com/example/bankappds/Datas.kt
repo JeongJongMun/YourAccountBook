@@ -48,5 +48,4 @@ class Expenditure(
 // 랭킹을 위한 데이터 클래스
 data class FireStoreData(
     var Name : String? = null,
-    var TotalExpense: Int? = null,
-    var RegTotalExpense: Int? = null)
+    var MonthExpense: Int = 0)
