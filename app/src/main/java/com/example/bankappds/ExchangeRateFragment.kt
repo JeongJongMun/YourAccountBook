@@ -31,40 +31,17 @@ class ExchangeRateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        Thread(Runnable {
-//            try {
-//                //원달러 환율
-//                val docDollar = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.naver?marketindexCd=FX_USDKRW").get()
-//                val tempDollar = docDollar.select(".no_today").text()
-//                print("dollar")
-//                println(tempDollar)
-//                exchangeRateDollar = tempDollar.substring(0,8).replace(",","").toFloat()
-//
-//                val docEuro = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_EURKRW").get()
-//                val tempEuro = docEuro.select(".no_today").text()
-//                exchangeRateEuro = tempEuro.substring(0,8).replace(",","").toFloat()
-//
-//                val docYen = Jsoup.connect("https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_JPYKRW").get()
-//                val tempYen = docYen.select(".no_today").text()
-//                exchangeRateYen = tempYen.substring(0,7).replace(",","").toFloat()
-//
-//                val ratesList = listOf(exchangeRateDollar,exchangeRateEuro,exchangeRateYen)
-//                val adapter = CardviewAdapter(ratesList)
-//                binding?.viewPager?.adapter = CardviewAdapter(ratesList)
-//            }
-//            catch (e:Exception) {
-//                e.printStackTrace()
-//            }
-//        }).start()
-
-        //스피너 세팅
         spinnerSetting()
+        //뷰모델에 있는 코루틴을 사용하여 Jsoup을 통해 환율값을 받아오는 함수 사용
+        viewModel.retrieveExchangeDollarRate()
 
+        //3개의 환율을 저장하는 리스트
         val exchangeRateList = mutableListOf<Float>()
         exchangeRateList.add(viewModel.exchangeDollarRate.value?:0f)
         exchangeRateList.add(viewModel.exchangeEuroRate.value?:0f)
         exchangeRateList.add(viewModel.exchangeYenRate.value?:0f)
 
+        //카드뷰 어댑터에 환율데이터 리스트를 넘김
         binding?.viewPager?.adapter = CardviewAdapter(exchangeRateList)
 
         binding?.viewPager?.setPadding(30, 0, 30, 0)
@@ -82,13 +59,12 @@ class ExchangeRateFragment : Fragment() {
             }
         })
 
-
-
+        //환율 계산하는 함수
         binding?.btnCalculate?.setOnClickListener {
             if (binding?.edtWonTo?.text != null && exchangeWhere != null ) {
                 val tempWon = binding?.edtWonTo?.text.toString().toFloat()
                 val tempExRate = exchangeWhere?:0f
-                binding?.txtAfterCalc?.text = (tempWon * tempExRate).toInt().toString() +"원"
+                binding?.txtAfterCalc?.text = (tempWon * tempExRate).toInt().toString()+"원"
             } else {
                 Toast.makeText(requireContext(), "누락된 부분이 있습니다", Toast.LENGTH_SHORT).show()
             }
