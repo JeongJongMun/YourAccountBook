@@ -44,7 +44,7 @@
 
     <EditText
         android:id="@+id/edt_pay"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginBottom="64dp"
         android:ems="10"
@@ -75,7 +75,7 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="48dp"
         android:entries="@array/category_type"
         android:fontFamily="@font/lineseedkrrg"
@@ -146,7 +146,7 @@
 
     <EditText
         android:id="@+id/edt_day"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:ems="2"

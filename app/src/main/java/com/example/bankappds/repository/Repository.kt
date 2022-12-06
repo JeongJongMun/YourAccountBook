@@ -16,7 +16,6 @@ import org.jsoup.Jsoup
 class Repository {
     val database = Firebase.database
     val db : FirebaseFirestore = FirebaseFirestore.getInstance()
-
     // realtime에서 데이터 가져올 변수들
     val emailRef = database.getReference("Email")
     val passwordRef = database.getReference("Password")
@@ -160,26 +159,22 @@ class Repository {
     }
 
     // ExpMap, RegExpMap은 realTime에만 저장
-    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?, email: String) {
+    fun postExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         expenditureMapRef.setValue(newValue)
-        db.collection("Users").document(email).update("ExpenditureMap", newValue)
     }
-    fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?, email: String) {
+    fun postRegExpenditureMap(newValue: MutableMap<String, MutableList<Expenditure>>?) {
         regExpenditureMapRef.setValue(newValue)
-        db.collection("Users").document(email).update("RegExpenditureMap", newValue)
     }
     // 총지출, 고정지출, 월별지출들은 realTime, cloud 에 저장
     fun postMonthExpense(email: String, newValue: Int) {
         monthExpenseRef.setValue(newValue)
         db.collection("Users").document(email).update("MonthExpense", newValue)
     }
-    fun postTotalExpense(email: String, newValue: Int) {
+    fun postTotalExpense(newValue: Int) {
         totalExpenseRef.setValue(newValue)
-        db.collection("Users").document(email).update("TotalExpense", newValue)
     }
-    fun postTotalRegExpense(email: String, newValue: Int) {
+    fun postTotalRegExpense(newValue: Int) {
         totalRegExpenseRef.setValue(newValue)
-        db.collection("Users").document(email).update("RegTotalExpense", newValue)
     }
 
     suspend fun readDollarExchangeRate(): Float {

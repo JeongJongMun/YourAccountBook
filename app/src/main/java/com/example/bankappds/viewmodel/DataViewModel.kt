@@ -130,9 +130,9 @@ class DataViewModel: ViewModel() {
         _expenditureMap.value = tempExpdMap
         _totalExpense.value = _totalExpense.value?.plus(expd.expense)
         // 맵 = realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value, email.value.toString())
+        repository.postExpenditureMap(_expenditureMap.value)
         // 총지출 = realtime, cloud 에 저장
-        repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
+        repository.postTotalExpense(_totalExpense.value ?: 0)
 
         // 월별지출 뷰모델
         val calendar: Calendar = Calendar.getInstance()
@@ -155,9 +155,9 @@ class DataViewModel: ViewModel() {
         _totalExpense.value = _totalExpense.value?.minus(expd.expense)
 
         // 맵 = realtime 에 저장
-        repository.postExpenditureMap(_expenditureMap.value, email.value.toString())
+        repository.postExpenditureMap(_expenditureMap.value)
         // 총지출 = cloud, realtime 에 저장
-        repository.postTotalExpense(email.value.toString(), _totalExpense.value ?: 0)
+        repository.postTotalExpense(_totalExpense.value ?: 0)
     }
 
     // 고정지출 맵에 Expenditure 객체 저장
@@ -171,10 +171,10 @@ class DataViewModel: ViewModel() {
         }
         _regExpdMap.value = tempRegExpdMap
         // realtime 에 저장
-        repository.postRegExpenditureMap(_regExpdMap.value, email.value.toString())
+        repository.postRegExpenditureMap(_regExpdMap.value)
         _totalRegExpense.value = _totalRegExpense.value?.plus(expd.expense)
         // cloud, realtime 에 저장
-        repository.postTotalRegExpense(_email.value.toString(), _totalRegExpense.value ?: 0)
+        repository.postTotalRegExpense(_totalRegExpense.value ?: 0)
     }
     // 고정지출 맵에서 Expenditure 객체 삭제
     fun deleteRegExpenditure(expd: Expenditure) {
@@ -182,10 +182,10 @@ class DataViewModel: ViewModel() {
         tempRegExpdMap[dayInfo]?.remove(expd)
         _regExpdMap.value = tempExpdMap
         // realtime에 저장
-        repository.postRegExpenditureMap(_regExpdMap.value, email.value.toString())
+        repository.postRegExpenditureMap(_regExpdMap.value)
         _totalRegExpense.value = _totalRegExpense.value?.minus(expd.expense)
         // cloud, realtime 에 저장
-        repository.postTotalRegExpense(_email.value.toString(), _totalRegExpense.value ?: 0)
+        repository.postTotalRegExpense(_totalRegExpense.value ?: 0)
     }
 
     // 차트에서 카테고리별 보여주기
