@@ -1,1 +1,2 @@
-# HouseholdBankAccount (financial ledger)
+# 너의 가계부
+### 객체지향 프로그래밍 프로젝트
